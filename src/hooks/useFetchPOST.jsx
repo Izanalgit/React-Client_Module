@@ -1,16 +1,17 @@
 import { useState , useEffect } from "react";
 import axios from "axios";
 
-const useFetchPUT = (url,payload) => {
+const useFetchPOST = (url,payload) => {
     
     const [data, setData] = useState(null);
     const [status, setStatus] = useState(false);
     const [errMsg, setErrMsg] = useState(null);
    
-    useEffect(()=>{
+    //REVIEW
 
+    useEffect(()=>{
         if(payload)
-            axios.put(url,payload)
+            axios.post(url,payload)
                 .then((response) => {
                     setData(response);
                 })
@@ -39,4 +40,4 @@ const useFetchPUT = (url,payload) => {
 
 }
 
-export default useFetchPUT;
+export default useFetchPOST;
