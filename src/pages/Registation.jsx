@@ -1,4 +1,4 @@
-const Chat = () => {
+const Registation = () => {
     return (
         <>
             <h1>REGISTRO DE USUARIO !</h1>
@@ -8,4 +8,4 @@ const Chat = () => {
 
 }
 
-export default Chat;
+export default Registation;

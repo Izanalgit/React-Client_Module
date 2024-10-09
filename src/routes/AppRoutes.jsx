@@ -5,6 +5,7 @@ import Home from "../pages/Home.jsx";
 import Profile from "../pages/Profile.jsx";
 import Search from "../pages/Search.jsx";
 import Chat from "../pages/Chat.jsx";
+import Registation from "../pages/Registation.jsx";
 
 const AppRoutes = () =>{
     return(
@@ -16,6 +17,7 @@ const AppRoutes = () =>{
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contacts" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/registation" element={<Registation />} />
             </Routes>
         </>
         </Router>
