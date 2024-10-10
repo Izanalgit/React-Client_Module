@@ -6,6 +6,7 @@ import Profile from "../pages/Profile.jsx";
 import Search from "../pages/Search.jsx";
 import Chat from "../pages/Chat.jsx";
 import Registation from "../pages/Registation.jsx";
+import Dashboard from "../pages/Dashboard.jsx";
 
 const AppRoutes = () =>{
     return(
@@ -18,6 +19,7 @@ const AppRoutes = () =>{
                 <Route path="/contacts" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/registation" element={<Registation />} />
+                <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </>
         </Router>
