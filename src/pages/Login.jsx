@@ -19,7 +19,6 @@ const Login = () => {
             );
             
             const token = response.headers['authorization'];
-            console.log(response.headers.getAuthorization())
 
             if (token) {
                 localStorage.setItem('authToken', token);  

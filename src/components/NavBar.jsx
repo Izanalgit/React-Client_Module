@@ -10,6 +10,7 @@ const NavBar = () => {
             <Link to="/profile" >Perfil</Link>
             <Link to="/contacts" >Buscar</Link>
             <Link to="/chat" >Mensages</Link>
+            <Link to="/logout" >DESCONTECTAR</Link>
         </nav>
     );
 }

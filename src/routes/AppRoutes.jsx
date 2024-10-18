@@ -8,6 +8,7 @@ import Chat from "../pages/Chat.jsx";
 import Registation from "../pages/Registation.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
 import Login from "../pages/Login.jsx";
+import Logout from "../pages/LogOut.jsx";
 
 const AppRoutes = () =>{
     return(
@@ -17,6 +18,7 @@ const AppRoutes = () =>{
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/logout" element={<Logout />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contacts" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
