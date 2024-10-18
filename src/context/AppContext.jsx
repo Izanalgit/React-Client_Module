@@ -4,18 +4,12 @@ const AppContext = createContext();
 
 const AppProvaider = ({children}) => {
 
-    const [logedIn, setLogedIn] = useState(false);
-    const API = "";
+    const API = "http://localhost:8080";
 
-
-    //Loged check
-    const getLoged = (status) => setLogedIn(status);
 
     return (
         <AppContext.Provider value={{
-            logedIn,
-            API,
-            getLoged
+            API
         }}>
             {children}
         </AppContext.Provider>
