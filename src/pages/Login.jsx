@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useApp } from '../context/AppContext';
 
 const Login = () => {
-    const {API} = useApp();
+    const {API,logedIn,getLoged} = useApp();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +21,8 @@ const Login = () => {
             const token = response.headers['authorization'];
 
             if (token) {
-                localStorage.setItem('authToken', token);  
+                localStorage.setItem('authToken', token);
+                getLoged(true);  
                 window.location.href = '/dashboard';
             } else setError('No se pudo obtener el token de autenticación.');
 
@@ -32,31 +33,36 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <h2>Iniciar Sesión</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <form onSubmit={handleSubmit}>
+        <> 
+            {logedIn && <h5>Ya estás conectado!</h5>}
+            {!logedIn &&
                 <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
+                    <h2>Iniciar Sesión</h2>
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label>Email:</label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label>Contraseña:</label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <button type="submit">Iniciar sesión</button>
+                    </form>
                 </div>
-                <div>
-                    <label>Contraseña:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Iniciar sesión</button>
-            </form>
-        </div>
+            }
+        </>
     );
 };
 

@@ -6,7 +6,7 @@ import { useApp } from '../context/AppContext';
 
 const Logout = () => {
     const navigate = useNavigate();
-    const {API} = useApp();
+    const {API,logedIn,getLoged} = useApp();
 
     useEffect(() => {
         const logoutUser = async () => {
@@ -28,6 +28,7 @@ const Logout = () => {
                     console.error('Error al hacer logout', err);
                 } finally {
                     localStorage.removeItem('authToken');
+                    getLoged(false);
                     navigate('/login');
                 }
             }
@@ -37,9 +38,14 @@ const Logout = () => {
     }, [navigate]);
 
     return (
-        <div>
-            <p>Cerrando sesión...</p>
-        </div>
+        <>
+            {!logedIn && <h5>No estás conectado!</h5>}
+            {logedIn &&
+                <div>
+                    <p>Cerrando sesión...</p>
+                </div>
+            }
+        </>
     );
 };
 
