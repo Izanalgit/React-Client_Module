@@ -1,43 +1,45 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useFetchPOST = (url,payload) => {
-    
+const useFetchPOST = (url, payload, config = {}) => {
     const [data, setData] = useState(null);
-    const [status, setStatus] = useState(false);
-    const [errMsg, setErrMsg] = useState(null);
-   
-    //REVIEW
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    useEffect(()=>{
-        if(payload)
-            axios.post(url,payload)
-                .then((response) => {
-                    setData(response);
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        if(error.response.data.errors)
-                            setErrMsg(error.response.data.errors);
-                        else
-                            setErrMsg(`Error ${error.response.status} : ${error.response.data.message}`);
-                    } else if (error.request) {
-                        setErrMsg(`No responde`);
-                        console.log(error.request);
-                    } else {
-                        setErrMsg(`Error desconocido`);
-                        console.log(error.message);
-                    }
-                })
-                .finally(() => {
-                    setStatus(true);
-                })
+    useEffect(() => {
+        if (!payload) {
+            setError("Payload no provisto");
+            setLoading(false);
+            return;
+        }
 
-    },[url,payload]);
+        let isMounted = true;
 
+        const fetchData = async () => {
+        try {
+            const response = await axios.post(url, payload, config);
+            if (isMounted) setData(response.data);
 
-    return {data,status,errMsg};
+        } catch (error) {
+            if (isMounted) {
+                const errorMessage = error.response
+                    ? `Error ${error.response.status}: ${error.response.data.message}` //messageErr?
+                    : "El servidor no responde";
+                
+                setError(errorMessage);
+            }
+        } finally {
+            if (isMounted) setLoading(false);
+        }
+        };
 
-}
+        fetchData();
+
+        return () => isMounted = false;
+
+    }, [url, config, payload]);
+
+    return { data, loading, error };
+};
 
 export default useFetchPOST;

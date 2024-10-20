@@ -1,40 +1,39 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-//REVIEW 
-
-const useFetchGET = (url) => {
-    
+const useFetchGET = (url,config) => {
     const [data, setData] = useState(null);
-    const [status, setStatus] = useState(false);
-    const [errMsg, setErrMsg] = useState(null);
-   
-    useEffect(()=>{
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-        axios.get(url)
-            .then((response) => {
-                setData(response);
-            })
-            .catch((error) => {
-                if (error.response) {
-                    setErrMsg(`Error ${error.response.status} : ${error.response.data.message}`);
-                } else if (error.request) {
-                    setErrMsg(`No responde`);
-                    console.log(error.request);
-                } else {
-                    setErrMsg(`Error desconocido`);
-                    console.log(error.message);
-                }
-            })
-            .finally(() => {
-                setStatus(true);
-            })
+    useEffect(() => {
+        let isMounted = true;
 
-    },[url]);
+        const fetchData = async () => {
+        try {
+            const response = await axios.get(url,config);
+            if (isMounted) setData(response.data);
 
+        } catch (error) {
+            if (isMounted) {
+                const errorMessage = error.response
+                    ? `Error ${error.response.status}: ${error.response.data.message}` //messageErr?
+                    : "El servidor no responde";
+                
+                setError(errorMessage);
+            }
+        } finally {
+            if (isMounted) setLoading(false);
+        }
+        };
 
-    return {data,status,errMsg};
+        fetchData();
 
-}
+        return () => isMounted = false;
+
+    }, [url]);
+
+    return { data, loading, error };
+};
 
 export default useFetchGET;
