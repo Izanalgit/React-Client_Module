@@ -39,7 +39,6 @@ const fetchUserInfo = async() => {
     const authToken = localStorage.getItem("authToken");
 
     try {
-        console.log("alksjdlk")
         const profileData = await getUserProfile(authToken);
         const contactsData = await getUserContacts(authToken);
         const blocksData = await getUserBlocks(authToken);
