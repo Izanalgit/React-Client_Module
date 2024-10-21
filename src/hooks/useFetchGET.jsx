@@ -1,39 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-const useFetchGET = (url,config) => {
+const useFetchGET = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(null); 
 
-    useEffect(() => {
-        let isMounted = true;
+    const fetchData = async (url,config) => {
+        // if (loading) return;
+        setLoading(true); 
+        setError(null);
 
-        const fetchData = async () => {
         try {
             const response = await axios.get(url,config);
-            if (isMounted) setData(response.data);
+            setData(response.data);
 
         } catch (error) {
-            if (isMounted) {
-                const errorMessage = error.response
-                    ? `Error ${error.response.status}: ${error.response.data.message}` //messageErr?
-                    : "El servidor no responde";
-                
-                setError(errorMessage);
-            }
+            const errorMessage = error.response
+                ? `STATUS ${error.response.status} : ${error.response.data.messageErr}`
+                : "El servidor no responde";
+            
+            setError(errorMessage);
+
         } finally {
-            if (isMounted) setLoading(false);
+            setLoading(false);
         }
-        };
+    };
 
-        fetchData();
 
-        return () => isMounted = false;
-
-    }, [url]);
-
-    return { data, loading, error };
+    return { fetchData, data, loading, error };
 };
 
 export default useFetchGET;
