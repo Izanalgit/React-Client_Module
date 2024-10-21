@@ -1,41 +1,92 @@
-import { useContext, createContext, useState, useEffect} from "react";
+import { useContext, createContext, useState, useEffect } from "react";
+import useUserService from "../services/userService";
 
 const AppContext = createContext();
 
-const AppProvaider = ({children}) => {
-
-    const [logedIn, setLogedIn] = useState(false);
+const AppProvaider = ({ children }) => {
+    const [logedIn, setLogedIn] = useState(null);
+    const [authToken, setAuthToken] = useState(null);
+    const [userProfile, setUserProfile] = useState({});
+    const [userContacts, setUserContacts] = useState([]);
+    const [userBlocks, setUserBlocks] = useState([]);
     const API = "http://localhost:8080";
-    
-    //Loged state
-    const getLoged = (status) => {
-        setLogedIn(status);
-        if (status) {
-            localStorage.setItem('logedIn', 'true');
+
+    const { 
+        getUserProfile, 
+        getUserContacts, 
+        getUserBlocks 
+    } = useUserService(API);
+
+    // Loged state
+    const getLoged = (userName, token) => {
+        setLogedIn(userName);
+        setAuthToken(token);
+
+        if (userName && token) {
+            localStorage.setItem("logedIn", userName);
+            localStorage.setItem("authToken", token);
         } else {
-            localStorage.removeItem('logedIn');
+            localStorage.removeItem("logedIn");
+            localStorage.removeItem("authToken");
+            localStorage.removeItem("userProfile");
+            localStorage.removeItem("userContacts");
+            localStorage.removeItem("userBlocks");
         }
     };
 
-    //Start or Refresh 
-    useEffect(() => {
-        //Prevail logedIn state
-        const haveUserAuth = localStorage.getItem('authToken');
-        const isUserLogedIn = localStorage.getItem('logedIn');
-        if (isUserLogedIn && haveUserAuth) setLogedIn(true);
-    }, []);
+// User get info from API
+const fetchUserInfo = async() => {
+    const authToken = localStorage.getItem("authToken");
 
-    return (
-        <AppContext.Provider value={{
+    try {
+        console.log("alksjdlk")
+        const profileData = await getUserProfile(authToken);
+        const contactsData = await getUserContacts(authToken);
+        const blocksData = await getUserBlocks(authToken);
+
+        setUserProfile(profileData.data);
+        setUserContacts(contactsData.data);
+        setUserBlocks(blocksData.data);
+
+        localStorage.setItem("userProfile", JSON.stringify(profileData.data));
+        localStorage.setItem("userContacts", JSON.stringify(contactsData.data));
+        localStorage.setItem("userBlocks", JSON.stringify(blocksData.data));
+    } catch (error) {
+        console.error("Error fetching user info:", error);
+    }
+};
+
+// Start or Refresh
+useEffect(() => {
+    // Prevail logedIn state and user info
+    const haveUserAuth = localStorage.getItem("authToken");
+    const isUserLogedIn = localStorage.getItem("logedIn");
+    if (isUserLogedIn && haveUserAuth) {
+        setLogedIn(isUserLogedIn);
+        setAuthToken(haveUserAuth);
+        setUserProfile(JSON.parse(localStorage.getItem("userProfile")));
+        setUserContacts(JSON.parse(localStorage.getItem("userContacts")));
+        setUserBlocks(JSON.parse(localStorage.getItem("userBlocks")));
+    }
+}, []);
+
+return (
+    <AppContext.Provider
+        value={{
             API,
             logedIn,
-            getLoged
-        }}>
-            {children}
-        </AppContext.Provider>
-    );
-}
+            authToken,
+            userProfile,
+            userContacts,
+            userBlocks,
+            getLoged,
+            fetchUserInfo,
+    }}>
+        {children}
+    </AppContext.Provider>
+  );
+};
 
 const useApp = () => useContext(AppContext);
 
-export {AppProvaider, useApp};
+export { AppProvaider, useApp };
