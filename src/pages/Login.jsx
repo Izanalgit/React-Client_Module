@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useApp } from "../context/AppContext"; 
 import useFetchPOST from "../hooks/useFetchPOST";
 
 const LoginComponent = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { API, logedIn, getLoged, fetchUserInfo } = useApp();
@@ -30,6 +32,7 @@ const LoginComponent = () => {
                 await getLoged(loginData.user, loginHeaders['authorization']);
                 await fetchUserInfo();
                 console.log(loginData.message);
+                navigate('/');
             }
         };
         fetchUser();
