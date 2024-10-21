@@ -1,35 +1,37 @@
 import useFetchGET from '../hooks/useFetchGET';
 
 const useUserService = (url) => {
-    const fetchInstance = useFetchGET(); 
+    const blocksInstance = useFetchGET();
+    const profileInstance = useFetchGET(); 
+    const contactsInstance = useFetchGET();  
 
     const getUserBlocks = async (authToken) => {
         const headers = { Authorization: `${authToken}` };
-        await fetchInstance.fetchData(`${url}/api/privacy/block`, {headers});
+        await blocksInstance.fetchData(`${url}/api/privacy/block`, {headers});
         return { 
-            data: fetchInstance.data,
-            loading: fetchInstance.loading, 
-            error: fetchInstance.error 
+            data: blocksInstance.data,
+            loading: blocksInstance.loading, 
+            error: blocksInstance.error 
         };
     };
 
     const getUserProfile = async (authToken) => {
         const headers = { Authorization: `${authToken}` };
-        await fetchInstance.fetchData(`${url}/api/profile`, { headers });
+        await profileInstance.fetchData(`${url}/api/profile`, { headers });
         return { 
-            data: fetchInstance.data, 
-            loading: fetchInstance.loading, 
-            error: fetchInstance.error 
+            data: profileInstance.data, 
+            loading: profileInstance.loading, 
+            error: profileInstance.error 
         };
     };
 
     const getUserContacts = async (authToken) => {
         const headers = { Authorization: `${authToken}` };
-        await fetchInstance.fetchData(`${url}/api/contacts/list`, { headers });
+        await contactsInstance.fetchData(`${url}/api/contacts/list`, { headers });
         return { 
-            data: fetchInstance.data, 
-            loading: fetchInstance.loading, 
-            error: fetchInstance.error 
+            data: contactsInstance.data, 
+            loading: contactsInstance.loading, 
+            error: contactsInstance.error 
         };
     };
 
