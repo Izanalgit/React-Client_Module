@@ -1,45 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
-const useFetchPOST = (url, payload, config = {}) => {
+const useFetchPOST = () => {
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [headers, setHeaders] = useState(null); 
+    const [loading, setLoading] = useState(false); 
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        if (!payload) {
-            setError("Payload no provisto");
-            setLoading(false);
-            return;
-        }
-
-        let isMounted = true;
-
-        const fetchData = async () => {
+    const fetchData = async (url, payload, config = {}) => {
+        // if (loading) return;
+        setLoading(true); 
+        setError(null); 
+        
         try {
             const response = await axios.post(url, payload, config);
-            if (isMounted) setData(response.data);
+
+            setData(response.data); 
+            setHeaders(response.headers); 
 
         } catch (error) {
-            if (isMounted) {
-                const errorMessage = error.response
-                    ? `Error ${error.response.status}: ${error.response.data.message}` //messageErr?
-                    : "El servidor no responde";
-                
-                setError(errorMessage);
-            }
+            const errorMessage = error.response
+                ? `STATUS ${error.response.status} : ${error.response.data.messageErr}`
+                : "El servidor no responde";
+            setError(errorMessage);
+
         } finally {
-            if (isMounted) setLoading(false);
+            setLoading(false);
         }
-        };
+    };
 
-        fetchData();
-
-        return () => isMounted = false;
-
-    }, [url, config, payload]);
-
-    return { data, loading, error };
+    return { fetchData, data, headers, loading, error };
 };
 
 export default useFetchPOST;
