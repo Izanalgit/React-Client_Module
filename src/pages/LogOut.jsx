@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -6,6 +6,7 @@ import { useApp } from '../context/AppContext';
 
 const Logout = () => {
     const navigate = useNavigate();
+    const hasLoggedOut = useRef(false);
     const {API,logedIn,getLoged} = useApp();
 
     useEffect(() => {
@@ -13,7 +14,8 @@ const Logout = () => {
             
             const token = localStorage.getItem('authToken'); 
 
-            if (token) {
+            if (token && !hasLoggedOut.current) {
+                hasLoggedOut.current = true;
                 try {
                     await axios.post(
                         `${API}/api/user/logout`, 
