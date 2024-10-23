@@ -35,21 +35,26 @@ const AppProvaider = ({ children }) => {
     };
 
 // User get info from API
-const fetchUserInfo = async() => {
+const fetchUserInfo = async(selector = 'ALL') => {
     const authToken = localStorage.getItem("authToken");
 
     try {
-        const profileData = await getUserProfile(authToken);
-        const contactsData = await getUserContacts(authToken);
-        const blocksData = await getUserBlocks(authToken);
+        if(selector === 'ALL' || selector === 'profile'){
+            const profileData = await getUserProfile(authToken);
+            setUserProfile(profileData.data);
+            localStorage.setItem("userProfile", JSON.stringify(profileData.data));
+        }
+        if(selector === 'ALL' || selector === 'contacts'){
+            const contactsData = await getUserContacts(authToken);
+            setUserContacts(contactsData.data);
+            localStorage.setItem("userContacts", JSON.stringify(contactsData.data));
+        }
+        if(selector === 'ALL' || selector === 'blocks'){
+            const blocksData = await getUserBlocks(authToken);
+            setUserBlocks(blocksData.data);
+            localStorage.setItem("userBlocks", JSON.stringify(blocksData.data));
+        }        
 
-        setUserProfile(profileData.data);
-        setUserContacts(contactsData.data);
-        setUserBlocks(blocksData.data);
-
-        localStorage.setItem("userProfile", JSON.stringify(profileData.data));
-        localStorage.setItem("userContacts", JSON.stringify(contactsData.data));
-        localStorage.setItem("userBlocks", JSON.stringify(blocksData.data));
     } catch (error) {
         console.error("Error fetching user info:", error);
     }
