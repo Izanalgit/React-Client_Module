@@ -20,10 +20,12 @@ const useFetchPOST = () => {
 
         } catch (error) {
             const errorMessage = error.response
-                ? `STATUS ${error.response.status} : ${error.response.data.messageErr}`
+                ? `STATUS ${error.response.status} : ${
+                    error.response.data.messageErr ?
+                    error.response.data.messageErr:
+                    error.response.data.errors.map(error=>error.msg)}`
                 : "El servidor no responde";
             setError(errorMessage);
-
         } finally {
             setLoading(false);
         }
