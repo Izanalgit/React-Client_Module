@@ -30,7 +30,7 @@ const LoginComponent = () => {
         const fetchUser = async () => {
             if (loginData?.user && loginHeaders['authorization'] && !logedIn) {
                 await getLoged(loginData.user, loginHeaders['authorization']);
-                await fetchUserInfo();
+                // await fetchUserInfo();
                 console.log(loginData.message);
                 navigate('/');
             }
