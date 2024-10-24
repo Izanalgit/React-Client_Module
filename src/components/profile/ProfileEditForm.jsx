@@ -3,7 +3,7 @@ import React, { useState , useEffect} from 'react';
 import { useApp } from '../../context/AppContext';
 import useFetchPOST from '../../hooks/useFetchPOST';
 
-const ProfileEditForm = () => {
+const ProfileEditForm = ({onComplete}) => {
 
     const { API, authToken, userProfile , fetchAndStoreUserInfo} = useApp();
 
@@ -112,6 +112,7 @@ const ProfileEditForm = () => {
                 console.log("Perfil actualizado:", profileFetchData);
                 await fetchAndStoreUserInfo(); 
                 setSuccessMessage('Perfil actualizado exitosamente');
+                onComplete();
             } else if (!profileFetchLoading && profileFetchError) {
                 setErrorMessage('Error al actualizar el perfil. Intenta de nuevo.');
                 console.log(profileFetchError);
