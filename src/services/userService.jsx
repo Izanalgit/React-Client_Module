@@ -7,9 +7,9 @@ const useUserService = (url) => {
 
     const getUserBlocks = async (authToken) => {
         const headers = { Authorization: `${authToken}` };
-        await blocksInstance.fetchData(`${url}/api/privacy/block`, {headers});
+        const blocksData = await blocksInstance.fetchData(`${url}/api/privacy/block`, { headers });
         return { 
-            data: blocksInstance.data,
+            data: blocksData,   // Aquí devolvemos directamente blocksData
             loading: blocksInstance.loading, 
             error: blocksInstance.error 
         };
@@ -17,9 +17,10 @@ const useUserService = (url) => {
 
     const getUserProfile = async (authToken) => {
         const headers = { Authorization: `${authToken}` };
-        await profileInstance.fetchData(`${url}/api/profile`, { headers });
+        const profileData = await profileInstance.fetchData(`${url}/api/profile`, { headers });
+        console.log('SERVICE', profileData);  // Ya debe mostrar la data correctamente
         return { 
-            data: profileInstance.data, 
+            data: profileData,   // Retornamos profileData directamente
             loading: profileInstance.loading, 
             error: profileInstance.error 
         };
@@ -27,9 +28,9 @@ const useUserService = (url) => {
 
     const getUserContacts = async (authToken) => {
         const headers = { Authorization: `${authToken}` };
-        await contactsInstance.fetchData(`${url}/api/contacts/list`, { headers });
+        const contactsData = await contactsInstance.fetchData(`${url}/api/contacts/list`, { headers });
         return { 
-            data: contactsInstance.data, 
+            data: contactsData,   // Retornamos contactsData directamente
             loading: contactsInstance.loading, 
             error: contactsInstance.error 
         };
