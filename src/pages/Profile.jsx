@@ -1,3 +1,5 @@
+import { useState } from "react";
+import ProfileEditForm from "../components/profile/ProfileEditForm";
 
 
 const Profile = () => {
@@ -7,9 +9,9 @@ const Profile = () => {
 
     return (
         <div>
-            {!isEditing && !isUploadingPhoto && <ProfileView />}
+            {/* {!isEditing && !isUploadingPhoto && <ProfileView />} */}
             {isEditing && <ProfileEditForm />}
-            {isUploadingPhoto && <PhotoUploadForm />}
+            {/* {isUploadingPhoto && <PhotoUploadForm />} */}
 
             <button onClick={() => setIsEditing(!isEditing)}>
                 {isEditing ? 'Cancel' : 'Edit Profile'}
