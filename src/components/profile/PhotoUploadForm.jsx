@@ -38,7 +38,7 @@ const PhotoUploadForm = ({onComplete}) => {
         const updateProfile = async () => {
             if (!loading && data) {
                 try {
-                    await fetchAndStoreUserInfo();
+                    await fetchAndStoreUserInfo('profile');
                     console.log('Perfil actualizado');
                 } catch (error) {
                     console.error('Error al actualizar el perfil:', error);

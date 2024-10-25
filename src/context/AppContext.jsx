@@ -44,27 +44,37 @@ const AppProvaider = ({ children }) => {
     };
 
 // User get info from API
-const fetchAndStoreUserInfo = async () => {
+const fetchAndStoreUserInfo = async (selector) => {
     if (logedIn && authToken) {
         const userInfo = {};
 
-        const profile = await getUserProfile(authToken);
-        userInfo.userProfile = profile.data;
-
-        const contacts = await getUserContacts(authToken);
-        userInfo.userContacts = contacts.data;
-
-        const blocks = await getUserBlocks(authToken);
-        userInfo.userBlocks = blocks.data;
+        if(!selector || selector === 'profile'){
+            const profile = await getUserProfile(authToken);
+            userInfo.userProfile = profile.data;
+        }
+        if(!selector || selector === 'contacts'){
+            const contacts = await getUserContacts(authToken);
+            userInfo.userContacts = contacts.data;
+        }
+        if(!selector || selector === 'blocks'){
+            const blocks = await getUserBlocks(authToken);
+            userInfo.userBlocks = blocks.data;
+        }
 
         if (userInfo) {
-            setUserProfile(userInfo.userProfile || null);
-            setUserContacts(userInfo.userContacts || null);
-            setUserBlocks(userInfo.userBlocks || null);
+            if(!selector || selector === 'profile')
+                setUserProfile(userInfo.userProfile || null);
+            if(!selector || selector === 'contacts')
+                setUserContacts(userInfo.userContacts || null);
+            if(!selector || selector === 'blocks')
+                setUserBlocks(userInfo.userBlocks || null);
 
-            localStorage.setItem("userProfile", JSON.stringify(userInfo.userProfile || null));
-            localStorage.setItem("userContacts", JSON.stringify(userInfo.userContacts || null));
-            localStorage.setItem("userBlocks", JSON.stringify(userInfo.userBlocks || null));
+            if(!selector || selector === 'profile')
+                localStorage.setItem("userProfile", JSON.stringify(userInfo.userProfile || null));
+            if(!selector || selector === 'contacts')
+                localStorage.setItem("userContacts", JSON.stringify(userInfo.userContacts || null));
+            if(!selector || selector === 'blocks')
+                localStorage.setItem("userBlocks", JSON.stringify(userInfo.userBlocks || null));
 
             console.log("CONTEXT", userInfo);
         }

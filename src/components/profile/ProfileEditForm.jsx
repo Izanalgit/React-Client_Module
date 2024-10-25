@@ -110,7 +110,7 @@ const ProfileEditForm = ({onComplete}) => {
         const updateContext = async () => {
             if (!profileFetchLoading && profileFetchData) {
                 console.log("Perfil actualizado:", profileFetchData);
-                await fetchAndStoreUserInfo(); 
+                await fetchAndStoreUserInfo('profile'); 
                 setSuccessMessage('Perfil actualizado exitosamente');
                 onComplete();
             } else if (!profileFetchLoading && profileFetchError) {
