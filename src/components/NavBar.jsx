@@ -5,11 +5,12 @@ import {Link} from 'react-router-dom';
 const NavBar = () => {
     return(
         <nav>
-            <Link to="/" >Inicio</Link>
-            <Link to="/login" >Log In</Link>
-            <Link to="/profile" >Perfil</Link>
-            <Link to="/contacts" >Buscar</Link>
-            <Link to="/chat" >Mensages</Link>
+            <Link to="/" >Inicio - </Link>
+            <Link to="/dashboard" >Dashboard - </Link>
+            <Link to="/profile" >Perfil - </Link>
+            <Link to="/contacts" >Buscar - </Link>
+            <Link to="/chat" >Mensages - </Link>
+            <Link to="/login" >CONECTAR / </Link>
             <Link to="/logout" >DESCONTECTAR</Link>
         </nav>
     );
