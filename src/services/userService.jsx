@@ -9,7 +9,7 @@ const useUserService = (url) => {
         const headers = { Authorization: `${authToken}` };
         const blocksData = await blocksInstance.fetchData(`${url}/api/privacy/block`, { headers });
         return { 
-            data: blocksData,   // Aquí devolvemos directamente blocksData
+            data: blocksData,
             loading: blocksInstance.loading, 
             error: blocksInstance.error 
         };
@@ -18,9 +18,8 @@ const useUserService = (url) => {
     const getUserProfile = async (authToken) => {
         const headers = { Authorization: `${authToken}` };
         const profileData = await profileInstance.fetchData(`${url}/api/profile`, { headers });
-        console.log('SERVICE', profileData);  // Ya debe mostrar la data correctamente
         return { 
-            data: profileData,   // Retornamos profileData directamente
+            data: profileData,
             loading: profileInstance.loading, 
             error: profileInstance.error 
         };
@@ -30,7 +29,7 @@ const useUserService = (url) => {
         const headers = { Authorization: `${authToken}` };
         const contactsData = await contactsInstance.fetchData(`${url}/api/contacts/list`, { headers });
         return { 
-            data: contactsData,   // Retornamos contactsData directamente
+            data: contactsData,
             loading: contactsInstance.loading, 
             error: contactsInstance.error 
         };
