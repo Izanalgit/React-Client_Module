@@ -17,6 +17,14 @@ const AppProvaider = ({ children }) => {
         getUserBlocks 
     } = useUserService(API);
 
+    //Change Name
+    const changeName = (newName) => {
+        if(newName){
+            setLogedIn(newName);
+            localStorage.setItem("logedIn", newName);
+        }
+    }
+
     // Loged state
     const getLoged = (userName, token) => {
         setLogedIn(userName);
@@ -75,8 +83,7 @@ const fetchAndStoreUserInfo = async (selector) => {
                 localStorage.setItem("userContacts", JSON.stringify(userInfo.userContacts || null));
             if(!selector || selector === 'blocks')
                 localStorage.setItem("userBlocks", JSON.stringify(userInfo.userBlocks || null));
-
-            console.log("CONTEXT", userInfo);
+            
         }
     }
 };
@@ -109,6 +116,7 @@ return (
             userContacts,
             userBlocks,
             getLoged,
+            changeName,
             fetchAndStoreUserInfo,
     }}>
         {children}
