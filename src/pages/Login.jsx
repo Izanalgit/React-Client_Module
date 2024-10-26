@@ -4,11 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext"; 
 import useFetchPOST from "../hooks/useFetchPOST";
 
+import UserRegistForm from "../components/user/UserRegistForm";
+
 const LoginComponent = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { API, logedIn, getLoged, fetchUserInfo } = useApp();
+    const [isSingUp, setIsSingUp] = useState(false);
+    const { API, logedIn, getLoged } = useApp();
     const { 
         data: loginData,
         headers: loginHeaders,
@@ -30,18 +33,18 @@ const LoginComponent = () => {
         const fetchUser = async () => {
             if (loginData?.user && loginHeaders['authorization'] && !logedIn) {
                 await getLoged(loginData.user, loginHeaders['authorization']);
-                // await fetchUserInfo();
                 console.log(loginData.message);
                 navigate('/');
             }
         };
         fetchUser();
-    }, [loginData, loginHeaders, logedIn, getLoged, fetchUserInfo]);
+    }, [loginData, loginHeaders, logedIn, getLoged]);
 
     return (
         <> 
             {logedIn && <h5>Ya estás conectado!</h5>}
-            {!logedIn &&
+            {!logedIn && isSingUp && <UserRegistForm />}
+            {!logedIn && !isSingUp &&
                 <div>
                     <h2>Iniciar Sesión</h2>
                     {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
@@ -61,6 +64,7 @@ const LoginComponent = () => {
                             required
                         />
                         <button type="submit">Login</button>
+                        <button onClick={()=>setIsSingUp(true)}>Registrarse</button>
 
                         {loginLoading && <p>Cargando...</p>}
                     </form>
