@@ -7,6 +7,7 @@ import Search from "../pages/Search.jsx";
 import Chat from "../pages/Chat.jsx";
 import Registation from "../pages/Registation.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
+import Contacts from "../pages/Contacts.jsx";
 import Login from "../pages/Login.jsx";
 import Logout from "../pages/LogOut.jsx";
 
@@ -20,7 +21,8 @@ const AppRoutes = () =>{
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/contacts" element={<Search />} />
+                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/search" element={<Search />} />
                 <Route path="/chat" element={<Chat />} />
                 <Route path="/registation" element={<Registation />} />
                 <Route path="/dashboard" element={<Dashboard />} />
