@@ -8,7 +8,7 @@ const NavBar = () => {
             <Link to="/" >Inicio - </Link>
             <Link to="/dashboard" >Dashboard - </Link>
             <Link to="/profile" >Perfil - </Link>
-            <Link to="/contacts" >Buscar - </Link>
+            <Link to="/contacts" >Contactos - </Link>
             <Link to="/chat" >Mensages - </Link>
             <Link to="/login" >CONECTAR / </Link>
             <Link to="/logout" >DESCONTECTAR</Link>
