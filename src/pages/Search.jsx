@@ -13,8 +13,8 @@ const Search = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
-    const [basicFilters, setBasicFilters] = useState({});
-    const [extendedFilters, setExtendedFilters] = useState({});
+    const [basicFilters, setBasicFilters] = useState();
+    const [extendedFilters, setExtendedFilters] = useState();
     const [searchDone, setSearchDone] = useState(false);
     const [profiles, setProfiles] = useState([]);
 
