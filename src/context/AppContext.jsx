@@ -69,7 +69,7 @@ const fetchAndStoreUserInfo = async (selector) => {
             userInfo.userBlocks = blocks.data;
         }
 
-        if (userInfo) {
+        if (userInfo.userProfile != null || userInfo.userContacts != null || userInfo.userBlocks != null) {
             if(!selector || selector === 'profile')
                 setUserProfile(userInfo.userProfile || null);
             if(!selector || selector === 'contacts')
@@ -84,6 +84,10 @@ const fetchAndStoreUserInfo = async (selector) => {
             if(!selector || selector === 'blocks')
                 localStorage.setItem("userBlocks", JSON.stringify(userInfo.userBlocks || null));
             
+        }else {
+            //Clean login if not profile get
+            setLogedIn(null);
+            setAuthToken(null);
         }
     }
 };
