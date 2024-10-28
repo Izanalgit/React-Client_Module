@@ -1,5 +1,6 @@
 import ContactResponse from "./ContactResponse";
 import ContactRemove from "./ContactRemove";
+import BlockUser from "../privacy/BlockUser";
 
 const ContactCard = ({ contactId, contactName, contactType }) => {
 
@@ -10,6 +11,7 @@ const ContactCard = ({ contactId, contactName, contactType }) => {
                 ? <ContactResponse contactId={contactId}/>
                 : <ContactRemove contactId={contactId}/>
             }
+            <BlockUser userId={contactId}/>
         </div>
     );
 };

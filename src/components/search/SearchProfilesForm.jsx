@@ -29,9 +29,9 @@ const SearchProfilesForm = ({ onSearch }) => {
             ? {
                   minHeight: minHeight ? parseInt(minHeight) : undefined,
                   maxHeight: maxHeight ? parseInt(maxHeight) : undefined,
-                  ethnia,
-                  religion,
-                  relationship,
+                  ethnia : ethnia ? ethnia : undefined,
+                  religion : religion ? religion : undefined,
+                  relationship : relationship ? relationship : undefined,
                   smoking: smoking === '' ? undefined : smoking,
                   drinking: drinking === '' ? undefined : drinking
               }
