@@ -5,7 +5,7 @@ import useFetchPATCH from "../../hooks/useFetchPATCH";
 
 const ContactRequest = ({contactId}) => {
 
-    const {API,authToken} = useApp();
+    const {API,authToken,fetchAndStoreUserInfo} = useApp();
 
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -44,7 +44,8 @@ const ContactRequest = ({contactId}) => {
     useEffect(()=>{
         const requestResponse = async()=>{
             if(contactRequestData && !contactRequestLoading){
-                    console.log(contactRequestData.message)
+                    console.log(contactRequestData.message);
+                    await fetchAndStoreUserInfo();
                     setSuccessMessage("Solicitud de contacto enviada con éxito.");
             }
             if (contactRequestError && !contactRequestLoading) {
