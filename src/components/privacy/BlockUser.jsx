@@ -42,10 +42,10 @@ const BlockUser = ({userId}) => {
     }
 
     useEffect(()=>{
-        const requestResponse = async()=>{
+        const block = async()=>{
             if(blockUserData && !blockUserLoading){
                     console.log(blockUserData.message)
-                    await fetchAndStoreUserInfo('blocks');
+                    await fetchAndStoreUserInfo();
                     setSuccessMessage("Bloqueo de usuario gestionado con éxito.");
             }
             if (blockUserError && !blockUserLoading) {
@@ -55,7 +55,7 @@ const BlockUser = ({userId}) => {
             setIsUpdating(false);
         }
 
-        requestResponse();
+        block();
     },[blockUserData, blockUserLoading, blockUserError])
 
     return (

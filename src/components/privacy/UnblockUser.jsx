@@ -42,7 +42,7 @@ const UnblockUser = ({userId}) => {
     }
 
     useEffect(()=>{
-        const requestResponse = async()=>{
+        const unblock = async()=>{
             if(unBlockUserData && !unBlockUserLoading){
                     console.log(unBlockUserData.message)
                     await fetchAndStoreUserInfo('blocks');
@@ -55,7 +55,7 @@ const UnblockUser = ({userId}) => {
             setIsUpdating(false);
         }
 
-        requestResponse();
+        unblock();
     },[unBlockUserData, unBlockUserLoading, unBlockUserError])
 
     return (
