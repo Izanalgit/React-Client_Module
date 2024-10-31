@@ -56,8 +56,7 @@ const SearchProfilesForm = ({ onSearch }) => {
                 <label>Localidad:</label>
                 <select value={location} onChange={(e) => setLocation(e.target.value)}>
                     <option value="">Indiferente</option>
-                    <option value="true">Sí</option>
-                    <option value="false">No</option>
+                    <option value="true">Cercano</option>
                 </select>
             </div>
             <div>
@@ -85,15 +84,36 @@ const SearchProfilesForm = ({ onSearch }) => {
                     </div>
                     <div>
                         <label>Etnia:</label>
-                        <input type="text" value={ethnia} onChange={(e) => setEthnia(e.target.value)} />
+                        <select value={ethnia} onChange={(e) => setEthnia(e.target.value)}>
+                            <option value="">Indiferente</option>
+                            <option value="Asiática">Asiática</option>
+                            <option value="Caucásico">Caucásico</option>
+                            <option value="Amerindia">Amerindia</option>
+                            <option value="Africana">Africana</option>
+                            <option value="Sudeste Asiática">Sudeste Asiático</option>
+                        </select>
                     </div>
                     <div>
                         <label>Religión:</label>
-                        <input type="text" value={religion} onChange={(e) => setReligion(e.target.value)} />
+                        <select value={religion} onChange={(e) => setReligion(e.target.value)}>
+                            <option value="">Indiferente</option>
+                            <option value="Cristianísmo">Cristianísmo</option>
+                            <option value="Judaísmo">Judaísmo</option>
+                            <option value="Hinduísmo">Hinduísmo</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Budísmo">Budísmo</option>
+                        </select>
                     </div>
                     <div>
                         <label>Relación:</label>
-                        <input type="text" value={relationship} onChange={(e) => setRelationship(e.target.value)} />
+                        <select value={relationship} onChange={(e) => setRelationship(e.target.value)}>
+                            <option value="">Indiferente</option>
+                            <option value="Soltería">Soltería</option>
+                            <option value="Divorcio">Divorcio</option>
+                            <option value="Pareja">Pareja</option>
+                            <option value="Matrimonio">Matrimonio</option>
+                            <option value="Viudedad">Viudedad</option>
+                        </select>
                     </div>
                     <div>
                         <label>Fuma:</label>

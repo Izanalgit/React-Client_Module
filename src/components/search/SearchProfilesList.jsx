@@ -4,13 +4,16 @@ const SearchProfilesList = ({profiles}) => {
 
     return (
         <>
-            {profiles.map((profile)=> (
-                <SearchProfileCard
-                    key={profile.userId} 
-                    contactId = {profile.userId} 
-                    contactName = {profile.name}
-                />
-            ))}
+            {profiles?.length > 0 ? 
+                profiles.map((profile)=> (
+                    <SearchProfileCard
+                        key={profile.userId} 
+                        contactId = {profile.userId} 
+                        contactName = {profile.name}
+                    />
+                ))
+                : <p>No se ha encontrado un perfil adecuado...</p>
+            }
 
         
         </>
