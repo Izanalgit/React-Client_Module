@@ -36,12 +36,7 @@ const Search = () => {
             setErrorMessage('');
             setSuccessMessage('');
     
-            if (!basicFilters) {
-                setErrorMessage('Filtros básicos necesarios.');
-                return;
-            }
-    
-            if (isUpdating) return;
+            if (isUpdating || !basicFilters) return;
     
             try {
                 setIsUpdating(true);
