@@ -1,14 +1,16 @@
-// import {  } from 'react'
-import './css/App.css'
-import AppRoutes from './routes/AppRoutes'
+import React from 'react'
+import './css/App.css';
+import { ChatProvider } from './context/ChatContext';
+import AppRoutes from './routes/AppRoutes';
+
 
 function App() {
 
   return (
-    <>
-      <AppRoutes/>
-    </>
+    <ChatProvider>
+      <AppRoutes />
+    </ChatProvider>
   )
 }
 
-export default App
+export default App;
