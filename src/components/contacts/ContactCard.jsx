@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import ContactResponse from "./ContactResponse";
 import ContactRemove from "./ContactRemove";
 import BlockUser from "../privacy/BlockUser";
@@ -12,6 +14,7 @@ const ContactCard = ({ contactId, contactName, contactType }) => {
                 : <ContactRemove contactId={contactId}/>
             }
             <BlockUser userId={contactId}/>
+            <Link to={`/chat/${contactId}`}>Abrir chat</Link>
         </div>
     );
 };
