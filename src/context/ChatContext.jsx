@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState , useEffect } from 'react';
 
 import { useApp } from './AppContext';
 import useChatService from '../services/chatService';
@@ -9,17 +9,27 @@ const ChatProvider = ({ children }) => {
     const [currentChat, setCurrentChat] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [contactId, setContactId] = useState(null)
 
     const {API,authToken} = useApp();
     const { getMessages, sendMessage } = useChatService(API,authToken);
 
+    //Get contactId
+    const getContactId = (id) => setContactId(id);
+
     // Load messages
     const loadChat = async (contactId) => {
+
+        if (!authToken) {
+            setError("Token no disponible. Por favor, inicia sesión nuevamente.");
+            return;
+        }
+
         setLoading(true);
         setError(null);
+
         try {
             const { data } = await getMessages(contactId);
-            console.log(data)
             setCurrentChat(data);
         } catch (err) {
             setError('Error al cargar los mensajes');
@@ -30,19 +40,45 @@ const ChatProvider = ({ children }) => {
 
     // Send message
     const sendChatMessage = async (contactId, message) => {
+
+        setLoading(true);
+        setError(null);
+
         try {
-            const { data } = await sendMessage(contactId, message);
-            loadChat(contactId) //REFACT !!!!
+            const {error:errorMsg } = await sendMessage(contactId, message);
+    
+            if (errorMsg) {
+                if (errorMsg.includes("STATUS 402")) 
+                    setError("Parece que no tienes premium ni tokens suficientes...");
+                if (errorMsg.includes("STATUS 422"))
+                    setError("Mensaje inválido...");
+
+                return;
+            }
+
+            await loadChat(contactId);
+
         } catch (err) {
-            console.error('Error al enviar el mensaje:', err);
+            setError("Error crítico al enviar el mensaje.");
+        } finally {
+            setLoading(false);
         }
     };
+
+    useEffect(() => {
+        const chat = async () =>{
+        if (contactId && authToken) 
+           await loadChat(contactId);
+        }
+        chat();
+    }, [authToken, contactId]);
+    
 
     return (
         <ChatContext.Provider 
             value={{ 
                 currentChat, 
-                loadChat, 
+                getContactId, 
                 sendChatMessage, 
                 loading, 
                 error 
