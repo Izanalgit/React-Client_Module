@@ -14,7 +14,10 @@ const ContactCard = ({ contactId, contactName, contactType }) => {
                 : <ContactRemove contactId={contactId}/>
             }
             <BlockUser userId={contactId}/>
-            <Link to={`/chat/${contactId}`}>Abrir chat</Link>
+            {contactType === "contact" &&
+                <Link to={`/chat/${contactName}/${contactId}`}>Abrir chat</Link>
+            }
+            
         </div>
     );
 };
