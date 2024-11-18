@@ -23,7 +23,8 @@ const useFetchPOST = () => {
                 ? `STATUS ${error.response.status} : ${
                     error.response.data.messageErr ?
                     error.response.data.messageErr:
-                    error.response.data.errors.map(error=>error.msg)}`
+                    error.response.data.errors ?
+                    error.response.data.errors.map(error=>error.msg):error}`
                 : "El servidor no responde";
             setError(errorMessage);
         } finally {
