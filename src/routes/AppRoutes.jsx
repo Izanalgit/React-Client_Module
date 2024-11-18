@@ -22,7 +22,7 @@ const AppRoutes = () =>{
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/search" element={<Search />} />
-                <Route path="/chat/:contactId" element={<Chat />} />
+                <Route path="/chat/:contactName/:contactId" element={<Chat />} />
                 <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </>
