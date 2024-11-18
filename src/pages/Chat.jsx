@@ -4,12 +4,12 @@ import ChatWindow from "../components/chat/ChatWindow";
 
 const Chat = () => {
 
-    const { contactId } = useParams();
+    const { contactName, contactId } = useParams();
 
     return (
 
         <>
-            <h1>MENSAJES:</h1>
+            <h2>Chat con {contactName}:</h2>
             <ChatWindow contactId={contactId}/>
         </>
 
