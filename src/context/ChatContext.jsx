@@ -45,7 +45,7 @@ const ChatProvider = ({ children }) => {
         setError(null);
 
         try {
-            const {error:errorMsg } = await sendMessage(contactId, message);
+            const { error: errorMsg } = await sendMessage(contactId, message);
     
             if (errorMsg) {
                 if (errorMsg.includes("STATUS 402")) 
