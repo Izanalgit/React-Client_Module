@@ -11,7 +11,7 @@ const ChatProvider = ({ children }) => {
     const [error, setError] = useState(null);
     const [contactId, setContactId] = useState(null)
 
-    const {API,authToken} = useApp();
+    const {API,authToken,sendMessage:webSocketMSG} = useApp();
     const { getMessages, sendMessage } = useChatService(API,authToken);
 
     //Get contactId
@@ -57,6 +57,7 @@ const ChatProvider = ({ children }) => {
             }
 
             await loadChat(contactId);
+            webSocketMSG('NEW_MESSAGE', { to: contactId, content: message });
 
         } catch (err) {
             setError("Error crítico al enviar el mensaje.");
