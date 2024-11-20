@@ -1,5 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import useUserService from "../services/userService";
+import useWebSocket from "../hooks/useWebSocket";
 
 const AppContext = createContext();
 
@@ -105,10 +106,14 @@ useEffect(() => {
         setUserBlocks(JSON.parse(localStorage.getItem("userBlocks")));
     }
 }, []);
+
 // Fetch User Info when login
 useEffect(() => {
     fetchAndStoreUserInfo();
 }, [logedIn, authToken]);
+
+// Websocket
+const { sendMessage } = useWebSocket('localhost:8080',authToken);
 
 return (
     <AppContext.Provider
@@ -122,6 +127,7 @@ return (
             getLoged,
             changeName,
             fetchAndStoreUserInfo,
+            sendMessage,
     }}>
         {children}
     </AppContext.Provider>
