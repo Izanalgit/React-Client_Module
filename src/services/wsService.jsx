@@ -2,14 +2,16 @@ function handleIncomingMessage(message) {
     switch (message.type) {
         case 'FRIEND_REQUEST':
             console.log(`Nueva solicitud de amistad de ${message.from}`);
-            // Aquí puedes actualizar tu estado o mostrar una notificación
-            break;
+            return 'FRIEND_REQUEST';
         case 'NEW_MESSAGE':
             console.log(`Nuevo mensaje de ${message.from}`);
-            // Aquí puedes actualizar el chat o mostrar una alerta
-            break;
+            return 'NEW_MESSAGE';
+        case 'IS_READ':
+            console.log(`Mensaje leído de ${message.from}`);
+            return 'IS_READ';
         default:
             console.warn('Tipo de mensaje desconocido:', message.type);
+            return null;
     }
 }
 
