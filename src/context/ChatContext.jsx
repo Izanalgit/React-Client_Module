@@ -9,9 +9,9 @@ const ChatProvider = ({ children }) => {
     const [currentChat, setCurrentChat] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [contactId, setContactId] = useState(null)
+    const [contactId, setContactId] = useState(null);
 
-    const {API,authToken,sendMessage:webSocketMSG} = useApp();
+    const {API,authToken,sendMessage:webSocketMSG,cleanWsEvent,wsEvent} = useApp();
     const { getMessages, sendMessage } = useChatService(API,authToken);
 
     //Get contactId
@@ -66,21 +66,34 @@ const ChatProvider = ({ children }) => {
         }
     };
 
+    //Check read WS
+    const setIsRead = (contactId) => webSocketMSG('IS_READ', { to: contactId});
+
     useEffect(() => {
         const chat = async () =>{
-        if (contactId && authToken) 
-           await loadChat(contactId);
+            if (contactId && authToken) 
+                await loadChat(contactId);
         }
         chat();
     }, [authToken, contactId]);
+
+    useEffect(() => {
+        const chatWs = async () =>{
+            if (contactId && authToken && ['NEW_MESSAGE','IS_READ'].includes(wsEvent)) 
+                await loadChat(contactId);
+                cleanWsEvent();
+        }
+        chatWs();
+    }, [wsEvent]);
     
 
     return (
         <ChatContext.Provider 
             value={{ 
-                currentChat, 
+                currentChat,
                 getContactId, 
-                sendChatMessage, 
+                sendChatMessage,
+                setIsRead, 
                 loading, 
                 error 
             }}>
