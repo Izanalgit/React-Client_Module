@@ -1,5 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import useUserService from "../services/userService";
+import usePremyService from "../services/premyService";
 import useWebSocket from "../hooks/useWebSocket";
 
 const AppContext = createContext();
@@ -10,13 +11,20 @@ const AppProvaider = ({ children }) => {
     const [userProfile, setUserProfile] = useState(null);
     const [userContacts, setUserContacts] = useState(null);
     const [userBlocks, setUserBlocks] = useState(null);
-    const API = "http://localhost:8080";
+    const [userPremy, setUserPremy] = useState(null);
+    const [wsEvent , setWsEvent] = useState(null);
+    const IpAPI = "192.168.1.79:8080"
+    const API = "http://" + IpAPI;
 
     const { 
         getUserProfile, 
         getUserContacts, 
         getUserBlocks 
     } = useUserService(API);
+
+    const {
+        getPremyCount
+    } = usePremyService(API);
 
     //Change Name
     const changeName = (newName) => {
@@ -43,11 +51,13 @@ const AppProvaider = ({ children }) => {
             localStorage.removeItem("userProfile");
             localStorage.removeItem("userContacts");
             localStorage.removeItem("userBlocks");
+            localStorage.removeItem("userPremy");
             setLogedIn(null);
             setAuthToken(null);
             setUserProfile(null);
             setUserContacts(null);
             setUserBlocks(null);
+            setUserPremy(null);
 
         }
     };
@@ -69,14 +79,25 @@ const fetchAndStoreUserInfo = async (selector) => {
             const blocks = await getUserBlocks(authToken);
             userInfo.userBlocks = blocks.data;
         }
+        if(!selector || selector === 'premy'){
+            const premy = await getPremyCount(authToken);
+            userInfo.userPremy = premy.data;
+        }
 
-        if (userInfo.userProfile != null || userInfo.userContacts != null || userInfo.userBlocks != null) {
+        if (
+            userInfo.userProfile != null || 
+            userInfo.userContacts != null || 
+            userInfo.userBlocks != null ||
+            userInfo.userPremy != null
+        ) {
             if(!selector || selector === 'profile')
                 setUserProfile(userInfo.userProfile || null);
             if(!selector || selector === 'contacts')
                 setUserContacts(userInfo.userContacts || null);
             if(!selector || selector === 'blocks')
                 setUserBlocks(userInfo.userBlocks || null);
+            if(!selector || selector === 'premy')
+                setUserPremy(userInfo.userPremy || null);
 
             if(!selector || selector === 'profile')
                 localStorage.setItem("userProfile", JSON.stringify(userInfo.userProfile || null));
@@ -84,6 +105,8 @@ const fetchAndStoreUserInfo = async (selector) => {
                 localStorage.setItem("userContacts", JSON.stringify(userInfo.userContacts || null));
             if(!selector || selector === 'blocks')
                 localStorage.setItem("userBlocks", JSON.stringify(userInfo.userBlocks || null));
+            if(!selector || selector === 'premy')
+                localStorage.setItem("userPremy", JSON.stringify(userInfo.userPremy || null));
             
         }else {
             //Clean login if not profile get
@@ -104,6 +127,7 @@ useEffect(() => {
         setUserProfile(JSON.parse(localStorage.getItem("userProfile")));
         setUserContacts(JSON.parse(localStorage.getItem("userContacts")));
         setUserBlocks(JSON.parse(localStorage.getItem("userBlocks")));
+        setUserPremy(JSON.parse(localStorage.getItem("userPremy")));
     }
 }, []);
 
@@ -113,7 +137,9 @@ useEffect(() => {
 }, [logedIn, authToken]);
 
 // Websocket
-const { sendMessage } = useWebSocket('localhost:8080',authToken);
+const cleanWsEvent = () => setWsEvent(null);
+const getWsEvent = (ws) => setWsEvent(ws);
+const { sendMessage } = useWebSocket(IpAPI,authToken,getWsEvent);
 
 return (
     <AppContext.Provider
@@ -124,10 +150,13 @@ return (
             userProfile,
             userContacts,
             userBlocks,
+            userPremy,
+            wsEvent,
             getLoged,
             changeName,
             fetchAndStoreUserInfo,
             sendMessage,
+            cleanWsEvent,
     }}>
         {children}
     </AppContext.Provider>
