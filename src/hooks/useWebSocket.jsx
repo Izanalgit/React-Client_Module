@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import handleIncomingMessage from '../services/wsService';
 
 
-function useWebSocket(API,authToken) {
+function useWebSocket(API,authToken,getWsEvent) {
     const [socket, setSocket] = useState(null);
 
     useEffect(() => {
@@ -20,7 +20,8 @@ function useWebSocket(API,authToken) {
             // Incoming message handler
             ws.onmessage = (event) => {
                 const message = JSON.parse(event.data);
-                handleIncomingMessage(message);
+                const wsEvent = handleIncomingMessage(message);
+                getWsEvent(wsEvent);
             };
 
             // Logout handler
