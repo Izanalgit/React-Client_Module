@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useChatContext } from '../../context/ChatContext';
-
+import MessageCard from './MessageCard';
+ 
 const ChatWindow = ({ contactId }) => {
     const { currentChat, getContactId, sendChatMessage, loading, error } = useChatContext();
 
@@ -21,7 +22,7 @@ const ChatWindow = ({ contactId }) => {
                 <ul>
                     {currentChat?.messages?.map((msg,index) => (
                         <li key={`message${index}`}>
-                            <strong>{msg.sender}:</strong> {msg.content}
+                            <MessageCard messageObj={msg} contactId={contactId}/>
                         </li>
                     ))}
                 </ul>
