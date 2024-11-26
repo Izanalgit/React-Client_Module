@@ -8,8 +8,6 @@ const usePremyService = (url) => {
         const premyData = await premyCount.fetchData(`${url}/api/premy/count`, { headers });
         return { 
             data: premyData,
-            loading: premyData.loading, 
-            error: premyData.error 
         };
     };
 
