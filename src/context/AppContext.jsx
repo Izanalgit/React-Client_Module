@@ -141,6 +141,16 @@ const cleanWsEvent = () => setWsEvent(null);
 const getWsEvent = (ws) => setWsEvent(ws);
 const { sendMessage } = useWebSocket(IpAPI,authToken,getWsEvent);
 
+useEffect(() => {
+    const requestWs = async () =>{
+        if (authToken && ['FRIEND_REQUEST','FRIEND_ACCEPT','FRIEND_REMOVED'].includes(wsEvent)){ 
+            await fetchAndStoreUserInfo('contacts');
+        }
+        cleanWsEvent();
+    }
+    requestWs();
+}, [wsEvent]);
+
 return (
     <AppContext.Provider
         value={{
