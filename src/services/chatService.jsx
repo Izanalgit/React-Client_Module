@@ -3,12 +3,21 @@ import axios from 'axios';
 
 const useChatService = (url,authToken) => {
     const getMessagesFetch = useFetchGET();
+    const getCountFetch = useFetchGET();
 
     const getMessages = async (contactId) => {
         const headers = { Authorization: `${authToken}` };
         const chatData = await getMessagesFetch.fetchData(`${url}/api/chat/read/${contactId}`, { headers });
         return { 
             data: chatData
+        };
+    };
+
+    const getCountMessages = async () => {
+        const headers = { Authorization: `${authToken}` };
+        const countData = await getCountFetch.fetchData(`${url}/api/chat/count`, { headers });
+        return { 
+            data: countData
         };
     };
 
@@ -35,6 +44,7 @@ const useChatService = (url,authToken) => {
 
     return {
         sendMessage,
+        getCountMessages,
         getMessages
     };
 };
