@@ -3,6 +3,12 @@ function handleIncomingMessage(message) {
         case 'FRIEND_REQUEST':
             console.log(`Nueva solicitud de amistad de ${message.from}`);
             return 'FRIEND_REQUEST';
+        case 'FRIEND_ACCEPT':
+            console.log(`Solicitud de amistad aceptada de ${message.from}`);
+            return 'FRIEND_ACCEPT';
+        case 'FRIEND_REMOVED':
+            console.log(`Amistad eliminada de ${message.from}`);
+            return 'FRIEND_REMOVED';
         case 'NEW_MESSAGE':
             console.log(`Nuevo mensaje de ${message.from}`);
             return 'NEW_MESSAGE';
