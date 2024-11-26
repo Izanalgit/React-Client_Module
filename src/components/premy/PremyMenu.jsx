@@ -1,5 +1,6 @@
 import {useState} from 'react';
 
+import AddPremy from './AddPremyProvisional';
 
 const PremyMenu = ({ premium }) => {
 
@@ -25,8 +26,10 @@ const PremyMenu = ({ premium }) => {
             </button>
 
             {isBuying &&
-                <p>Menu de comprar</p>
-            
+            <div>
+                <h3>Menu de comprar</h3>
+                <AddPremy />
+            </div>
             }
         </div>
     );
