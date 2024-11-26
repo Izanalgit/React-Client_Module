@@ -4,6 +4,7 @@ import { useApp } from "../context/AppContext";
 import UserUpdateFrom from "../components/user/UserUpdateFrom";
 import UserDeleteForm from "../components/user/UserDeleteForm";
 import BlockUserList from "../components/privacy/BlockUserList";
+import PremyMenu from "../components/premy/PremyMenu";
 
 const Dashboard = () => {
 
@@ -12,7 +13,7 @@ const Dashboard = () => {
     const [isManagingBlocks,setIsManagingBlocks] = useState(false);
     
 
-    const {logedIn} = useApp();
+    const {logedIn,userPremy} = useApp();
 
     const handleCompleteAction = () => {
         setIsEditingUser(false);
@@ -29,6 +30,7 @@ const Dashboard = () => {
                 {!isEditingUser && !isDeletingUser && !isManagingBlocks &&
                     <p>Hola {logedIn}</p>
                 }
+                {<PremyMenu premium={userPremy}/>}
                 {isEditingUser && <UserUpdateFrom onComplete={handleCompleteAction} />}
                 {isDeletingUser && <UserDeleteForm />}
                 {isManagingBlocks && <BlockUserList />}
