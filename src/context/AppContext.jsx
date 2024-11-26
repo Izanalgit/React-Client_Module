@@ -13,7 +13,7 @@ const AppProvaider = ({ children }) => {
     const [userBlocks, setUserBlocks] = useState(null);
     const [userPremy, setUserPremy] = useState(null);
     const [wsEvent , setWsEvent] = useState(null);
-    const IpAPI = "192.168.1.79:8080"
+    const IpAPI = import.meta.env.VITE_API_URL;
     const API = "http://" + IpAPI;
 
     const { 
