@@ -1,9 +1,19 @@
 import {Link} from 'react-router-dom';
 
+import { useApp } from '../context/AppContext';
+import { useChatContext } from '../context/ChatContext';
+
+import NewContactAdvice from './advices/NewContactAdvice';
+import NewMessageAdvice from './advices/NewMessageAdvice';
+
 // import '../css/NavBar.css'  ->   className={'butNav glow'}
 
 const NavBar = () => {
-    return(
+
+    const {userContacts , logedIn} = useApp();
+    const {unRead} = useChatContext();
+
+    return(<>
         <nav>
             <Link to="/" >Inicio - </Link>
             <Link to="/dashboard" >Dashboard - </Link>
@@ -12,7 +22,13 @@ const NavBar = () => {
             <Link to="/login" >CONECTAR / </Link>
             <Link to="/logout" >DESCONTECTAR</Link>
         </nav>
-    );
+        {logedIn &&
+            <>
+                <NewContactAdvice requests={userContacts} />
+                <NewMessageAdvice messages={unRead} />
+            </>
+        }
+    </>);
 }
 
 export default NavBar;
