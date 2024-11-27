@@ -12,7 +12,7 @@ const ChatProvider = ({ children }) => {
     const [error, setError] = useState(null);
     const [contactId, setContactId] = useState(null);
 
-    const {API,authToken,sendMessage:webSocketMSG,cleanWsEvent,wsEvent} = useApp();
+    const {API,authToken,sendMessage:webSocketMSG,cleanWsEvent,wsEvent,fetchAndStoreUserInfo} = useApp();
     const { getMessages, getCountMessages, sendMessage } = useChatService(API,authToken);
 
     //Get contactId
@@ -79,6 +79,7 @@ const ChatProvider = ({ children }) => {
             }
 
             await loadChat(contactId);
+            await fetchAndStoreUserInfo('premy');
             webSocketMSG('NEW_MESSAGE', { to: contactId, content: message });
 
         } catch (err) {
@@ -89,15 +90,15 @@ const ChatProvider = ({ children }) => {
     };
 
     //Check read WS
-    const setIsRead = (contactId) =>{ 
+    const setIsRead = async (contactId) =>{ 
         webSocketMSG('IS_READ', { to: contactId})
-        countUnread();
+        await countUnread();
     };
 
     // When logued
     useEffect(() => {
         const chat = async () =>{
-            if (authToken) 
+            if (authToken)
                 await countUnread();
         }
         chat();

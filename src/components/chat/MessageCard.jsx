@@ -48,9 +48,11 @@ const MessageCard = ({messageObj , contactId }) => {
 
     useEffect(()=>{
         const seeMessage = async () =>{
-            if(isSeen && !messageObj.isRead && messageObj.messageId)
+            if(isSeen && !messageObj.isRead && messageObj.messageId){
                 await handleSeen();
-                setIsRead(contactId);
+                await setIsRead(contactId);
+                messageObj.isRead = true;
+            }
         }
         if(messageObj.sender !== "me")
             seeMessage();
