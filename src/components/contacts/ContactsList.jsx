@@ -16,7 +16,7 @@ const ContactList = () => {
             <h2>Contactos</h2>
             {contacts.length > 0 ? (
                 contacts.map((contact) => {
-                    const unreadMessages = unRead.count
+                    const unreadMessages = unRead.count || [];
 
                     const count = unreadMessages.length > 0 ?
                         unreadMessages.find(
