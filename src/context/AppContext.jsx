@@ -12,6 +12,8 @@ const AppProvaider = ({ children }) => {
     const [userContacts, setUserContacts] = useState(null);
     const [userBlocks, setUserBlocks] = useState(null);
     const [userPremy, setUserPremy] = useState(null);
+    const [userKey, setUserkey] = useState(null);
+    const [userKeyPass, setUserkeyPass] = useState(null);
     const [wsEvent , setWsEvent] = useState(null);
     const IpAPI = import.meta.env.VITE_API_URL;
     const API = "http://" + IpAPI;
@@ -19,7 +21,8 @@ const AppProvaider = ({ children }) => {
     const { 
         getUserProfile, 
         getUserContacts, 
-        getUserBlocks 
+        getUserBlocks,
+        getUserKey 
     } = useUserService(API);
 
     const {
@@ -35,16 +38,23 @@ const AppProvaider = ({ children }) => {
     }
 
     // Loged state
-    const getLoged = (userName, token) => {
+    const getLoged = (userName, token , userKey) => {
         setLogedIn(userName);
         setAuthToken(token);
     
-        if (userName && token) {
+        if (userName && token && userKey) {
             localStorage.setItem("logedIn", userName);
             localStorage.setItem("authToken", token);
+            localStorage.setItem("userKey", userKey.rpk);
 
             setLogedIn(userName);
             setAuthToken(token);
+            setUserkey(userKey.rpk);
+            setUserkeyPass({
+                rps: userKey.rps,
+                riv: userKey.riv,
+                rsa: userKey.rsa
+            })
         } else {
             localStorage.removeItem("logedIn");
             localStorage.removeItem("authToken");
@@ -52,19 +62,22 @@ const AppProvaider = ({ children }) => {
             localStorage.removeItem("userContacts");
             localStorage.removeItem("userBlocks");
             localStorage.removeItem("userPremy");
+            localStorage.removeItem("userKey");
             setLogedIn(null);
             setAuthToken(null);
             setUserProfile(null);
             setUserContacts(null);
             setUserBlocks(null);
             setUserPremy(null);
+            setUserkey(null);
+            setUserkeyPass(null);
 
         }
     };
 
 // User get info from API
 const fetchAndStoreUserInfo = async (selector) => {
-    if (logedIn && authToken) {
+    if (logedIn && authToken && userKey) {
         const userInfo = {};
 
         if(!selector || selector === 'profile'){
@@ -112,18 +125,39 @@ const fetchAndStoreUserInfo = async (selector) => {
             //Clean login if not profile get
             setLogedIn(null);
             setAuthToken(null);
+            setUserkey(null);
         }
     }
 };
+
+// Get Private Key pass
+const getPKS = async () => {
+
+    if(!authToken)
+        return
+
+    const {data} = await getUserKey(authToken);
+
+    if(data){
+        const SPSP = data.soloElPuebloSalvaAlPueblo
+
+        setUserkeyPass({
+            rps: SPSP.rps,
+            riv: SPSP.riv,
+            rsa: SPSP.rsa
+    })}
+}
 
 // Start or Refresh
 useEffect(() => {
     // Prevail logedIn state and user info
     const haveUserAuth = localStorage.getItem("authToken");
+    const haveUseKey = localStorage.getItem("userKey");
     const isUserLogedIn = localStorage.getItem("logedIn");
-    if (isUserLogedIn && haveUserAuth) {
+    if (isUserLogedIn && haveUserAuth && haveUseKey) {
         setLogedIn(isUserLogedIn);
         setAuthToken(haveUserAuth);
+        setUserkey(haveUseKey);
         setUserProfile(JSON.parse(localStorage.getItem("userProfile")));
         setUserContacts(JSON.parse(localStorage.getItem("userContacts")));
         setUserBlocks(JSON.parse(localStorage.getItem("userBlocks")));
@@ -134,6 +168,7 @@ useEffect(() => {
 // Fetch User Info when login
 useEffect(() => {
     fetchAndStoreUserInfo();
+    getPKS();
 }, [logedIn, authToken]);
 
 // Websocket
