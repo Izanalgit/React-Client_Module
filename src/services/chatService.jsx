@@ -23,7 +23,7 @@ const useChatService = (url,authToken) => {
 
     const sendMessage = async (contactId,newMessage) => {
         const headers = { Authorization: `${authToken}` };
-        const payload = {recep:contactId,message:newMessage};
+        const payload = {recep:contactId,message:newMessage,messageRemit:newMessage};
         try {
             const response = await axios.post(`${url}/api/chat/send`, {payload}, { headers });
             return { data: response.data, error: null };
