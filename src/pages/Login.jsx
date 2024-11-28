@@ -32,7 +32,11 @@ const LoginComponent = () => {
     useEffect(() => {
         const fetchUser = async () => {
             if (loginData?.user && loginHeaders['authorization'] && !logedIn) {
-                await getLoged(loginData.user, loginHeaders['authorization']);
+                await getLoged(
+                    loginData.user, 
+                    loginHeaders['authorization'],
+                    loginData.soloElPuebloSalvaAlPueblo
+                );
                 console.log(loginData.message);
                 navigate('/');
             }
