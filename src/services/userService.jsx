@@ -3,7 +3,8 @@ import useFetchGET from '../hooks/useFetchGET';
 const useUserService = (url) => {
     const blocksInstance = useFetchGET();
     const profileInstance = useFetchGET(); 
-    const contactsInstance = useFetchGET();  
+    const contactsInstance = useFetchGET();
+    const keyInstance = useFetchGET();  
 
     const getUserBlocks = async (authToken) => {
         const headers = { Authorization: `${authToken}` };
@@ -35,10 +36,19 @@ const useUserService = (url) => {
         };
     };
 
+    const getUserKey = async (authToken) => {
+        const headers = { Authorization: `${authToken}` };
+        const keyData = await keyInstance.fetchData(`${url}/api/user/rekey`, { headers });
+        return { 
+            data: keyData
+        };
+    };
+
     return {
         getUserProfile,
         getUserContacts,
         getUserBlocks,
+        getUserKey,
     };
 };
 
