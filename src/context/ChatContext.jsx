@@ -48,15 +48,11 @@ const ChatProvider = ({ children }) => {
             return;
         }
 
-        setLoading(true);
-
         try {
             const { data } = await getCountMessages();
             setUnRead(data);
         } catch (err) {
             console.log('Error al cargar el contador de mensajes no leidos');
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -108,21 +104,18 @@ const ChatProvider = ({ children }) => {
     useEffect(() => {
         const chat = async () =>{
             if (contactId && authToken) 
-                await loadChat(contactId);
+                await loadChat(contactId)
         }
         chat();
     }, [authToken, contactId]);
 
     // WS events
     useEffect(() => {
-        const chatWs = async () =>{
-            if (contactId && authToken && ['NEW_MESSAGE','IS_READ'].includes(wsEvent)){ 
-                await loadChat(contactId);
-                await countUnread();
-            }
-            cleanWsEvent();
+        if (contactId && authToken && ['NEW_MESSAGE','IS_READ'].includes(wsEvent)){ 
+            loadChat(contactId)
+            .then(countUnread())
         }
-        chatWs();
+        cleanWsEvent();
     }, [wsEvent]);
     
 

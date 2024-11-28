@@ -21,7 +21,7 @@ const ChatWindow = ({ contactId }) => {
             {currentChat?.messages?.length > 0 &&
                 <ul>
                     {currentChat?.messages?.map((msg,index) => (
-                        <li key={`message${index}`}>
+                        <li key={`${contactId}${index}`}>
                             <MessageCard messageObj={msg} contactId={contactId}/>
                         </li>
                     ))}
