@@ -1,9 +1,12 @@
 import useFetchGET from '../hooks/useFetchGET';
+import usePairKeyServices from './pairKeyService';
 import axios from 'axios';
 
 const useChatService = (url,authToken) => {
     const getMessagesFetch = useFetchGET();
     const getCountFetch = useFetchGET();
+
+    const {encryptMessageWithPublicKey} = usePairKeyServices();
 
     const getMessages = async (contactId) => {
         const headers = { Authorization: `${authToken}` };
@@ -21,9 +24,12 @@ const useChatService = (url,authToken) => {
         };
     };
 
-    const sendMessage = async (contactId,newMessage) => {
+    const sendMessage = async (contactId,newMessage,contactKey,userKey) => {
         const headers = { Authorization: `${authToken}` };
-        const payload = {recep:contactId,message:newMessage,messageRemit:newMessage};
+        const payload = {
+            recep:contactId,
+            message:encryptMessageWithPublicKey(newMessage,contactKey),
+            messageRemit:encryptMessageWithPublicKey(newMessage,userKey)};
         try {
             const response = await axios.post(`${url}/api/chat/send`, {payload}, { headers });
             return { data: response.data, error: null };
