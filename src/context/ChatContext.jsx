@@ -2,6 +2,7 @@ import { createContext, useContext, useState , useEffect } from 'react';
 
 import { useApp } from './AppContext';
 import useChatService from '../services/chatService';
+import useDecryptChat from '../hooks/useDecryptChat';
 
 const ChatContext = createContext();
 
@@ -11,12 +12,27 @@ const ChatProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [contactId, setContactId] = useState(null);
+    const [contactPublicKey, setContactPublicKey] = useState(null);
 
-    const {API,authToken,sendMessage:webSocketMSG,cleanWsEvent,wsEvent,fetchAndStoreUserInfo} = useApp();
+    const {
+        API,
+        authToken,
+        sendMessage:webSocketMSG,
+        cleanWsEvent,
+        wsEvent,
+        fetchAndStoreUserInfo,
+        userKey,
+        userKeyPass,
+        userPublicKey
+    } = useApp();
+    
     const { getMessages, getCountMessages, sendMessage } = useChatService(API,authToken);
 
     //Get contactId
-    const getContactId = (id) => setContactId(id);
+    const getContactId = (id,key) => {
+        setContactId(id)
+        setContactPublicKey(key)
+    };
 
     // Load messages
     const loadChat = async (contactId) => {
@@ -25,14 +41,24 @@ const ChatProvider = ({ children }) => {
             setError("Token no disponible. Por favor, inicia sesión nuevamente.");
             return;
         }
+        if (!userKeyPass) {
+            setError("Llave Privada no disponible. Por favor, inicia sesión nuevamente.");
+            return;
+        }
 
         setLoading(true);
         setError(null);
 
         try {
             const { data } = await getMessages(contactId);
-            setCurrentChat(data);
+
+            const messages = data?.messages?.length > 0 
+                ? useDecryptChat(data.messages,userKey,userKeyPass)
+                : [];
+
+            setCurrentChat({messages});
         } catch (err) {
+            console.log(err)
             setError('Error al cargar los mensajes');
         } finally {
             setLoading(false);
@@ -57,13 +83,13 @@ const ChatProvider = ({ children }) => {
     };
 
     // Send message
-    const sendChatMessage = async (contactId, message) => {
+    const sendChatMessage = async (message) => {
 
         setLoading(true);
         setError(null);
 
         try {
-            const { error: errorMsg } = await sendMessage(contactId, message);
+            const { error: errorMsg } = await sendMessage(contactId, message, contactPublicKey, userPublicKey);
     
             if (errorMsg) {
                 if (errorMsg.includes("STATUS 402")) 
@@ -103,17 +129,16 @@ const ChatProvider = ({ children }) => {
     // Onlaod Chat
     useEffect(() => {
         const chat = async () =>{
-            if (contactId && authToken) 
+            if (contactId && authToken && userKeyPass)
                 await loadChat(contactId)
         }
         chat();
-    }, [authToken, contactId]);
+    }, [authToken, contactId, userKeyPass]);
 
     // WS events
     useEffect(() => {
-        if (contactId && authToken && ['NEW_MESSAGE','IS_READ'].includes(wsEvent)){ 
-            loadChat(contactId)
-            .then(countUnread())
+        if (contactId && authToken && userKeyPass && ['NEW_MESSAGE','IS_READ'].includes(wsEvent)){ 
+            countUnread().then(loadChat(contactId))
         }
         cleanWsEvent();
     }, [wsEvent]);

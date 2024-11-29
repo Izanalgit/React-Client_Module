@@ -2,16 +2,16 @@ import { useEffect } from 'react';
 import { useChatContext } from '../../context/ChatContext';
 import MessageCard from './MessageCard';
  
-const ChatWindow = ({ contactId }) => {
+const ChatWindow = ({ contactId , contactPublicKey}) => {
     const { currentChat, getContactId, sendChatMessage, loading, error } = useChatContext();
 
     useEffect(() => {
         if(contactId)
-            getContactId(contactId);
+            getContactId(contactId,contactPublicKey);
     }, [contactId]);
 
     const handleSendMessage = async (message) => {
-        await sendChatMessage(contactId, message);
+        await sendChatMessage(message);
     };
 
     return (
