@@ -13,6 +13,7 @@ const AppProvaider = ({ children }) => {
     const [userBlocks, setUserBlocks] = useState(null);
     const [userPremy, setUserPremy] = useState(null);
     const [userKey, setUserkey] = useState(null);
+    const [userPublicKey, setUserPublicKey] = useState(null);
     const [userKeyPass, setUserkeyPass] = useState(null);
     const [wsEvent , setWsEvent] = useState(null);
     const IpAPI = import.meta.env.VITE_API_URL;
@@ -46,10 +47,12 @@ const AppProvaider = ({ children }) => {
             localStorage.setItem("logedIn", userName);
             localStorage.setItem("authToken", token);
             localStorage.setItem("userKey", userKey.rpk);
+            localStorage.setItem("userPublicKey", userKey.public);
 
             setLogedIn(userName);
             setAuthToken(token);
             setUserkey(userKey.rpk);
+            setUserPublicKey(userKey.public)
             setUserkeyPass({
                 rps: userKey.rps,
                 riv: userKey.riv,
@@ -63,6 +66,7 @@ const AppProvaider = ({ children }) => {
             localStorage.removeItem("userBlocks");
             localStorage.removeItem("userPremy");
             localStorage.removeItem("userKey");
+            localStorage.removeItem("userPublicKey");
             setLogedIn(null);
             setAuthToken(null);
             setUserProfile(null);
@@ -70,6 +74,7 @@ const AppProvaider = ({ children }) => {
             setUserBlocks(null);
             setUserPremy(null);
             setUserkey(null);
+            setUserPublicKey(null);
             setUserkeyPass(null);
 
         }
@@ -96,12 +101,17 @@ const fetchAndStoreUserInfo = async (selector) => {
             const premy = await getPremyCount(authToken);
             userInfo.userPremy = premy.data;
         }
+        if(!selector || selector === 'public'){
+            const publicKey = await getUserKey(authToken);
+            userInfo.publicKey = publicKey.data.soloElPuebloSalvaAlPueblo.public;
+        }
 
         if (
             userInfo.userProfile != null || 
             userInfo.userContacts != null || 
             userInfo.userBlocks != null ||
-            userInfo.userPremy != null
+            userInfo.userPremy != null ||
+            userInfo.publicKey != null
         ) {
             if(!selector || selector === 'profile')
                 setUserProfile(userInfo.userProfile || null);
@@ -111,6 +121,8 @@ const fetchAndStoreUserInfo = async (selector) => {
                 setUserBlocks(userInfo.userBlocks || null);
             if(!selector || selector === 'premy')
                 setUserPremy(userInfo.userPremy || null);
+            if(!selector || selector === 'public')
+                setUserPublicKey(userInfo.publicKey || null);
 
             if(!selector || selector === 'profile')
                 localStorage.setItem("userProfile", JSON.stringify(userInfo.userProfile || null));
@@ -120,12 +132,15 @@ const fetchAndStoreUserInfo = async (selector) => {
                 localStorage.setItem("userBlocks", JSON.stringify(userInfo.userBlocks || null));
             if(!selector || selector === 'premy')
                 localStorage.setItem("userPremy", JSON.stringify(userInfo.userPremy || null));
+            if(!selector || selector === 'public')
+                localStorage.setItem("userPublicKey", JSON.stringify(userInfo.publicKey || null));
             
         }else {
             //Clean login if not profile get
             setLogedIn(null);
             setAuthToken(null);
             setUserkey(null);
+            setUserPublicKey(null);
         }
     }
 };
@@ -140,12 +155,12 @@ const getPKS = async () => {
 
     if(data){
         const SPSP = data.soloElPuebloSalvaAlPueblo
-
         setUserkeyPass({
             rps: SPSP.rps,
             riv: SPSP.riv,
             rsa: SPSP.rsa
-    })}
+        })
+    }
 }
 
 // Start or Refresh
@@ -158,6 +173,7 @@ useEffect(() => {
         setLogedIn(isUserLogedIn);
         setAuthToken(haveUserAuth);
         setUserkey(haveUseKey);
+        setUserPublicKey(JSON.parse(localStorage.getItem("userPublicKey")));
         setUserProfile(JSON.parse(localStorage.getItem("userProfile")));
         setUserContacts(JSON.parse(localStorage.getItem("userContacts")));
         setUserBlocks(JSON.parse(localStorage.getItem("userBlocks")));
@@ -169,7 +185,7 @@ useEffect(() => {
 useEffect(() => {
     fetchAndStoreUserInfo();
     getPKS();
-}, [logedIn, authToken]);
+}, [logedIn, authToken ]);
 
 // Websocket
 const cleanWsEvent = () => setWsEvent(null);
@@ -197,6 +213,9 @@ return (
             userBlocks,
             userPremy,
             wsEvent,
+            userKey,
+            userPublicKey,
+            userKeyPass,
             getLoged,
             changeName,
             fetchAndStoreUserInfo,
