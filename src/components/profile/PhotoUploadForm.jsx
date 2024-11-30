@@ -15,7 +15,7 @@ const PhotoUploadForm = ({onComplete}) => {
 
     const handleImageUpload = async () => {
         if (!selectedImage) {
-            alert("Please select an image.");
+            alert("Por favor añade una imagen.");
             return;
         }
 
