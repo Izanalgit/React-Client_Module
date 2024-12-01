@@ -10,7 +10,7 @@ const ContactList = () => {
 
     const contacts = userContacts?.contactsList?.contacts || [];
     const requests = userContacts?.contactsList?.requests || [];
-    console.log(contacts)//CHIVATO
+
     return (
         <div>
             <h2>Contactos</h2>

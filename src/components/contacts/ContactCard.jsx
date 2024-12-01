@@ -7,7 +7,7 @@ import BlockUser from "../privacy/BlockUser";
 import defaultProfile from '../../assets/images/profile-default.png';
 
 const ContactCard = ({ contactId, contactImage, contactName, contactType ,countUnread}) => {
-
+    
     const profileImage = contactImage ? contactImage : defaultProfile;
 
     return (
@@ -23,6 +23,7 @@ const ContactCard = ({ contactId, contactImage, contactName, contactType ,countU
                 <>
                     {countUnread > 0 && <p>Mensajes sin leer {countUnread}</p>}
                     <Link to={`/chat/${contactName}/${contactId}`}>Abrir chat</Link>
+                    <Link to={`/contact/${contactId}`}>Abrir Perfil</Link>
                 </>
             }
             
