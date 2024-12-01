@@ -10,13 +10,13 @@ const ContactList = () => {
 
     const contacts = userContacts?.contactsList?.contacts || [];
     const requests = userContacts?.contactsList?.requests || [];
-
+    console.log(contacts)//CHIVATO
     return (
         <div>
             <h2>Contactos</h2>
             {contacts.length > 0 ? (
                 contacts.map((contact) => {
-                    const unreadMessages = unRead.count || [];
+                    const unreadMessages = unRead?.count || [];
 
                     const count = unreadMessages.length > 0 ?
                         unreadMessages.find(
@@ -26,7 +26,8 @@ const ContactList = () => {
                     return (
                         <ContactCard 
                             key={contact.contactId} 
-                            contactId={contact.contactId} 
+                            contactId={contact.contactId}
+                            contactImage={contact.profilePicture}  
                             contactName={contact.contactName}
                             contactType="contact"
                             countUnread = {count} 
@@ -42,7 +43,8 @@ const ContactList = () => {
                 requests.map((request) => (
                     <ContactCard 
                         key={request.contactId} 
-                        contactId={request.contactId} 
+                        contactId={request.contactId}
+                        contactImage={request.profilePicture}  
                         contactName={request.contactName}
                         contactType="request" 
                     />
