@@ -34,39 +34,7 @@ const ChatProvider = ({ children }) => {
         setContactPublicKey(key)
     };
 
-    // Load messages
-    const loadChat = async (contactId) => {
-
-        if (!authToken) {
-            setError("Token no disponible. Por favor, inicia sesión nuevamente.");
-            return;
-        }
-        if (!userKeyPass) {
-            setError("Llave Privada no disponible. Por favor, inicia sesión nuevamente.");
-            return;
-        }
-
-        setLoading(true);
-        setError(null);
-
-        try {
-            const { data } = await getMessages(contactId);
-
-            const messages = data?.messages?.length > 0 
-                ? useDecryptChat(data.messages,userKey,userKeyPass)
-                : [];
-
-            setCurrentChat({messages});
-        } catch (err) {
-            console.log(err)
-            setError('Error al cargar los mensajes');
-        } finally {
-            setLoading(false);
-        }
-    };
-
     // Count messages unread
-
     const countUnread = async () => {
 
         if (!authToken) {
@@ -82,6 +50,79 @@ const ChatProvider = ({ children }) => {
         }
     };
 
+    // Load messages
+    const loadChat = async (contactId) => {
+
+        if (!authToken) {
+            setError("Token no disponible. Por favor, inicia sesión nuevamente.");
+            return;
+        }
+        if (!userKeyPass) {
+            setError("Llave Privada no disponible. Por favor, inicia sesión nuevamente.");
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+
+        const normalizeDate = (dateStr) => new Date(dateStr).getTime();
+
+        try {
+            // Last date to filter
+            const lastMessageDate = currentChat?.messages?.length 
+                ? currentChat.messages[currentChat.messages.length - 1].date 
+                : null;
+
+            // Index messages to filter
+            const messageIndex = currentChat?.messages?.reduce((acc, msg) => {
+                acc[msg.messageId] = msg.isRead;
+                return acc;
+            }, {});
+
+            const { data } = await getMessages(contactId);
+            
+            // Filter new messages to decrypt
+            const newMessages = data?.messages?.filter((message) => (
+                normalizeDate(message.date) > normalizeDate(lastMessageDate)
+            )) || [];
+
+            // Filter own messages to mark as read
+            const updatedMessages = data?.messages?.filter((message) => {
+                const existingIsRead = messageIndex?.[message.messageId];
+                return existingIsRead !== undefined 
+                    && existingIsRead !== message.isRead 
+                    && message.sender === "me";
+            }) || [];
+
+            // Decrypt new messages
+            const decryptedMessages = newMessages?.length > 0 
+                ? useDecryptChat(newMessages,userKey,userKeyPass)
+                : [];
+
+            setCurrentChat((prevChat) => {
+                const updatedChatMessages = [...(prevChat?.messages || [])];
+            
+                // Update readed messages
+                updatedMessages.forEach((updatedMessage) => {
+                    const index = updatedChatMessages.findIndex((msg) => msg.messageId === updatedMessage.messageId);
+                    if (index !== -1) 
+                        updatedChatMessages[index].isRead = updatedMessage.isRead;
+                });
+            
+                // Add changes and new messages
+                return {
+                    ...prevChat,
+                    messages: [...updatedChatMessages, ...decryptedMessages],
+                };
+            });
+        } catch (err) {
+            console.log(err)
+            setError('Error al cargar los mensajes');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     // Send message
     const sendChatMessage = async (message) => {
 
@@ -89,8 +130,10 @@ const ChatProvider = ({ children }) => {
         setError(null);
 
         try {
+            // Encrypt and send message
             const { error: errorMsg } = await sendMessage(contactId, message, contactPublicKey, userPublicKey);
     
+            // Error handler
             if (errorMsg) {
                 if (errorMsg.includes("STATUS 402")) 
                     setError("Parece que no tienes premium ni tokens suficientes...");
@@ -100,8 +143,11 @@ const ChatProvider = ({ children }) => {
                 return;
             }
 
+            // Update user chat and premium on client
             await loadChat(contactId);
             await fetchAndStoreUserInfo('premy');
+
+            // Send WS event
             webSocketMSG('NEW_MESSAGE', { to: contactId, content: message });
 
         } catch (err) {
@@ -112,9 +158,9 @@ const ChatProvider = ({ children }) => {
     };
 
     //Check read WS
-    const setIsRead = async (contactId) =>{ 
-        webSocketMSG('IS_READ', { to: contactId})
-        await countUnread();
+    const setIsRead = (contactId) =>{ 
+        webSocketMSG('IS_READ', { to: contactId});
+        countUnread();
     };
 
     // When logued
@@ -137,8 +183,10 @@ const ChatProvider = ({ children }) => {
 
     // WS events
     useEffect(() => {
-        if (contactId && authToken && userKeyPass && ['NEW_MESSAGE','IS_READ'].includes(wsEvent)){ 
-            countUnread().then(loadChat(contactId))
+        if (authToken && ['NEW_MESSAGE','IS_READ'].includes(wsEvent)){
+            countUnread();
+            if(contactId) 
+                loadChat(contactId);
         }
         cleanWsEvent();
     }, [wsEvent]);
