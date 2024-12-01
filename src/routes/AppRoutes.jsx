@@ -5,6 +5,7 @@ import Home from "../pages/Home.jsx";
 import Profile from "../pages/Profile.jsx";
 import Search from "../pages/Search.jsx";
 import Chat from "../pages/Chat.jsx";
+import Contact from "../pages/Contact.jsx";
 import Dashboard from "../pages/Dashboard.jsx";
 import Contacts from "../pages/Contacts.jsx";
 import Login from "../pages/Login.jsx";
@@ -23,6 +24,7 @@ const AppRoutes = () =>{
                 <Route path="/contacts" element={<Contacts />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/chat/:contactName/:contactId" element={<Chat />} />
+                <Route path="/contact/:contactId" element={<Contact />} />
                 <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </>
