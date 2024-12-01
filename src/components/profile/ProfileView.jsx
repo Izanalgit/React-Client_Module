@@ -1,3 +1,5 @@
+import defaultProfile from '../../assets/images/profile-default.png';
+import defaultCover from '../../assets/images/cover-default.png';
 
 const ProfileView = ({ userName = 'Unknown', userProfileInfo = {} }) => {
     const {
@@ -8,8 +10,8 @@ const ProfileView = ({ userName = 'Unknown', userProfileInfo = {} }) => {
             special = 'N/A',
             location = 'N/A',
             bio = 'N/A',
-            profilePicture = '',
-            coverPhoto = '',
+            profilePicture = null,
+            coverPhoto = null,
         } = {},
         userProfileExtended: {
             height = 'N/A',
@@ -21,11 +23,14 @@ const ProfileView = ({ userName = 'Unknown', userProfileInfo = {} }) => {
         } = {}
     } = userProfileInfo;
 
+    const coverImage = coverPhoto ? coverPhoto : defaultCover;
+    const profileImage = profilePicture ? profilePicture : defaultProfile;
+
     return (
         <div className="profile-view">
             <div className="profile-header">
-                <img src={coverPhoto} alt="Cover" className="cover-photo" />
-                <img src={profilePicture} alt="Profile" className="profile-picture" />
+                <img src={coverImage} alt="Cover" className="cover-photo" />
+                <img src={profileImage} alt="Profile" className="profile-picture" />
                 <h2>{userName}</h2>
             </div>
             <div className="profile-info">
