@@ -5,15 +5,23 @@ const useOnSeen = (reference, rootMargin = "0px") => {
 
     useEffect(() => {
         const observer = new IntersectionObserver(
-            ([entry]) => {setIntersecting(entry.isIntersecting)},{ rootMargin }
+            ([entry]) => {
+                setIntersecting(entry.isIntersecting);
+            },
+            { rootMargin, threshold: 0 }
         );
-
-        if (reference.current) 
+    
+        if (reference.current) {
             observer.observe(reference.current);
-        
+    
+            // Forzar una evaluación inicial
+            if (reference.current.getBoundingClientRect().top < window.innerHeight) {
+                setIntersecting(true);
+            }
+        }
+    
         return () => {
-            if (reference.current)
-                observer.unobserve(reference.current);
+            if (reference.current) observer.unobserve(reference.current);
         };
     }, [reference, rootMargin]);
 
