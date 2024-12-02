@@ -3,7 +3,14 @@ import { useChatContext } from '../../context/ChatContext';
 import MessageCard from './MessageCard';
  
 const ChatWindow = ({ contactId , contactPublicKey}) => {
-    const { currentChat, getContactId, sendChatMessage, loading, error } = useChatContext();
+    const { 
+        currentChat,
+        getContactId,
+        sendChatMessage,
+        getLastDate,
+        loading,
+        error
+    } = useChatContext();
 
     useEffect(() => {
         if(contactId)
@@ -14,6 +21,10 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
         await sendChatMessage(message);
     };
 
+    const hadleGetOlderChat = (lastDate) => {
+        getLastDate(lastDate);
+    }
+
     return (
         <div>
             {loading && <p>Cargando mensajes...</p>}
@@ -22,6 +33,10 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
                 <ul>
                     {currentChat?.messages?.map((msg,index) => (
                         <li key={`${contactId}${index}`}>
+                            {(currentChat?.messages?.length >= 10 && 
+                            currentChat?.messages?.length - 1 === index) && (
+                                <p onClick={() => hadleGetOlderChat(msg.date)}>... cargar más ...</p>
+                            )}
                             <MessageCard messageObj={msg} contactId={contactId}/>
                         </li>
                     ))}
