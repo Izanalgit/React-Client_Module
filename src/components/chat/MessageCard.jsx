@@ -50,8 +50,8 @@ const MessageCard = ({messageObj , contactId }) => {
         const seeMessage = () =>{
             if(isSeen && !messageObj.isRead && messageObj.messageId){
                 handleSeen()
-                .then(setIsRead(contactId))
                 .then(messageObj.isRead = true)
+                .then(setIsRead(contactId))
 
             }
         }
