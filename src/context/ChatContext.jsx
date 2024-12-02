@@ -12,6 +12,7 @@ const ChatProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [contactId, setContactId] = useState(null);
+    const [beforeDate, setBeforeDate] = useState(null);
     const [contactPublicKey, setContactPublicKey] = useState(null);
 
     const {
@@ -26,7 +27,12 @@ const ChatProvider = ({ children }) => {
         userPublicKey
     } = useApp();
     
-    const { getMessages, getCountMessages, sendMessage } = useChatService(API,authToken);
+    const { 
+        getMessages,
+        getOlderMessages,
+        getCountMessages,
+        sendMessage 
+    } = useChatService(API,authToken);
 
     //Get contactId
     const getContactId = (id,key) => {
@@ -51,7 +57,7 @@ const ChatProvider = ({ children }) => {
     };
 
     // Load messages
-    const loadChat = async (contactId) => {
+    const loadChat = async (contactId,lastDate=null) => {
 
         if (!authToken) {
             setError("Token no disponible. Por favor, inicia sesión nuevamente.");
@@ -70,51 +76,58 @@ const ChatProvider = ({ children }) => {
         try {
             // Last date to filter
             const lastMessageDate = currentChat?.messages?.length 
-                ? currentChat.messages[currentChat.messages.length - 1].date 
+                ? currentChat.messages[0].date 
                 : null;
 
-            // Index messages to filter
-            const messageIndex = currentChat?.messages?.reduce((acc, msg) => {
-                acc[msg.messageId] = msg.isRead;
-                return acc;
-            }, {});
+            // Get messages
+            const { data } = lastDate
+                ? await getOlderMessages(contactId,lastDate)
+                : await getMessages(contactId)
 
-            const { data } = await getMessages(contactId);
-            
+            // Index messages to filter
+            const messageIndex = lastDate
+                ? null    
+                : data?.messages?.reduce((acc, msg) => {
+                    acc[msg.messageId] = msg.isRead;
+                    return acc;
+                }, {});                
+
             // Filter new messages to decrypt
-            const newMessages = data?.messages?.filter((message) => (
-                normalizeDate(message.date) > normalizeDate(lastMessageDate)
+            const newMessages = lastDate
+                ? data?.messages?.filter((message) => (
+                    normalizeDate(message.date) < normalizeDate(lastDate)
+                ))    
+                : data?.messages?.filter((message) => (
+                    normalizeDate(message.date) > normalizeDate(lastMessageDate)
+                )) || [];
+            // console.log("FILTRED : ",newMessages)//CHIVATO
+
+            // Update read messages
+            const updatedMessages = lastDate
+            ? currentChat?.messages
+            : currentChat?.messages?.map((message) =>(
+                messageIndex?.[message.messageId]
+                ? {...message,isRead: messageIndex?.[message.messageId]}
+                : message  
             )) || [];
 
-            // Filter own messages to mark as read
-            const updatedMessages = data?.messages?.filter((message) => {
-                const existingIsRead = messageIndex?.[message.messageId];
-                return existingIsRead !== undefined 
-                    && existingIsRead !== message.isRead 
-                    && message.sender === "me";
-            }) || [];
+            // console.log("UPDATED : ",updatedMessages)//CHIVATO
 
             // Decrypt new messages
             const decryptedMessages = newMessages?.length > 0 
-                ? useDecryptChat(newMessages,userKey,userKeyPass)
+                ? await useDecryptChat(newMessages,userKey,userKeyPass)
                 : [];
 
-            setCurrentChat((prevChat) => {
-                const updatedChatMessages = [...(prevChat?.messages || [])];
-            
-                // Update readed messages
-                updatedMessages.forEach((updatedMessage) => {
-                    const index = updatedChatMessages.findIndex((msg) => msg.messageId === updatedMessage.messageId);
-                    if (index !== -1) 
-                        updatedChatMessages[index].isRead = updatedMessage.isRead;
-                });
-            
-                // Add changes and new messages
-                return {
-                    ...prevChat,
-                    messages: [...updatedChatMessages, ...decryptedMessages],
-                };
+            // console.log("DECRYPT : ",decryptedMessages)//CHIVATO
+
+            setCurrentChat((prevChat) => {                
+
+                return lastDate
+                    ? { ...prevChat, messages: [...updatedMessages, ...decryptedMessages]}
+                    : { ...prevChat, messages: [...decryptedMessages, ...updatedMessages]}
+                
             });
+                
         } catch (err) {
             console.log(err)
             setError('Error al cargar los mensajes');
@@ -165,11 +178,11 @@ const ChatProvider = ({ children }) => {
 
     // When logued
     useEffect(() => {
-        const chat = async () =>{
+        const count = async () =>{
             if (authToken)
                 await countUnread();
         }
-        chat();
+        count();
     }, [authToken]);
 
     // Onlaod Chat
@@ -180,17 +193,29 @@ const ChatProvider = ({ children }) => {
         }
         chat();
     }, [authToken, contactId, userKeyPass]);
+    
+    // Onload older Chat
+    useEffect(() => {
+        const chatOld = async () =>{
+            if (contactId && authToken && userKeyPass && beforeDate)
+                await loadChat(contactId,beforeDate)
+        }
+        chatOld();
+        setBeforeDate(null);
+    }, [beforeDate]);
 
     // WS events
     useEffect(() => {
-        if (authToken && ['NEW_MESSAGE','IS_READ'].includes(wsEvent)){
+        if(wsEvent === 'NEW_MESSAGE')
             countUnread();
-            if(contactId) 
-                loadChat(contactId);
+        if (authToken && contactId && ['NEW_MESSAGE','IS_READ'].includes(wsEvent)){
+            loadChat(contactId);
         }
         cleanWsEvent();
     }, [wsEvent]);
     
+    //Get last date
+    const getLastDate = (lastDate) => setBeforeDate(lastDate);
 
     return (
         <ChatContext.Provider 
@@ -199,7 +224,8 @@ const ChatProvider = ({ children }) => {
                 unRead,
                 getContactId, 
                 sendChatMessage,
-                setIsRead, 
+                setIsRead,
+                getLastDate, 
                 loading, 
                 error 
             }}>
