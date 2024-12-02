@@ -4,13 +4,28 @@ import axios from 'axios';
 
 const useChatService = (url,authToken) => {
     const getMessagesFetch = useFetchGET();
+    const getOlderMessagesFetch = useFetchGET();
     const getCountFetch = useFetchGET();
 
     const {encryptMessageWithPublicKey} = usePairKeyServices();
 
     const getMessages = async (contactId) => {
         const headers = { Authorization: `${authToken}` };
-        const chatData = await getMessagesFetch.fetchData(`${url}/api/chat/read/${contactId}`, { headers });
+        const chatData = await getMessagesFetch.fetchData(
+            `${url}/api/chat/read/${contactId}`,
+            { headers }
+        );
+        return { 
+            data: chatData
+        };
+    };
+
+    const getOlderMessages = async (contactId,lastDate) => {
+        const headers = { Authorization: `${authToken}` };
+        const chatData = await getOlderMessagesFetch.fetchData(
+            `${url}/api/chat/read/${contactId}/${lastDate}`,
+            { headers }
+        );
         return { 
             data: chatData
         };
@@ -51,7 +66,8 @@ const useChatService = (url,authToken) => {
     return {
         sendMessage,
         getCountMessages,
-        getMessages
+        getMessages,
+        getOlderMessages
     };
 };
 
