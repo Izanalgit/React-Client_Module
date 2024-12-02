@@ -17,6 +17,8 @@ const MessageCard = ({messageObj , contactId }) => {
     const isSeen = useOnSeen(msgRef,"0px");
 
     const { 
+        loading:checkLoading,
+        data:checkSucces,
         error: checkMessageError, 
         fetchData: checkMessageRequest
     } = useFetchPATCH();
@@ -47,17 +49,21 @@ const MessageCard = ({messageObj , contactId }) => {
     }
 
     useEffect(()=>{
-        const seeMessage = () =>{
+        const seeMessage = async () =>{
             if(isSeen && !messageObj.isRead && messageObj.messageId){
-                handleSeen()
-                .then(messageObj.isRead = true)
-                .then(setIsRead(contactId))
+                await handleSeen()
+                messageObj.isRead = true;
 
             }
         }
         if(messageObj.sender !== "me")
             seeMessage();
     },[isSeen])
+
+    useEffect(()=>{
+        if(!checkLoading && checkSucces)
+            setIsRead(contactId)
+    },[checkLoading,checkSucces])
 
     return (
         <div ref={msgRef}>

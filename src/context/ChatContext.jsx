@@ -100,7 +100,6 @@ const ChatProvider = ({ children }) => {
                 : data?.messages?.filter((message) => (
                     normalizeDate(message.date) > normalizeDate(lastMessageDate)
                 )) || [];
-            // console.log("FILTRED : ",newMessages)//CHIVATO
 
             // Update read messages
             const updatedMessages = lastDate
@@ -111,14 +110,10 @@ const ChatProvider = ({ children }) => {
                 : message  
             )) || [];
 
-            // console.log("UPDATED : ",updatedMessages)//CHIVATO
-
             // Decrypt new messages
             const decryptedMessages = newMessages?.length > 0 
                 ? await useDecryptChat(newMessages,userKey,userKeyPass)
                 : [];
-
-            // console.log("DECRYPT : ",decryptedMessages)//CHIVATO
 
             setCurrentChat((prevChat) => {                
 
