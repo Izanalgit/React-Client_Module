@@ -5,12 +5,14 @@ import { useApp } from "../context/AppContext";
 import useFetchPOST from "../hooks/useFetchPOST";
 
 import UserRegistForm from "../components/user/UserRegistForm";
+import UserRecoverFrom from "../components/user/UserRecoverForm";
 
 const LoginComponent = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isSingUp, setIsSingUp] = useState(false);
+    const [isRecovering, setIsRecovering] = useState(false);
     const { API, logedIn, getLoged } = useApp();
     const { 
         data: loginData,
@@ -48,7 +50,8 @@ const LoginComponent = () => {
         <> 
             {logedIn && <h5>Ya estás conectado!</h5>}
             {!logedIn && isSingUp && <UserRegistForm />}
-            {!logedIn && !isSingUp &&
+            {!logedIn && isRecovering && <UserRecoverFrom userEmailLogIn={email}/>}
+            {!logedIn && !isSingUp && !isRecovering &&
                 <div>
                     <h2>Iniciar Sesión</h2>
                     {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
@@ -69,6 +72,7 @@ const LoginComponent = () => {
                         />
                         <button type="submit">Login</button>
                         <button onClick={()=>setIsSingUp(true)}>Registrarse</button>
+                        <p onClick={()=>setIsRecovering(true)}>He olvidado la contraseña ...</p>
 
                         {loginLoading && <p>Cargando...</p>}
                     </form>
