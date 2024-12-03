@@ -129,6 +129,7 @@ const UserRegistForm = () => {
                 }
             </form>
         }
+        <button onClick={()=>window.location.reload()}>Volver</button>
     </>
     )
 }
