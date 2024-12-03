@@ -12,7 +12,7 @@ const usePairKeyServices = () => {
         return encryptedMessage.toString('base64');
     }
 
-    // Decrypt PRIVATE Key with provisional pass
+    // Decrypt PRIVATE Key with temporary pass
     function decryptPrivateKey(encryptedPrivateKey, password, ivHex, salt) {
 
         const encryptionKey = crypto.pbkdf2Sync(password, salt, 100000, 32, 'sha256');
