@@ -10,8 +10,8 @@ export default defineConfig({
       crypto: 'crypto-browserify',
       stream: 'stream-browserify',
       buffer: 'buffer/',
-      process: 'process/browser',
-      setImmediate: 'setimmediate',
+      // process: 'process/browser',
+      // setImmediate: 'setimmediate',
     },
   },
   optimizeDeps: {
@@ -21,7 +21,7 @@ export default defineConfig({
       },
       plugins: [
         NodeGlobalsPolyfillPlugin({
-          process: true,
+          // process: true,
           buffer: true,
         }),
         NodeModulesPolyfillPlugin(),

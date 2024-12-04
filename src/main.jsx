@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { AppProvaider } from './context/AppContext.jsx'
 import './css/index.css'
-import process from 'process';
-import 'setimmediate';
+// import process from 'process';
+// import 'setimmediate';
 
-if (!window.process)
-    window.process = process;
+// if (!window.process)
+//     window.process = process;
 
 // let process = {}
 

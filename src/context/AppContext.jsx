@@ -16,7 +16,7 @@ const AppProvaider = ({ children }) => {
     const [userPublicKey, setUserPublicKey] = useState(null);
     const [userKeyPass, setUserkeyPass] = useState(null);
     const [wsEvent , setWsEvent] = useState(null);
-    const IpAPI = import.meta.env.VITE_API_URL;
+    const IpAPI = "kimikall-api.onrender.com";
     const API = "https://" + IpAPI;
 
     const { 
