@@ -36,5 +36,8 @@
     "globals": "^15.9.0",
     "react-error-overlay": "6.0.9",
     "vite": "^5.4.1"
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }
