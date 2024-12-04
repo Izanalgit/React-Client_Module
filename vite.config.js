@@ -5,13 +5,18 @@ import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfil
 
 export default defineConfig({
   plugins: [react()],
+  define: {
+    'process.env': process.env,
+  },
+  build: {
+    outDir: 'dist',
+  },
   resolve: {
     alias: {
       crypto: 'crypto-browserify',
       stream: 'stream-browserify',
       buffer: 'buffer/',
-      // process: 'process/browser',
-      // setImmediate: 'setimmediate',
+      process: 'process/browser',
     },
   },
   optimizeDeps: {
@@ -21,7 +26,7 @@ export default defineConfig({
       },
       plugins: [
         NodeGlobalsPolyfillPlugin({
-          // process: true,
+          process: true,
           buffer: true,
         }),
         NodeModulesPolyfillPlugin(),
