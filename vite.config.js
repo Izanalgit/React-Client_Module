@@ -9,7 +9,8 @@ export default defineConfig({
     alias: {
       crypto: 'crypto-browserify',
       stream: 'stream-browserify',
-      buffer: 'buffer/', 
+      buffer: 'buffer/',
+      process: 'process/browser', 
     },
   },
   optimizeDeps: {
