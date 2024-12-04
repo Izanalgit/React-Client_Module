@@ -10,6 +10,12 @@ if (!window.process)
 
 // let process = {}
 
+useEffect(() => {
+    window.process = {
+      ...window.process,
+    };
+  }, []);
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     // <React.StrictMode>
         <AppProvaider>

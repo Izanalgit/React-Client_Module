@@ -10,13 +10,14 @@ export default defineConfig({
       crypto: 'crypto-browserify',
       stream: 'stream-browserify',
       buffer: 'buffer/',
-      process: 'process/browser', 
+      process: 'process/browser',
     },
   },
   optimizeDeps: {
     esbuildOptions: {
       define: {
         global: 'globalThis',
+        'process.env': {},
       },
       plugins: [
         NodeGlobalsPolyfillPlugin({
@@ -29,7 +30,11 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['setImmediate'],
+      output: {
+        globals: {
+          setImmediate: 'setImmediate',
+        },
+      },
     },
   },
 });
