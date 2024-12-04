@@ -9,7 +9,7 @@ function useWebSocket(API,authToken,getWsEvent) {
     useEffect(() => {
         if (authToken) {
             // WebSocket connect
-            const ws = new WebSocket(`ws://${API}`);
+            const ws = new WebSocket(`wss://${API}`);
 
             // Send auth token
             ws.onopen = () => {

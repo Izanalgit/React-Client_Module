@@ -17,7 +17,7 @@ const AppProvaider = ({ children }) => {
     const [userKeyPass, setUserkeyPass] = useState(null);
     const [wsEvent , setWsEvent] = useState(null);
     const IpAPI = import.meta.env.VITE_API_URL;
-    const API = "http://" + IpAPI;
+    const API = "https://" + IpAPI;
 
     const { 
         getUserProfile, 
