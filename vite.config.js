@@ -11,6 +11,7 @@ export default defineConfig({
       stream: 'stream-browserify',
       buffer: 'buffer/',
       process: 'process/browser',
+      setImmediate: 'setimmediate',
     },
   },
   optimizeDeps: {
@@ -26,15 +27,6 @@ export default defineConfig({
         }),
         NodeModulesPolyfillPlugin(),
       ],
-    },
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        globals: {
-          setImmediate: 'setImmediate',
-        },
-      },
     },
   },
 });
