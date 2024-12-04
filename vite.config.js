@@ -9,19 +9,16 @@ export default defineConfig({
     alias: {
       crypto: 'crypto-browserify',
       stream: 'stream-browserify',
-      buffer: 'buffer/',
-      process: 'process/browser', 
+      buffer: 'buffer/', 
     },
   },
   optimizeDeps: {
     esbuildOptions: {
       define: {
         global: 'globalThis',
-        'process.env': {},
       },
       plugins: [
         NodeGlobalsPolyfillPlugin({
-          process: true,
           buffer: true,
         }),
         NodeModulesPolyfillPlugin(),
