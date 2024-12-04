@@ -13,6 +13,9 @@ export default defineConfig({
       process: 'process/browser', 
     },
   },
+  define: {
+    'process.env': {},
+  },
   optimizeDeps: {
     esbuildOptions: {
       define: {
