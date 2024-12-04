@@ -32,7 +32,6 @@ export default defineConfig({
       plugins: [
         inject({
           process: 'process/browser',
-          global: 'globalThis',
         }),
       ],
     },
