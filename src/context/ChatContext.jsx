@@ -212,6 +212,9 @@ const ChatProvider = ({ children }) => {
     //Get last date
     const getLastDate = (lastDate) => setBeforeDate(lastDate);
 
+    //Clean chat
+    const cleanChat = () => setCurrentChat(null);
+
     return (
         <ChatContext.Provider 
             value={{ 
@@ -220,7 +223,8 @@ const ChatProvider = ({ children }) => {
                 getContactId, 
                 sendChatMessage,
                 setIsRead,
-                getLastDate, 
+                getLastDate,
+                cleanChat, 
                 loading, 
                 error 
             }}>

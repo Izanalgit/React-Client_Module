@@ -8,13 +8,16 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
         getContactId,
         sendChatMessage,
         getLastDate,
+        cleanChat,
         loading,
         error
     } = useChatContext();
 
     useEffect(() => {
-        if(contactId)
+        if(contactId){
+            cleanChat();
             getContactId(contactId,contactPublicKey);
+        }
     }, [contactId]);
 
     const handleSendMessage = async (message) => {
