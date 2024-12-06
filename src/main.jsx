@@ -5,9 +5,9 @@ import { AppProvaider } from './context/AppContext.jsx'
 import './css/index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    // <React.StrictMode>
+    <React.StrictMode>
         <AppProvaider>
             <App />
         </AppProvaider>
-    // </React.StrictMode>,
+    </React.StrictMode>,
 )

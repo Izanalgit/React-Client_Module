@@ -13,8 +13,9 @@ const Search = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
-    const [basicFilters, setBasicFilters] = useState();
-    const [extendedFilters, setExtendedFilters] = useState();
+    const [basicFilters, setBasicFilters] = useState({});
+    const [extendedFilters, setExtendedFilters] = useState({});
+    const [goSearch, setGoSearch] = useState(false);
     const [searchDone, setSearchDone] = useState(false);
     const [profiles, setProfiles] = useState([]);
 
@@ -25,40 +26,52 @@ const Search = () => {
         fetchData: searchProfiles
     } = useFetchPOST();
 
+    const searchWithFilter = () => setGoSearch(true);
+    const searchAgain = () => setSearchDone(false);
+
     const getFilters = (basicFilters, advancedFilters) => {
         setBasicFilters({...basicFilters});
         setExtendedFilters({...advancedFilters});
         setSearchDone(true);
     }
 
-    useEffect(()=>{
-        const search = async () => {
-            setErrorMessage('');
-            setSuccessMessage('');
-    
-            if (isUpdating || !basicFilters) return;
-    
-            try {
-                setIsUpdating(true);
-                const headers = { Authorization: `${authToken}` };
-                await searchProfiles(
-                    `${API}/api/contacts/search`, 
-                    {payload:{ normalSearch :basicFilters, expandedSearch:extendedFilters}},
-                    {headers}
-                );
-    
-            } catch (err) {
-                setErrorMessage('Error al realizar la busqueda de perfiles. Intenta de nuevo.');
-                console.log(err , profilesSearchError)
-            } finally {
-                setIsUpdating(false);
-            }
-        };
+    // Search fetch
+    const search = async () => {
+        setErrorMessage('');
+        setSuccessMessage('');
 
-        search();
-        
+        if (isUpdating || !authToken) return;
+
+        try {
+            setIsUpdating(true);
+            const headers = { Authorization: `${authToken}` };
+            await searchProfiles(
+                `${API}/api/contacts/search`, 
+                {payload:{ normalSearch :basicFilters , expandedSearch:extendedFilters }},
+                {headers}
+            );
+
+        } catch (err) {
+            setErrorMessage('Error al realizar la busqueda de perfiles. Intenta de nuevo.');
+            console.log(err , profilesSearchError)
+        } finally {
+            setIsUpdating(false);
+        }
+    };
+
+    //Default search
+    useEffect(()=>{
+        if(authToken)
+            search();
+    },[authToken])
+
+    //Filtered search
+    useEffect(()=>{
+        if(basicFilters)
+            search();
     },[basicFilters,extendedFilters])
 
+    //Set filters
     useEffect(()=>{
         if(!profilesSearchLoading && profilesSearchData && !profilesSearchError)
             setProfiles(profilesSearchData.profiles);
@@ -78,10 +91,22 @@ const Search = () => {
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                     {successMessage && <p className="success-message">{successMessage}</p>} 
 
-                    {searchDone  
-                        ?<SearchProfilesList profiles={profiles} /> 
-                        :<SearchProfilesForm onSearch={getFilters} />
+                    {goSearch
+                        ?<>
+                            {searchDone  
+                                ?<>
+                                    <button onClick={searchAgain}>FILTRAR</button>
+                                    <SearchProfilesList profiles={profiles} />
+                                </>
+                                : <SearchProfilesForm onSearch={getFilters} />
+                            }
+                        </>
+                        :<>
+                            <button onClick={searchWithFilter}>FILTRAR</button>
+                            <SearchProfilesList profiles={profiles} />
+                        </>
                     }
+                    
                 </>
             }
         </>}
