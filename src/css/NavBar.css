@@ -1,0 +1,65 @@
+.navegation {
+    position: fixed;
+    top: 0; 
+    left: 50%;
+    transform: translateX(-50%); 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; 
+    width: 100%;
+    height: fit-content; 
+    background-color: #1e293b; 
+  }
+  
+  /* Warnings circulares */
+.warningsDiv {
+    display: flex;
+    gap: 1rem; /* Espacio entre los elementos */
+    justify-content: center;
+  }
+  
+  .warningsDiv > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: #f87171; /* Fondo rojo suave */
+    color: #ffffff;
+    border-radius: 50%; /* Hace que sea circular */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+nav {
+    background-color: #1e293b; /* Azul oscuro */
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos de los links */
+  nav a {
+    color: #ffffff; /* Blanco */
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 1.2rem;
+    transition: color 0.3s, transform 0.3s;
+    position: relative;
+  }
+  
+  nav a:hover {
+    color: #60a5fa; /* Azul claro */
+    transform: scale(1.1); /* Efecto de zoom */
+  }
+  
+  /* Indicador de link activo */
+  nav a.active {
+    color: #facc15; /* Amarillo */
+    font-weight: bold;
+  }
