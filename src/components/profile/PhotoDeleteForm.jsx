@@ -41,7 +41,7 @@ const PhotoDeleteForm = ({onComplete}) => {
     }, [loading, data]);
 
     return (
-        <div>
+        <div className='image-form'>
             <h3>Eliminar imagen</h3>
 
             <label>
