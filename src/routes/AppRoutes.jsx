@@ -17,6 +17,7 @@ const AppRoutes = () =>{
         <Router>
         <>
             <NavBar />
+            <div className="content">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
@@ -28,6 +29,7 @@ const AppRoutes = () =>{
                 <Route path="/contact/:contactId" element={<Contact />} />
                 <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
+            </div>
             <Footer />
         </>
         </Router>
