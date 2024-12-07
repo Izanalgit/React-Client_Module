@@ -51,7 +51,7 @@ const PhotoUploadForm = ({onComplete}) => {
     }, [loading, data]);
 
     return (
-        <div>
+        <div className='image-form'>
             <h3>Actualizar imagen</h3>
 
             <label>
