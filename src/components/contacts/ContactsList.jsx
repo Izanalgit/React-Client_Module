@@ -19,9 +19,9 @@ const ContactList = () => {
     return (
         <div>
             <div>
-                <h2 onClick={()=>changeContactsList(false)}>Contactos</h2>
-                <h2>|</h2>
-                <h2 onClick={()=>changeContactsList(true)}>Solicitudes</h2>
+                <h3 onClick={()=>changeContactsList(false)}>Contactos</h3>
+                <h3>|</h3>
+                <h3 onClick={()=>changeContactsList(true)}>Solicitudes</h3>
             </div>
             {onRequests
                 ?<>{requests.length > 0 ? (
