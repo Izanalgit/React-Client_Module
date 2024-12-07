@@ -21,7 +21,7 @@ const ContactCard = ({ contactId, contactImage, contactName, contactType ,countU
             <BlockUser userId={contactId}/>
             {contactType === "contact" &&
                 <>
-                    {countUnread > 0 && <p>Mensajes sin leer {countUnread}</p>}
+                    {countUnread?.count > 0 && <p>Mensajes sin leer {countUnread?.count}</p>}
                     <Link to={`/chat/${contactName}/${contactId}`}>Abrir chat</Link>
                     <Link to={`/contact/${contactId}`}>Abrir Perfil</Link>
                 </>
