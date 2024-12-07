@@ -83,7 +83,7 @@ const UserRegistForm = () => {
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         {successMessage && <p className="success-message">{successMessage}</p>} 
         {!successMessage &&
-            <form onSubmit={handleSubmit} className="profile-form">
+            <form onSubmit={handleSubmit} className="regist-form">
                 <div>
                 <div className="form-group">
                     <label htmlFor="name">Nombre</label>
@@ -129,7 +129,7 @@ const UserRegistForm = () => {
                 }
             </form>
         }
-        <button onClick={()=>window.location.reload()}>Volver</button>
+        <button onClick={()=>window.location.reload()} className="back-button">Volver</button>
     </>
     )
 }

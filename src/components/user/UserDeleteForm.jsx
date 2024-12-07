@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 import useFetchDELETE from "../../hooks/useFetchDELETE";
 
+import '../../css/FormDelete.css';
+
 const UserDeleteForm = () => {
     const navigate = useNavigate();
     const {API,authToken,getLoged} = useApp();
@@ -79,7 +81,7 @@ const UserDeleteForm = () => {
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         {successMessage && <p className="success-message">{successMessage}</p>} 
         {!successMessage &&
-            <form onSubmit={handleSubmit} className="profile-form">
+            <form onSubmit={handleSubmit} className="profile-delete-form">
                 <div>
                 <div className="form-group">
                     <label htmlFor="email">Correo Electrónico</label>
@@ -105,6 +107,7 @@ const UserDeleteForm = () => {
                 {!userDeleteLoading &&
                     <button type="submit">Eliminar usuario</button>
                 }
+                <p>Esta acción es irreversible. Por favor, asegúrate antes de continuar.</p>
             </form>
         }
     </>

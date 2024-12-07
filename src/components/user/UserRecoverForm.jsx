@@ -206,7 +206,7 @@ const UserRecoverFrom = ({userEmailLogIn}) => {
                 }
             </form>
         }
-        <button onClick={()=>window.location.reload()}>Volver</button>
+        <button onClick={()=>window.location.reload() } className="back-button">Volver</button>
     </>)
 }
 
