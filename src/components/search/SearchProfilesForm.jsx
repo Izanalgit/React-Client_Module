@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../../css/FormSearch.css';
 
 const SearchProfilesForm = ({ onSearch }) => {
     // Basic filters
@@ -41,8 +42,8 @@ const SearchProfilesForm = ({ onSearch }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Búsqueda de Perfiles</h2>
+        <form onSubmit={handleSubmit} className="search-form">
+            <h3>Búsqueda de Perfiles</h3>
 
             <div>
                 <label>Edad mínima:</label>

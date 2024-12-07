@@ -1,0 +1,101 @@
+.search-form {
+    max-width: 600px;
+    margin: .5rem auto;
+    padding: 1.5rem;
+    background-color: #1e293b; 
+    border: 1px solid  #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    font-family: Arial, sans-serif;
+    color: #f8fafc; /* Texto oscuro */
+}
+
+.search-form h2 {
+    margin-bottom: 1rem;
+    color: #f8fafc;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.search-form h3 {
+    margin: 1.5rem 0 1rem;
+    color: #e2e8f0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+.search-form div {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-form label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #f8fafc; 
+    font-size: 0.9rem;
+}
+
+.search-form input,
+.search-form select {
+    padding: 0.8rem;
+    border: 1px solid #cbd5e1; /* Gris claro */
+    border-radius: 5px;
+    background-color: #20385f;
+    font-size: 1rem;
+    color: #ffffff;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-form input:focus,
+.search-form select:focus {
+    border-color: #3b82f6; /* Azul claro */
+}
+
+.search-form input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.2); /* Aumenta tamaño del checkbox */
+}
+
+.search-form button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #3b82f6; /* Azul */
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.search-form button[type="submit"]:hover {
+    background-color: #2563eb; /* Azul más oscuro */
+    transform: scale(1.02); /* Ligero aumento */
+}
+
+.search-form button[type="submit"]:active {
+    background-color: #1d4ed8; /* Azul aún más oscuro */
+    transform: scale(0.98);
+}
+
+.advanced-filters {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+}
+
+.advanced-filters.active {
+    max-height: 1000px; /* Altura suficiente para mostrar los filtros */
+    transition: max-height 0.5s ease-in;
+}
+
+.advanced-filters div {
+    margin-bottom: 1rem;
+}

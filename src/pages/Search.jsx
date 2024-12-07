@@ -86,8 +86,6 @@ const Search = () => {
             {userProfile?.userProfile?.special?.length < 1
                 ? <p>Debes rellenar tu perfil primero.</p>
                 :<>
-                    <h1>BUSQUEDA DE CONTACTOS:</h1>
-
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                     {successMessage && <p className="success-message">{successMessage}</p>} 
 
