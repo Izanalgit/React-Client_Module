@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import NavBar from "../components/NavBar.jsx";
+import Footer from "../components/Footer.jsx";
 import Home from "../pages/Home.jsx";
 import Profile from "../pages/Profile.jsx";
 import Search from "../pages/Search.jsx";
@@ -27,6 +28,7 @@ const AppRoutes = () =>{
                 <Route path="/contact/:contactId" element={<Contact />} />
                 <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
+            <Footer />
         </>
         </Router>
     );
