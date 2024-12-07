@@ -1,0 +1,57 @@
+.profile-delete-form {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: #1e293b; /* Fondo oscuro */
+    color: #ffffff; /* Texto blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.profile-delete-form h3 {
+    margin-bottom: 1.5rem;
+    color: #f87171; /* Rojo claro */
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.form-group input:focus {
+    border-color: #f87171; /* Rojo claro */
+}
+
+.profile-delete-form button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 1.5rem;
+    background-color: #ef4444; /* Rojo intenso */
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.profile-delete-form button[type="submit"]:hover {
+    background-color: #dc2626; /* Rojo más oscuro */
+    transform: scale(1.02); /* Ligero aumento para dar énfasis */
+}
+
+.profile-delete-form button[type="submit"]:active {
+    background-color: #b91c1c; /* Rojo aún más oscuro */
+    transform: scale(0.98); /* Efecto de clic */
+}
+
+.profile-delete-form button:disabled {
+    background-color: #94a3b8; /* Gris deshabilitado */
+    cursor: not-allowed;
+}
+
+.profile-delete-form p {
+    margin-top: 1rem;
+    color: #94a3b8; /* Gris claro */
+    font-size: 0.9rem;
+}

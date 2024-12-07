@@ -38,6 +38,7 @@
     border-radius: 4px;
     font-size: 0.9rem;
     cursor: pointer;
+    width: -webkit-fill-available;
 }
 
 .image-form button {
@@ -68,4 +69,10 @@
     color: #f87171; /* Rojo para errores */
     font-size: 0.9rem;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    .image-form{
+        margin: 2% auto;
+    }
 }
