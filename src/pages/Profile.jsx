@@ -8,6 +8,7 @@ import PhotoDeleteForm from "../components/profile/PhotoDeleteForm";
 
 import '../css/UserProfile.css';
 import '../css/FormsProfile.css';
+import '../css/FormsPhoto.css';
 
 const Profile = () => {
 
