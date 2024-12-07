@@ -3,6 +3,7 @@ import './css/App.css';
 import { ChatProvider } from './context/ChatContext';
 import AppRoutes from './routes/AppRoutes';
 
+import './css/FormsGlobal.css';
 
 function App() {
 
