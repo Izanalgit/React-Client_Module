@@ -7,6 +7,9 @@ import useFetchPOST from "../hooks/useFetchPOST";
 import UserRegistForm from "../components/user/UserRegistForm";
 import UserRecoverFrom from "../components/user/UserRecoverForm";
 
+import '../css/LogIn.css';
+import '../css/FormsUser.css';
+
 const LoginComponent = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -52,7 +55,7 @@ const LoginComponent = () => {
             {!logedIn && isSingUp && <UserRegistForm />}
             {!logedIn && isRecovering && <UserRecoverFrom userEmailLogIn={email}/>}
             {!logedIn && !isSingUp && !isRecovering &&
-                <div>
+                <div className="login-form">
                     <h2>Iniciar Sesión</h2>
                     {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
                     <form onSubmit={handleLogin}>
