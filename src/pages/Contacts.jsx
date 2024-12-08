@@ -1,25 +1,24 @@
 import { useApp } from "../context/AppContext";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import ContactList from "../components/contacts/ContactsList";
 
 const Contacts = () => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const {logedIn} = useApp();
 
-    const handleButton = () => {
-        navigate('/search');
-    }
+    // const handleButton = () => {
+    //     navigate('/search');
+    // }
 
     return (
     <>
         {!logedIn && <h5>No estás conectado!</h5>}
         {logedIn &&
             <>
-                <h1>LISTA DE CONTACTOS</h1>
                 <ContactList />
-                <button onClick={handleButton}>Buscar</button>
+                {/* <button onClick={handleButton}>Buscar</button> */}
             </>
         }
     </>)
