@@ -11,6 +11,7 @@ const SearchProfilesList = ({profiles}) => {
                         contactId = {profile.userId} 
                         contactName = {profile.name}
                         contactImage = {profile.profilePicture}
+                        contactBio = {profile.bio}
                     />
                 ))
                 : <p>No se ha encontrado un perfil adecuado...</p>

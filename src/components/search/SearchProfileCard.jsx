@@ -1,14 +1,17 @@
 import ContactRequest from "../contacts/ContactRequest";
 import defaultProfile from '../../assets/images/profile-default.png';
 
-const SearchProfileCard = ({ contactId, contactName , contactImage }) => {
+import '../../css/SearchCard.css';
+
+const SearchProfileCard = ({ contactId, contactName, contactImage, contactBio}) => {
 
     const profileImage = contactImage ? contactImage : defaultProfile;
 
     return (
-        <div style={{ border: "1px solid #ddd", padding: "10px", marginBottom: "10px" }}>
-            <img src={profileImage} alt="Profile" className="profile-picture" />
+        <div className="search-card">
             <h4>{contactName}</h4>
+            <img src={profileImage} alt="Profile" />
+            <p>{contactBio}</p>
             <ContactRequest contactId={contactId}/>
         </div>
     );
