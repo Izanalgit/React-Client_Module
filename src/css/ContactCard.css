@@ -1,0 +1,194 @@
+/* Contenedor del selector */
+.title-selector {
+    display: flex;
+    justify-content: center; /* Centra los títulos */
+    align-items: center;
+    gap: 35px; /* Espacio entre elementos */
+    padding: 10px 0;
+    /* background: #f8f9fa;  */
+    border-bottom: 2px solid #e9ecef; /* Línea divisoria */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilo para los títulos */
+.title-selector h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #a6abaf;
+    cursor: pointer;
+    margin: 0;
+    transition: color 0.3s, transform 0.2s; /* Efectos al pasar el ratón */
+}
+
+/* Hover para títulos */
+.title-selector h3:hover {
+    color: #007bff; /* Azul claro */
+    transform: scale(1.1); /* Ligero aumento de tamaño */
+}
+
+/* Separador (barra vertical) */
+.title-selector h3:nth-child(2) {
+    color: #adb5bd; /* Gris claro */
+    cursor: default; /* Sin interacción */
+}
+
+/* Título activo */
+.title-selector h3.active {
+    color: #007bff; /* Azul para el activo */
+    border-bottom: 2px solid #007bff; /* Indicador visual */
+}
+
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Nombre y botones se separan a izquierda y derecha */
+    background: linear-gradient(135deg, #ffffff, #f7f7f7);
+    border: 1px solid #dcdcdc;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 40px; /* Más espacio horizontal para la separación */
+    max-width: 500px;
+    margin: 10px auto;
+    font-family: 'Arial', sans-serif;
+    gap: 15px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen del perfil */
+.contact-card .profile-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #adb5bd;
+}
+
+/* Contenedor de la izquierda (imagen + nombre) */
+.contact-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Nombre del contacto */
+.contact-left h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #343a40;
+}
+
+/* Contador de mensajes sin leer */
+.unread-count {
+    position: absolute;
+    top: -3px;
+    left: 85px;
+    background-color: #dc3545;
+    color: #fff;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Botones/links a la derecha */
+.contact-right {
+    display: flex;
+    flex-direction: column; /* Organización vertical */
+    align-items: flex-end; /* Alineados a la derecha */
+    gap: 5px;
+}
+
+/* Botón de configuración */
+.config-contact-but {
+    position: absolute; /* Posición absoluta respecto a la tarjeta */
+    top: -15px;         /* Margen desde la parte superior */
+    right: 10px;       /* Margen desde la derecha */
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #6c757d;
+    transition: color 0.3s;
+}
+
+.config-contact-but:hover {
+    color: #343a40;
+}
+
+/* Botones de acción */
+.contact-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.contact-buttons button {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-buttons button:hover {
+    background-color: #495057;
+}
+
+/* Links para chat y perfil */
+.contact-links {
+    display: flex;
+    gap: 10px;
+}
+
+.contact-links a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 1%;
+    background-color: aliceblue;
+}
+
+.contact-links a:hover {
+    color: aliceblue;
+    background-color: #0056b3;
+}
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .contact-card {
+        flex-wrap: wrap; /* Permitir que los elementos se ajusten */
+    }
+
+    .contact-left, 
+    .contact-right {
+        text-align: center; /* Centrar el contenido */
+    }
+
+    .contact-left {
+        justify-content: center; /* Centrar imagen y nombre */
+        margin-bottom: 10px;
+    }
+
+    .config-contact-but {
+        position: absolute; /* Aseguramos que siga estando arriba */
+        top: -15px;
+        right: 10px; /* Mantener el botón arriba a la derecha */
+    }
+}
