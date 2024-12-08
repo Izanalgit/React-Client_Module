@@ -57,16 +57,40 @@ const AddPremy = () => {
     },[buyPremyData, buyPremyLoading, buyPremyError])
 
     return (
-        <div>
-            {isUpdating && <h3>PROCESANDO COMPRA</h3>}
-            <button onClick={()=>handleSubmit('premy')} disabled={isUpdating}>
-                Comprar Premium
-            </button>
-            <button onClick={()=>handleSubmit('message')} disabled={isUpdating}>
-                Comprar Tokens
-            </button>
+        <div className="buying-content">
+            {isUpdating && <h4>PROCESANDO COMPRA</h4>}
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+            <div className="buy-columns">
+                <div className="premy-column">
+                    <button onClick={()=>handleSubmit('premy')} disabled={isUpdating}>
+                        Comprar Premium
+                    </button>
+                    <ul>
+                        <li>
+                            Mensajes ilimitados
+                        </li>
+                        <li>
+                            Más cosas de premi
+                        </li>
+                    </ul>
+                    <h5>10 € / 30 días</h5>
+                </div>
+                <div className="token-column">
+                    <button onClick={()=>handleSubmit('message')} disabled={isUpdating}>
+                        Comprar Tokens
+                    </button>
+                    <ul>
+                        <li>
+                            1 Mensaje por 1 Token
+                        </li>
+                        <li>
+                            Más cosas de los tokens
+                        </li>
+                    </ul>
+                    <h5>1 € / 2 tokens</h5>
+                </div>
+            </div>  
         </div>
     );
 
