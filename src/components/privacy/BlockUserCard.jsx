@@ -12,7 +12,7 @@ const BlockUserCard = ({ blockedId, blockedName }) => {
     }
 
     return (
-        <div style={{ border: "1px solid #ddd", padding: "10px", marginBottom: "10px" }}>
+        <div className="block-card">
             <h4>{blockedName}</h4>
             
             {isReporting
@@ -20,7 +20,7 @@ const BlockUserCard = ({ blockedId, blockedName }) => {
                 : <UnblockUser userId={blockedId} />
             }
 
-            <button onClick={handleButton} >
+            <button onClick={handleButton} className={isReporting ? "report-button" : ""}>
                 {isReporting ? "Cancelar" : "Reportar"}
             </button>
         </div>

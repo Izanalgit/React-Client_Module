@@ -59,9 +59,9 @@ const BlockUser = ({userId}) => {
     },[blockUserData, blockUserLoading, blockUserError])
 
     return (
-        <div>
+        <div className="block-button">
             <button onClick={handleSubmit} disabled={isUpdating}>
-                {isUpdating ? "Bloqueando..." : "Bloquear usuario"}
+                {isUpdating ? "Bloqueando..." : "Bloquear"}
             </button>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}

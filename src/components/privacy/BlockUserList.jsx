@@ -2,6 +2,8 @@ import { useApp } from "../../context/AppContext";
 
 import BlockUserCard from "./BlockUserCard";
 
+import '../../css/BlockCard.css';
+
 const BlockUserList = () => {
 
     const {userBlocks} = useApp();
@@ -9,8 +11,8 @@ const BlockUserList = () => {
     const blockedUsers = userBlocks?.blockedUsers || [];
 
     return (
-        <div>
-            <h2>Usuarios bloqueados</h2>
+        <div className="block-list">
+            <h4>Usuarios bloqueados</h4>
             {blockedUsers.length > 0 ? (
                 blockedUsers.map((blocked) => (
                     <BlockUserCard 

@@ -61,7 +61,7 @@ const UnblockUser = ({userId}) => {
     return (
         <div>
             <button onClick={handleSubmit} disabled={isUpdating}>
-                {isUpdating ? "Desbloqueando..." : "Desbloquear usuario"}
+                {isUpdating ? "Desbloqueando..." : "Desbloquear"}
             </button>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
