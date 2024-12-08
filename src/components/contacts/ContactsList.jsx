@@ -17,11 +17,21 @@ const ContactList = () => {
     const changeContactsList = (onReq) => setOnRequests(onReq);
 
     return (
-        <div>
-            <div>
-                <h3 onClick={()=>changeContactsList(false)}>Contactos</h3>
+        <div className="contacts-list">
+            <div className="title-selector">
+                <h3 
+                    className={!onRequests ? "active" : ""} 
+                    onClick={() => changeContactsList(false)}
+                >
+                    Contactos
+                </h3>
                 <h3>|</h3>
-                <h3 onClick={()=>changeContactsList(true)}>Solicitudes</h3>
+                <h3 
+                    className={onRequests ? "active" : ""} 
+                    onClick={() => changeContactsList(true)}
+                >
+                    Solicitudes
+                </h3>
             </div>
             {onRequests
                 ?<>{requests.length > 0 ? (

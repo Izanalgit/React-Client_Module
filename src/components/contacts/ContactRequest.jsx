@@ -59,7 +59,7 @@ const ContactRequest = ({contactId}) => {
     },[contactRequestData, contactRequestLoading, contactRequestError])
 
     return (
-        <div>
+        <div className="request-button">
             <button onClick={handleSubmit} disabled={isUpdating}>
                 {isUpdating ? "Enviando..." : "Enviar solicitud"}
             </button>

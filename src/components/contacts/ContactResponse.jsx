@@ -65,7 +65,7 @@ const ContactResponse = ({contactId}) => {
     },[responseContactData, responseContactLoading, responseContactError])
 
     return (
-        <div>
+        <div className="response-button">
             <button onClick={()=>handleSubmit('accept')} disabled={isUpdating}>
                 {isUpdating ? "Aceptando..." : "Aceptar"}
             </button>
