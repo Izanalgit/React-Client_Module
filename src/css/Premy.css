@@ -1,0 +1,200 @@
+/* Contenedor principal del menú premium */
+.premy-menu {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    margin: 20px auto;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+}
+
+.premy-menu:hover {
+    transform: translateY(-5px); /* Efecto de elevación */
+}
+
+/* Encabezados del menú */
+.premy-menu h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    margin-top: 0;
+    color: #343a40;
+    border-bottom: 2px solid #6c757d;
+    padding-bottom: 10px;
+}
+
+.premy-menu h4 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #495057;
+}
+
+/* Menú de compra */
+.buying-menu {
+    background: #ffffff;
+    border: 2px solid #6c757d;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+/* Menú de tokens */
+.tokens-menu {
+    background: #ffffff;
+    border: 2px solid #28a745;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+/* Botón */
+.premy-menu button {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px;
+}
+
+.premy-menu button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.premy-menu button:active {
+    background-color: #1e7e34;
+}
+
+/*Columnas */
+.buying-content {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.buying-content h4 {
+    font-size: 1.2rem;
+    color: #007bff;
+    margin-bottom: 15px;
+}
+
+.buying-content p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.buying-content .buy-columns {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.buying-content .premy-column,
+.buying-content .token-column {
+    background-color: #ffffff;
+    border: 2px solid #6c757d;
+    border-radius: 10px;
+    padding: 15px;
+    width: 45%;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.buying-content .premy-column:hover,
+.buying-content .token-column:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.buying-content button {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-bottom: 15px;
+}
+
+.buying-content button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.buying-content button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.buying-content ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin: 15px 0;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.buying-content ul li {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+}
+
+.buying-content ul li::before {
+    content: '✓';
+    color: #28a745;
+    margin-right: 8px;
+    font-size: 1rem;
+}
+
+.buying-content h5 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #343a40;
+}
+
+.premy-menu button.buying {
+    background-color: #dc3545; /* Rojo para estado de compra */
+    transform: scale(1.05); /* Destacar el botón en compra */
+}
+
+
+@media (max-width: 768px) {
+    .premy-menu {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .premy-menu h3, .premy-menu h4 {
+        font-size: 1.2rem;
+    }
+
+    .premy-menu button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    .buying-content .buy-columns {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .buying-content .premy-column,
+    .buying-content .token-column {
+        width: -webkit-fill-available;
+    }
+}
