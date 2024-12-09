@@ -1,3 +1,4 @@
+import messagesIamge from '../../assets/images/icons/contact.png'
 
 const NewContactAdvice = ({requests}) => {
 
@@ -5,10 +6,18 @@ const NewContactAdvice = ({requests}) => {
         ? requests.contactsList.requests
         : [];
 
+    let requestCount = friendRequests.length;
+
+    if(requestCount > 99)
+        requestCount = 99;
+
     return (<>
-        {friendRequests.length > 0 &&    
-            <h4>R {friendRequests.length}</h4>
-        }
+        {friendRequests.length > 0 &&(
+        <div>
+            <img src={messagesIamge} />    
+            <h4>{requestCount}</h4>
+        </div>
+        )}
     </>)
 
 }

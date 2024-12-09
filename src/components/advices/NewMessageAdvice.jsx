@@ -1,3 +1,5 @@
+import messagesIamge from '../../assets/images/icons/chat.png'
+
 const NewMessageAdvice = ({ messages }) => {
     let unreadMessages = null;
 
@@ -8,11 +10,16 @@ const NewMessageAdvice = ({ messages }) => {
                 .reduce((rec, cur) => rec + cur, 0)
             : null;
     }
+    if(unreadMessages > 99)
+        unreadMessages = 99;
 
     return (
         <>
             {unreadMessages !== null && unreadMessages > 0 && (
-                <h4>M {unreadMessages}</h4>
+            <div>
+                <img src={messagesIamge} />
+                <h4>{unreadMessages}</h4>
+            </div>
             )}
         </>
     );
