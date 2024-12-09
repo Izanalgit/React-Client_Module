@@ -6,6 +6,8 @@ import useFetchPOST from "../hooks/useFetchPOST";
 import SearchProfilesForm from "../components/search/SearchProfilesForm";
 import SearchProfilesList from "../components/search/SearchProfilesList";
 
+import '../css/SearchContent.css'
+
 const Search = () => {
 
     const { API, authToken, logedIn ,userProfile} = useApp();
@@ -85,7 +87,7 @@ const Search = () => {
         <>
             {userProfile?.userProfile?.special?.length < 1
                 ? <p>Debes rellenar tu perfil primero.</p>
-                :<>
+                :<div className="search-content">
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                     {successMessage && <p className="success-message">{successMessage}</p>} 
 
@@ -93,19 +95,25 @@ const Search = () => {
                         ?<>
                             {searchDone  
                                 ?<>
-                                    <button onClick={searchAgain}>FILTRAR</button>
+                                    <button 
+                                        onClick={searchAgain}
+                                        className="filter-button"
+                                    >FILTRAR</button>
                                     <SearchProfilesList profiles={profiles} />
                                 </>
                                 : <SearchProfilesForm onSearch={getFilters} />
                             }
                         </>
                         :<>
-                            <button onClick={searchWithFilter}>FILTRAR</button>
+                            <button 
+                                onClick={searchWithFilter}
+                                className="filter-button"
+                            >FILTRAR</button>
                             <SearchProfilesList profiles={profiles} />
                         </>
                     }
                     
-                </>
+                </div>
             }
         </>}
     </>)
