@@ -1,0 +1,72 @@
+.notification {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content; 
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    animation: fadeIn 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+.notification p{
+    margin: 0 !important;
+    font-size: 1rem !important;
+    cursor: default !important;
+    text-decoration: none !important;
+    transition: none !important;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%);
+    }
+}
+
+/* Tipos de notificaciones */
+.notification.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+.notification.success .close-btn,
+.notification.success p{
+    color: #155724 !important;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+.notification.error .close-btn,
+.notification.error p{
+    color: #721c24 !important;
+}
+
+/* Botón de cerrar */
+.close-btn {
+    background: none !important;
+    border: none !important;
+    color: inherit !important;
+    cursor: pointer !important;
+    font-size: 1.2rem !important;
+    width: auto !important;
+}
+
+@media (max-width: 768px) {
+    .notification {
+        width: 80%;
+    }
+
+}
