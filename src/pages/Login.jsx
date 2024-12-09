@@ -7,6 +7,9 @@ import useFetchPOST from "../hooks/useFetchPOST";
 import UserRegistForm from "../components/user/UserRegistForm";
 import UserRecoverFrom from "../components/user/UserRecoverForm";
 
+import Loader from "../components/popups/Loader";
+import Notification from "../components/popups/Notification";
+
 import '../css/LogIn.css';
 import '../css/FormsUser.css';
 
@@ -16,6 +19,7 @@ const LoginComponent = () => {
     const [password, setPassword] = useState("");
     const [isSingUp, setIsSingUp] = useState(false);
     const [isRecovering, setIsRecovering] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
     const { API, logedIn, getLoged } = useApp();
     const { 
         data: loginData,
@@ -49,6 +53,18 @@ const LoginComponent = () => {
         fetchUser();
     }, [loginData, loginHeaders, logedIn, getLoged]);
 
+    //Error handling
+    useEffect(()=>{
+        if(loginError){
+            if (loginError.includes("STATUS 401")) 
+                setErrorMessage("Credenciales incorrectas, revisa el correo y la contraseña ...");
+            if (loginError.includes("STATUS 409"))
+                setErrorMessage("Ya estás conectado ...");
+            if (loginError.includes("STATUS 500"))
+                setErrorMessage("Ups, parece que hay un error con el servidor ...");
+        }
+    },[loginError])
+
     return (
         <> 
             {logedIn && <h5>Ya estás conectado!</h5>}
@@ -57,7 +73,13 @@ const LoginComponent = () => {
             {!logedIn && !isSingUp && !isRecovering &&
                 <div className="login-form">
                     <h2>Iniciar Sesión</h2>
-                    {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
+                    {errorMessage && 
+                        <Notification   
+                            type={'error'} 
+                            message={errorMessage} 
+                            onClose={()=>setErrorMessage(null)}
+                        />
+                    }
                     <form onSubmit={handleLogin}>
                         <input
                             type="email"
@@ -77,7 +99,7 @@ const LoginComponent = () => {
                         <button onClick={()=>setIsSingUp(true)}>Registrarse</button>
                         <p onClick={()=>setIsRecovering(true)}>He olvidado la contraseña ...</p>
 
-                        {loginLoading && <p>Cargando...</p>}
+                        {loginLoading && <Loader />}
                     </form>
                 </div>
             }
