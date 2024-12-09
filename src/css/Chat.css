@@ -1,0 +1,122 @@
+/* Contenedor principal del chat */
+h2 {
+    margin-top: 0px;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 600px; /* Altura máxima */
+    border: 1px solid #ccc; /* Borde del chat */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 16px;
+    /* background-color: #f9f9f9; *//* Fondo del chat */
+}
+
+/* Lista de mensajes */
+.chat-container ul {
+    list-style-type: none;
+    height: 60vh; /* Altura ajustable */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column-reverse; /* Asegura el orden de abajo hacia arriba */
+    gap: 8px; /* Espaciado entre mensajes */
+    overflow-y: scroll; /* Asegura que el contenido siga siendo desplazable */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer/Edge */
+}
+/* Para navegadores basados en WebKit (Chrome, Safari, Edge Chromium) */
+.chat-container ul::-webkit-scrollbar {
+    display: none; /* Oculta el scrollbar */
+}
+
+/* Mensajes individuales */
+.chat-container li {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Mensajes enviados por el usuario */
+.my-msg {
+    align-self: flex-end; /* Alinea a la derecha */
+    background-color: #d1f7c4; /* Color de fondo para mensajes propios */
+    color: #333; /* Color del texto */
+    padding: 8px 12px;
+    border-radius: 12px 12px 0 12px; /* Bordes redondeados */
+    word-wrap: break-word; /* Permite el salto de línea en texto largo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade una sombra suave */
+    max-width: 50%;
+    min-width: 20%;
+}
+
+/* Mensajes enviados por el contacto */
+.contact-msg {
+    align-self: flex-start; /* Alinea a la izquierda */
+    background-color: #e4e6eb; /* Color de fondo para mensajes del contacto */
+    color: #333; /* Color del texto */
+    padding: 8px 12px;
+    border-radius: 12px 12px 12px 0; /* Bordes redondeados */
+    word-wrap: break-word; /* Permite el salto de línea en texto largo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Añade una sombra suave */
+    max-width: 50%;
+    min-width: 20%;
+}
+
+/* Botón de cargar más */
+.chat-container ul p {
+    align-self: center;
+    color: #555;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-bottom: 8px;
+}
+
+/* Input del chat */
+.chat-container input {
+    width: -webkit-fill-available;
+    padding: 12px;
+    margin-top: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.2s;
+}
+
+.chat-container input:focus {
+    border-color: #0078d7; /* Color al enfocar */
+}
+
+/* MessageCard general */
+.message-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.message-card strong {
+    text-align: left;
+}
+.message-card p {
+    color: black !important;
+    cursor:default !important;
+    text-decoration: none !important;
+    margin-bottom: 0px !important;
+}
+
+/* Texto de 'visto' */
+.message-card h6 {
+    font-size: 10px;
+    margin: 0;
+    color: #888;
+    position: absolute;
+    right: 0;
+}
+
+@media (max-width: 768px) {
+    .chat-container ul {
+        height: 65vh;
+    }
+}
