@@ -17,7 +17,7 @@ const NavBar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return(
-        <div className="navegation">
+        <div className={logedIn ?"navegation":"navigation-not-loged"}>
             {logedIn && (
                 <div className="warningsDiv">
                     <NewContactAdvice requests={userContacts} />
@@ -32,15 +32,40 @@ const NavBar = () => {
             </div>
 
             <nav className={menuOpen ? 'active' : ''}>
-                <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>Inicio</NavLink>
-                <NavLink to="/dashboard" className={({ isActive }) => (isActive ? 'active' : '')}>Dashboard</NavLink>
-                <NavLink to="/profile" className={({ isActive }) => (isActive ? 'active' : '')}>Perfil</NavLink>
-                <NavLink to="/contacts" className={({ isActive }) => (isActive ? 'active' : '')}>Contactos</NavLink>
-                <NavLink to="/search" className={({ isActive }) => (isActive ? 'active' : '')}>Buscar</NavLink>
+                <NavLink to="/" 
+                    className={({ isActive }) => (isActive ? 'active' : '')}
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >Inicio</NavLink>
+                {logedIn &&
+                <>
+                    <NavLink to="/dashboard" 
+                        className={({ isActive }) => (isActive ? 'active' : '')}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >Usuario</NavLink>
+                    <NavLink to="/profile" 
+                        className={({ isActive }) => (isActive ? 'active' : '')}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >Perfil</NavLink>
+                    <NavLink to="/contacts" 
+                        className={({ isActive }) => (isActive ? 'active' : '')}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >Contactos</NavLink>
+                    <NavLink to="/search" 
+                        className={({ isActive }) => (isActive ? 'active' : '')}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >Buscar</NavLink>
+                </>
+                }
                 {logedIn ? (
-                    <NavLink to="/logout" className={({ isActive }) => (isActive ? 'active' : '')}>DESCONECTAR</NavLink>
+                    <NavLink to="/logout" 
+                        className={({ isActive }) => (isActive ? 'active' : '')}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >DESCONECTAR</NavLink>
                 ) : (
-                    <NavLink to="/login" className={({ isActive }) => (isActive ? 'active' : '')}>CONECTAR</NavLink>
+                    <NavLink to="/login" 
+                        className={({ isActive }) => (isActive ? 'active' : '')}
+                        onClick={() => setMenuOpen(!menuOpen)}
+                    >CONECTAR</NavLink>
                 )}
             </nav>
         </div>
