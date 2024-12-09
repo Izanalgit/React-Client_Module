@@ -6,6 +6,9 @@ import useFetchGET from '../../hooks/useFetchGET';
 
 import ProfileView from '../profile/ProfileView';
 
+import Loader from '../popups/Loader';
+import Notification from '../popups/Notification';
+
 const ContactProfile = ({contactId}) => {
 
     const {API,authToken,userContacts} = useApp();
@@ -45,11 +48,13 @@ const ContactProfile = ({contactId}) => {
     }, [loading, data]);
 
     return (<>
-        {loading &&
-            <h3>Cargando perfil del contacto ...</h3>
-        }
+        {loading && <Loader />}
         {contactError &&
-            <h3>Error al cargar el perfil del contacto ...</h3>
+            <Notification   
+                type={'error'} 
+                message='Error al cargar el perfil del contacto ...' 
+                onClose={()=>setContactError(false)}
+            />
         }
         {contactProfile && !contactError && !loading &&
             <div className='contact-profile-container'>
