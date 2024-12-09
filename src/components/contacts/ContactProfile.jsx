@@ -52,10 +52,12 @@ const ContactProfile = ({contactId}) => {
             <h3>Error al cargar el perfil del contacto ...</h3>
         }
         {contactProfile && !contactError && !loading &&
-            <>
+            <div className='contact-profile-container'>
+                <div className='link-container'>
+                    <Link to={`/chat/${contactName}/${contactId}`} className="chat-icon-link" />
+                </div>
                 <ProfileView userName={contactName} userProfileInfo={contactProfile}/>
-                <Link to={`/chat/${contactName}/${contactId}`}>Abrir chat</Link>
-            </>
+            </div>
         }
     </>);
 };
