@@ -34,12 +34,6 @@ const ChatProvider = ({ children }) => {
         sendMessage 
     } = useChatService(API,authToken);
 
-    //Get contactId
-    const getContactId = (id,key) => {
-        setContactId(id)
-        setContactPublicKey(key)
-    };
-
     // Count messages unread
     const countUnread = async () => {
 
@@ -208,12 +202,17 @@ const ChatProvider = ({ children }) => {
         }
         cleanWsEvent();
     }, [wsEvent]);
+
+    //Get contactId
+    const getContactId = (id,key) => {
+        if(id !== contactId)
+            setCurrentChat(null);
+        setContactId(id)
+        setContactPublicKey(key)
+    };
     
     //Get last date
     const getLastDate = (lastDate) => setBeforeDate(lastDate);
-
-    //Clean chat
-    const cleanChat = () => setCurrentChat(null);
 
     return (
         <ChatContext.Provider 
@@ -224,7 +223,6 @@ const ChatProvider = ({ children }) => {
                 sendChatMessage,
                 setIsRead,
                 getLastDate,
-                cleanChat, 
                 loading, 
                 error 
             }}>
