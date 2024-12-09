@@ -14,15 +14,16 @@ const BlockUserCard = ({ blockedId, blockedName }) => {
     return (
         <div className="block-card">
             <h4>{blockedName}</h4>
-            
-            {isReporting
-                ? <ReportUser userId={blockedId} />
-                : <UnblockUser userId={blockedId} />
-            }
+            <div className="blocked-actions">
+                {isReporting
+                    ? <ReportUser userId={blockedId} />
+                    : <UnblockUser userId={blockedId} />
+                }
 
-            <button onClick={handleButton} className={isReporting ? "report-button" : ""}>
-                {isReporting ? "Cancelar" : "Reportar"}
-            </button>
+                <button onClick={handleButton} className={isReporting ? "report-button" : ""}>
+                    {isReporting ? "Cancelar" : "Reportar"}
+                </button>
+            </div>
         </div>
     );
 };

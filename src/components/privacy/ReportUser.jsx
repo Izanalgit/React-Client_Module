@@ -3,6 +3,8 @@ import { useState ,useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPOST from "../../hooks/useFetchPOST";
 
+import '../../css/FormReport.css'
+
 const ReportUser = ({userId}) => {
 
     const {API,authToken} = useApp();

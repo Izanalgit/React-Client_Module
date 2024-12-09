@@ -59,13 +59,13 @@ const UnblockUser = ({userId}) => {
     },[unBlockUserData, unBlockUserLoading, unBlockUserError])
 
     return (
-        <div>
+        <>
             <button onClick={handleSubmit} disabled={isUpdating}>
                 {isUpdating ? "Desbloqueando..." : "Desbloquear"}
             </button>
             {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-        </div>
+        </>
     );
 
 }
