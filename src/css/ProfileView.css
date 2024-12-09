@@ -93,6 +93,49 @@
     color: #333;
 }
 
+/*Contenedor de contacto*/
+.contact-profile-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Asegura que el perfil esté alineado debajo */
+}
+
+/* Contenedor del fondo y el ícono */
+.contact-profile-container .link-container {
+    position: absolute; 
+    top: -10px;
+    left: 50%;
+    transform: translate(400%);
+    width: 40px; 
+    height: 40px; 
+    background-color: #000; 
+    border: 1.5px solid whitesmoke;
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 10; 
+}
+
+/* Ícono del chat */
+.chat-icon-link {
+    width: 32px; /* Tamaño del ícono */
+    height: 32px;
+    background-image: url('/src/assets/images/icons/chat.ico'); /* Ruta al ícono */
+    background-size: cover; /* Escala la imagen para llenar el espacio */
+    background-position: center; /* Centra el ícono */
+    background-repeat: no-repeat;
+    border-radius: 50%; /* Opcional: redondea el ícono */
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.chat-icon-link:hover {
+    transform: scale(1.1); /* Agranda ligeramente el ícono */
+    opacity: 0.8; /* Ajusta la opacidad al pasar el ratón */
+}
+
 /* Responsividad */
 @media (max-width: 768px) {
     .profile-view {
@@ -111,6 +154,11 @@
 
     .profile-header p {
         padding: 15% 5% 0
+    }
+
+    .contact-profile-container .link-container {
+        top: 10px;
+        transform: translate(350%);
     }
 
 }
