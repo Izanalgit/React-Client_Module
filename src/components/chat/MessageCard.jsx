@@ -66,8 +66,9 @@ const MessageCard = ({messageObj , contactId }) => {
     },[checkLoading,checkSucces])
 
     return (
-        <div ref={msgRef}>
-            <strong>{messageObj.sender}:</strong> {messageObj.content}
+        <div ref={msgRef} className="message-card">
+            <strong>{messageObj.sender === "me" ? 'Yo' : messageObj.sender}:</strong>
+            <p>{messageObj.content}</p>
             {messageObj.isRead && messageObj.sender === "me" && <h6>visto</h6>}
         </div>
     );

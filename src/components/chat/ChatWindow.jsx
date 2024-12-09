@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useChatContext } from '../../context/ChatContext';
 import MessageCard from './MessageCard';
  
+import '../../css/Chat.css';
+
 const ChatWindow = ({ contactId , contactPublicKey}) => {
     const { 
         currentChat,
@@ -27,7 +29,7 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
     }
 
     return (
-        <div>
+        <div className='chat-container'>
             {loading && <p>Cargando mensajes...</p>}
             {error && <p>{error}</p>}
             {currentChat?.messages?.length > 0 &&
@@ -38,7 +40,9 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
                             currentChat?.messages?.length - 1 === index) && (
                                 <p onClick={() => hadleGetOlderChat(msg.date)}>... cargar más ...</p>
                             )}
-                            <MessageCard messageObj={msg} contactId={contactId}/>
+                            <div className={msg.sender === 'me' ? 'my-msg' : 'contact-msg'}>
+                                <MessageCard messageObj={msg} contactId={contactId}/>
+                            </div>
                         </li>
                     ))}
                 </ul>
