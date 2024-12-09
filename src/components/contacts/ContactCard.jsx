@@ -6,6 +6,7 @@ import ContactRemove from "./ContactRemove";
 import BlockUser from "../privacy/BlockUser";
 
 import '../../css/ContactCard.css';
+import chatImage from '../../assets/images/icons/chat.png';
 import defaultProfile from '../../assets/images/profile-default.png';
 
 const ContactCard = ({ contactId, contactImage, contactName, contactType ,countUnread}) => {
@@ -24,7 +25,10 @@ const ContactCard = ({ contactId, contactImage, contactName, contactType ,countU
             </div>
 
             {contactType === "contact" && countUnread?.count > 0 && (
-                <p className="unread-count">M {countUnread?.count}</p>
+                <div className="unread-count">
+                    <img src={chatImage} />
+                    <p>{countUnread?.count > 99 ? '99' : countUnread?.count}</p>
+                </div>
             )}
 
             <div className="contact-right">
@@ -46,7 +50,7 @@ const ContactCard = ({ contactId, contactImage, contactName, contactType ,countU
             </div>
 
             {contactType !== "request" && (
-                <p onClick={handleButtons} className="config-contact-but">-*-</p>
+                <p onClick={handleButtons} className="config-contact-but"></p>
             )}
         </div>
 
