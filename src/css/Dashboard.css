@@ -55,10 +55,11 @@
 @media (max-width: 768px) {
     .dashboard-user {
         flex-direction: column; /* Cambia a disposición vertical */
+        overflow: hidden;
     }
 
     .manage-buttons {
-        width: 100%; /* Ocupa todo el ancho */
+        width: -webkit-fill-available; /* Ocupa todo el ancho */
         order: 1; /* Mantén los botones arriba */
         flex-direction: row;
         justify-content: center; /* Centra los botones horizontalmente */
