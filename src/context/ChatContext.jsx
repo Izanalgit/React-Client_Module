@@ -139,11 +139,12 @@ const ChatProvider = ({ children }) => {
             if (errorMsg) {
                 if (errorMsg.includes("STATUS 402")) 
                     setError("Parece que no tienes premium ni tokens suficientes...");
-                if (errorMsg.includes("STATUS 422"))
+                else if (errorMsg.includes("STATUS 422"))
                     setError("Mensaje inválido...");
-
+                else
+                    setError("No se ha podido enviar ..."); 
                 return;
-            }
+            } 
 
             // Update user chat and premium on client
             await loadChat(contactId);
