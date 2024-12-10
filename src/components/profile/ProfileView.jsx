@@ -28,6 +28,10 @@ const ProfileView = ({ userName, userProfileInfo = {} }) => {
     const coverImage = coverPhoto ? coverPhoto : defaultCover;
     const profileImage = profilePicture ? profilePicture : defaultProfile;
 
+    //Covnert year to age
+    const yearActual = new Date().getFullYear();
+    const yearsAge = age != 'N/A' ? yearActual - age : age;
+
     return (
         <div className="profile-view">
             <div className="profile-header">
@@ -43,7 +47,7 @@ const ProfileView = ({ userName, userProfileInfo = {} }) => {
             </div>
             <div className="profile-info">
                 <div className="info-section">
-                    <p><strong>Edad:</strong> {age}</p>
+                    <p><strong>Edad:</strong> {yearsAge}</p>
                     <p><strong>Altura:</strong> {height}</p>
                     <p><strong>Género:</strong> {genre}</p>
                     <p><strong>Orientación:</strong> {orentation}</p>

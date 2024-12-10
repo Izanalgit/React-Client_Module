@@ -113,7 +113,7 @@ const ProfileEditForm = ({onComplete}) => {
                 await fetchAndStoreUserInfo('profile'); 
                 onComplete();
             } else if (!profileFetchLoading && profileFetchError) {
-                setErrorMessage('Error al actualizar el perfil. Intenta de nuevo.');
+                setErrorMessage(profileFetchError);
                 console.log(profileFetchError);
             }
             setIsUpdating(false);
@@ -134,7 +134,7 @@ const ProfileEditForm = ({onComplete}) => {
             <div className='profile-form-groups'>
             <div>
                 <div className="form-group">
-                    <label htmlFor="age">Edad</label>
+                    <label htmlFor="age">Año de nacimiento</label>
                     <input
                         type="number"
                         id="age"
