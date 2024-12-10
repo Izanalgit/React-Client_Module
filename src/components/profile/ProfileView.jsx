@@ -3,7 +3,7 @@ import defaultCover from '../../assets/images/cover-default.png';
 
 import '../../css/ProfileView.css';
 
-const ProfileView = ({ userName = 'Unknown', userProfileInfo = {} }) => {
+const ProfileView = ({ userName, userProfileInfo = {} }) => {
     const {
         userProfile: {
             age = 'N/A',
@@ -35,7 +35,7 @@ const ProfileView = ({ userName = 'Unknown', userProfileInfo = {} }) => {
                 <div className="profile-picture-container">
                     <img src={profileImage} alt="Profile" className="profile-picture" />
                     <div className='user-title'>
-                        <h2 className="user-name">{userName}</h2>
+                        <h2 className="user-name">{userName?userName:''}</h2>
                         <h3><strong>{special}</strong></h3>
                     </div>
                 </div>

@@ -58,9 +58,11 @@ const ContactProfile = ({contactId}) => {
         }
         {contactProfile && !contactError && !loading &&
             <div className='contact-profile-container'>
-                <div className='link-container'>
-                    <Link to={`/chat/${contactName}/${contactId}`} className="chat-icon-link" />
-                </div>
+                {contactName &&
+                    <div className='link-container'>
+                        <Link to={`/chat/${contactName}/${contactId}`} className="chat-icon-link" />
+                    </div>
+                }
                 <ProfileView userName={contactName} userProfileInfo={contactProfile}/>
             </div>
         }
