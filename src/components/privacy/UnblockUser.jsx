@@ -3,12 +3,13 @@ import { useState ,useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPOST from "../../hooks/useFetchPOST";
 
+import Notification from "../popups/Notification";
+
 const UnblockUser = ({userId}) => {
 
     const {API,authToken,fetchAndStoreUserInfo} = useApp();
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
 
     const { 
@@ -20,7 +21,6 @@ const UnblockUser = ({userId}) => {
 
     const handleSubmit = async () => {
         setErrorMessage('');
-        setSuccessMessage('');
 
         if (isUpdating) return;
 
@@ -46,7 +46,6 @@ const UnblockUser = ({userId}) => {
             if(unBlockUserData && !unBlockUserLoading){
                     console.log(unBlockUserData.message)
                     await fetchAndStoreUserInfo('blocks');
-                    setSuccessMessage("Desbloqueo de usuario gestionado con éxito.");
             }
             if (unBlockUserError && !unBlockUserLoading) {
                 console.log(unBlockUserError)
@@ -63,8 +62,13 @@ const UnblockUser = ({userId}) => {
             <button onClick={handleSubmit} disabled={isUpdating}>
                 {isUpdating ? "Desbloqueando..." : "Desbloquear"}
             </button>
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+            {errorMessage && 
+                <Notification   
+                    type={'error'} 
+                    message={errorMessage} 
+                    onClose={()=>setErrorMessage('')}
+                />
+            }
         </>
     );
 

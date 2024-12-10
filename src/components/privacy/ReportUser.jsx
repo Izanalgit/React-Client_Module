@@ -3,6 +3,7 @@ import { useState ,useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPOST from "../../hooks/useFetchPOST";
 
+import Notification from "../popups/Notification";
 import '../../css/FormReport.css'
 
 const ReportUser = ({userId}) => {
@@ -74,8 +75,20 @@ const ReportUser = ({userId}) => {
 
     return (
         <form onSubmit={handleSubmit} className="report-form">
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p>} 
+            {errorMessage && 
+                <Notification   
+                    type={'error'} 
+                    message={errorMessage} 
+                    onClose={()=>setErrorMessage('')}
+                />
+            }
+            {successMessage && 
+                <Notification   
+                    type={'success'} 
+                    message={successMessage} 
+                    onClose={()=>setSuccessMessage('')}
+                />
+            } 
             
             <label htmlFor="reportText">Reportar usuario :</label>
             <textarea
