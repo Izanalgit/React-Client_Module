@@ -37,8 +37,8 @@
 
 /* Tipos de notificaciones */
 .notification.success {
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
+    background-color: #d4edda !important;
+    border: 1px solid #c3e6cb !important;
 }
 .notification.success .close-btn,
 .notification.success p{
@@ -46,8 +46,8 @@
 }
 
 .notification.error {
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
+    background-color: #f8d7da !important;
+    border: 1px solid #f5c6cb !important;
 }
 .notification.error .close-btn,
 .notification.error p{
