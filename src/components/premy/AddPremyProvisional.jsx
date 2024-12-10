@@ -3,6 +3,9 @@ import { useState , useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchGET from "../../hooks/useFetchGET";
 
+import Loader from "../popups/Loader";
+import Notification from "../popups/Notification";
+
 const AddPremy = () => {
 
     const {API , authToken ,fetchAndStoreUserInfo} = useApp();
@@ -58,9 +61,26 @@ const AddPremy = () => {
 
     return (
         <div className="buying-content">
-            {isUpdating && <h4>PROCESANDO COMPRA</h4>}
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+            {isUpdating && 
+                <>  
+                    <Loader />
+                    <h4>PROCESANDO COMPRA</h4>
+                </>
+            }
+            {errorMessage && 
+                <Notification   
+                    type={'error'} 
+                    message={errorMessage} 
+                    onClose={()=>setErrorMessage('')}
+                />
+            }
+            {successMessage && 
+                <Notification   
+                    type={'success'} 
+                    message={successMessage} 
+                    onClose={()=>setSuccessMessage('')}
+                />
+            }
             <div className="buy-columns">
                 <div className="premy-column">
                     <button onClick={()=>handleSubmit('premy')} disabled={isUpdating}>
