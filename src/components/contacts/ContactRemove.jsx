@@ -10,7 +10,6 @@ const ContactRemove = ({contactId}) => {
     const {API,authToken,fetchAndStoreUserInfo} = useApp();
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
 
     const { 
@@ -22,7 +21,6 @@ const ContactRemove = ({contactId}) => {
 
     const handleSubmit = async () => {
         setErrorMessage('');
-        setSuccessMessage('');
 
         if (isUpdating) return;
 
@@ -47,7 +45,6 @@ const ContactRemove = ({contactId}) => {
         const requestResponse = async()=>{
             if(contactRemoveData && !contactRemoveLoading){
                 console.log(contactRemoveData.message)
-                setSuccessMessage("Contacto eliminado de la lista con éxito.");
                 await fetchAndStoreUserInfo('contacts');
             }
             if (contactRemoveError && !contactRemoveLoading) {
@@ -70,13 +67,6 @@ const ContactRemove = ({contactId}) => {
                     type={'error'} 
                     message={errorMessage} 
                     onClose={()=>setErrorMessage('')}
-                />
-            }
-            {successMessage && 
-                <Notification   
-                    type={'success'} 
-                    message={successMessage} 
-                    onClose={()=>setSuccessMessage('')}
                 />
             }
         </div>
