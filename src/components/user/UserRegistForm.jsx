@@ -3,6 +3,8 @@ import { useState , useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPOST from "../../hooks/useFetchPOST";
 
+import Notification from '../popups/Notification';
+
 const UserRegistForm = () => {
 
     const {API} = useApp();
@@ -69,7 +71,7 @@ const UserRegistForm = () => {
                 console.log("Usuario registrado: ",userRegistData.message);
                 setSuccessMessage('Usuario registrado exitosamente, comprueba tu correo electrónico');
             } else if (!userRegistLoading && userRegistError) {
-                setErrorMessage('Error al registrar el usuario. Intenta de nuevo.');
+                setErrorMessage(userRegistError);
                 console.log(userRegistError);
             }
             setIsUpdating(false);
@@ -80,8 +82,20 @@ const UserRegistForm = () => {
 
     return (
     <>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>} 
+        {errorMessage && 
+            <Notification   
+                type={'error'} 
+                message={errorMessage} 
+                onClose={()=>setErrorMessage('')}
+            />
+        }
+        {successMessage && 
+            <Notification   
+                type={'success'} 
+                message={successMessage} 
+                onClose={()=>setSuccessMessage('')}
+            />
+        } 
         {!successMessage &&
             <form onSubmit={handleSubmit} className="regist-form">
                 <div>

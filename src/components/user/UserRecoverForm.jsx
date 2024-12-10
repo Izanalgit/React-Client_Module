@@ -3,6 +3,8 @@ import { useState , useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPOST from "../../hooks/useFetchPOST";
 
+import Notification from '../popups/Notification';
+
 const UserRecoverFrom = ({userEmailLogIn}) => {
 
     const {API} = useApp();
@@ -148,8 +150,20 @@ const UserRecoverFrom = ({userEmailLogIn}) => {
     }, [userRecoverLoading, userRecoverData, userRecoverError]);
 
     return (<>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
+        {errorMessage && 
+            <Notification   
+                type={'error'} 
+                message={errorMessage} 
+                onClose={()=>setErrorMessage('')}
+            />
+        }
+        {successMessage && 
+            <Notification   
+                type={'success'} 
+                message={successMessage} 
+                onClose={()=>setSuccessMessage('')}
+            />
+        }
 
         {!recoverPhase && 
             <form onSubmit={handleForgottenSubmit} className="recover-form">

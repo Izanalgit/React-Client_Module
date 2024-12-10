@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 import useFetchDELETE from "../../hooks/useFetchDELETE";
 
+import Notification from '../popups/Notification';
 import '../../css/FormDelete.css';
 
 const UserDeleteForm = () => {
@@ -65,7 +66,6 @@ const UserDeleteForm = () => {
                 console.log("Usuario eliminado : ",userDeleteData.message);
                 setSuccessMessage('Usuario eliminado exitosamente');
                 getLoged(false);
-                navigate('/login');
             } else if (!userDeleteLoading && userDeleteError) {
                 setErrorMessage('Error al eliminar el usuario. Intenta de nuevo.');
                 console.log(userDeleteError);
@@ -78,8 +78,20 @@ const UserDeleteForm = () => {
 
     return (
     <>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>} 
+        {errorMessage && 
+            <Notification   
+                type={'error'} 
+                message={errorMessage} 
+                onClose={()=>setErrorMessage('')}
+            />
+        }
+        {successMessage && 
+            <Notification   
+                type={'success'} 
+                message={successMessage} 
+                onClose={()=>{setSuccessMessage(''); navigate('/login');}}
+            />
+        }
         {!successMessage &&
             <form onSubmit={handleSubmit} className="profile-delete-form">
                 <div>

@@ -3,6 +3,8 @@ import { useState , useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPATCH from "../../hooks/useFetchPATCH";
 
+import Notification from '../popups/Notification';
+
 const UserUpdateFrom = ({onComplete}) => {
 
     const {API,authToken,logedIn,changeName} = useApp();
@@ -72,10 +74,9 @@ const UserUpdateFrom = ({onComplete}) => {
             if (!userUpdateLoading && userUpdateData) {
                 console.log("Usuario actualizado: ",userUpdateData.message);
                 await changeName(userUpdateData.name); 
-                setSuccessMessage('Usuario actualizado exitosamente');
-                onComplete(); 
+                setSuccessMessage('Usuario actualizado exitosamente'); 
             } else if (!userUpdateLoading && userUpdateError) {
-                setErrorMessage('Error al actualizar el usuario. Intenta de nuevo.');
+                setErrorMessage(userUpdateError);
                 console.log(userUpdateError);
             }
             setIsUpdating(false);
@@ -86,8 +87,20 @@ const UserUpdateFrom = ({onComplete}) => {
 
     return (
         <form onSubmit={handleSubmit} className="profile-form">
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p>} 
+            {errorMessage && 
+                <Notification   
+                    type={'error'} 
+                    message={errorMessage} 
+                    onClose={()=>setErrorMessage('')}
+                />
+            }
+            {successMessage && 
+                <Notification   
+                    type={'success'} 
+                    message={successMessage} 
+                    onClose={()=>{setSuccessMessage(''); onComplete();}}
+                />
+            } 
             
             <div>
 
