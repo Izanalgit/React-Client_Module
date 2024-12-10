@@ -11,10 +11,6 @@
     transition: transform 0.3s ease;
 }
 
-.premy-menu:hover {
-    transform: translateY(-5px); /* Efecto de elevación */
-}
-
 /* Encabezados del menú */
 .premy-menu h3 {
     font-size: 1.5rem;
