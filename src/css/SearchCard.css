@@ -12,7 +12,6 @@
 }
 
 .search-card:hover {
-    transform: translateY(-5px); /* Levanta la carta al pasar el ratón */
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Intensifica la sombra */
 }
 
