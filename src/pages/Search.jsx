@@ -6,6 +6,7 @@ import useFetchPOST from "../hooks/useFetchPOST";
 import SearchProfilesForm from "../components/search/SearchProfilesForm";
 import SearchProfilesList from "../components/search/SearchProfilesList";
 
+import Notification from "../components/popups/Notification";
 import '../css/SearchContent.css'
 
 const Search = () => {
@@ -88,8 +89,20 @@ const Search = () => {
             {userProfile?.userProfile?.special?.length < 1
                 ? <p>Debes rellenar tu perfil primero.</p>
                 :<div className="search-content">
-                    {errorMessage && <p className="error-message">{errorMessage}</p>}
-                    {successMessage && <p className="success-message">{successMessage}</p>} 
+                    {errorMessage && 
+                        <Notification   
+                            type={'error'} 
+                            message={errorMessage} 
+                            onClose={()=>setErrorMessage('')}
+                        />
+                    }
+                    {successMessage && 
+                        <Notification   
+                            type={'success'} 
+                            message={successMessage} 
+                            onClose={()=>setSuccessMessage('')}
+                        />
+                    } 
 
                     {goSearch
                         ?<>
