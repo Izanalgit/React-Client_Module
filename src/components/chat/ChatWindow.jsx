@@ -1,10 +1,15 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useChatContext } from '../../context/ChatContext';
 import MessageCard from './MessageCard';
  
+import Loader from '../popups/Loader';
+import Notification from '../popups/Notification';
 import '../../css/Chat.css';
 
 const ChatWindow = ({ contactId , contactPublicKey}) => {
+
+    const [errorMessage, setErrorMessage] = useState(null);
+
     const { 
         currentChat,
         getContactId,
@@ -20,6 +25,11 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
         }
     }, [contactId]);
 
+    useEffect(()=>{
+        if(error)
+            setErrorMessage(error)
+    },[error])
+
     const handleSendMessage = async (message) => {
         await sendChatMessage(message);
     };
@@ -30,8 +40,14 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
 
     return (
         <div className='chat-container'>
-            {loading && <p>Cargando mensajes...</p>}
-            {error && <p>{error}</p>}
+            {loading && <Loader />}
+            {errorMessage && 
+                <Notification   
+                    type={'error'} 
+                    message={errorMessage} 
+                    onClose={()=>setErrorMessage(null)}
+                />
+            }
             {currentChat?.messages?.length > 0 &&
                 <ul>
                     {currentChat?.messages?.map((msg,index) => (
