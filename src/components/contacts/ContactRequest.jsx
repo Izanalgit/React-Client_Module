@@ -3,6 +3,8 @@ import { useState ,useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPATCH from "../../hooks/useFetchPATCH";
 
+import Notification from "../popups/Notification";
+
 const ContactRequest = ({contactId}) => {
 
     const {API,authToken,fetchAndStoreUserInfo} = useApp();
@@ -59,13 +61,27 @@ const ContactRequest = ({contactId}) => {
     },[contactRequestData, contactRequestLoading, contactRequestError])
 
     return (
-        <div className="request-button">
-            <button onClick={handleSubmit} disabled={isUpdating}>
-                {isUpdating ? "Enviando..." : "Enviar solicitud"}
-            </button>
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-        </div>
+        <>
+            <div className="request-button">
+                <button onClick={handleSubmit} disabled={isUpdating}>
+                    {isUpdating ? "Enviando..." : "Enviar solicitud"}
+                </button>
+            </div>
+            {errorMessage && 
+                <Notification   
+                    type={'error'} 
+                    message={errorMessage} 
+                    onClose={()=>setErrorMessage('')}
+                />
+            }
+            {successMessage && 
+                <Notification   
+                    type={'success'} 
+                    message={successMessage} 
+                    onClose={()=>setSuccessMessage('')}
+                />
+            }
+        </>
     );
 
 }

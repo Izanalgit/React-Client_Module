@@ -3,6 +3,8 @@ import { useState , useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPATCH from "../../hooks/useFetchPATCH";
 
+import Notification from "../popups/Notification";
+
 const ContactRemove = ({contactId}) => {
 
     const {API,authToken,fetchAndStoreUserInfo} = useApp();
@@ -63,8 +65,20 @@ const ContactRemove = ({contactId}) => {
             <button onClick={handleSubmit} disabled={isUpdating}>
                 {isUpdating ? "Eliminando..." : "Eliminar"}
             </button>
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+            {errorMessage && 
+                <Notification   
+                    type={'error'} 
+                    message={errorMessage} 
+                    onClose={()=>setErrorMessage('')}
+                />
+            }
+            {successMessage && 
+                <Notification   
+                    type={'success'} 
+                    message={successMessage} 
+                    onClose={()=>setSuccessMessage('')}
+                />
+            }
         </div>
     );
 

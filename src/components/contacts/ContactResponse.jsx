@@ -3,12 +3,13 @@ import { useState , useEffect} from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPATCH from "../../hooks/useFetchPATCH";
 
+import Notification from "../popups/Notification";
+
 const ContactResponse = ({contactId}) => {
 
     const {API,authToken,fetchAndStoreUserInfo} = useApp();
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
 
     const { 
@@ -20,7 +21,6 @@ const ContactResponse = ({contactId}) => {
 
     const handleSubmit = async (userAction) => {
         setErrorMessage('');
-        setSuccessMessage('');
 
         if (isUpdating) return;
 
@@ -51,7 +51,6 @@ const ContactResponse = ({contactId}) => {
         const requestResponse = async()=>{
             if(responseContactData && !responseContactLoading){
                 console.log(responseContactData.message)
-                setSuccessMessage("Solicitud gestionada con exito.");
                 await fetchAndStoreUserInfo('contacts');
             }
             if (responseContactError && !responseContactLoading) {
@@ -72,8 +71,13 @@ const ContactResponse = ({contactId}) => {
             <button onClick={()=>handleSubmit('decline')} disabled={isUpdating}>
                 {isUpdating ? "Denegando..." : "Denegar"}
             </button>
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+            {errorMessage && 
+                <Notification   
+                    type={'error'} 
+                    message={errorMessage} 
+                    onClose={()=>setErrorMessage('')}
+                />
+            }
         </div>
     );
 
