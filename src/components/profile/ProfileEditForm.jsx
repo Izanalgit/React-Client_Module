@@ -3,12 +3,13 @@ import React, { useState , useEffect} from 'react';
 import { useApp } from '../../context/AppContext';
 import useFetchPOST from '../../hooks/useFetchPOST';
 
+import Notification from '../popups/Notification';
+
 const ProfileEditForm = ({onComplete}) => {
 
     const { API, authToken, userProfile , fetchAndStoreUserInfo} = useApp();
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
 
     const [profileData, setProfileData] = useState({
@@ -80,7 +81,6 @@ const ProfileEditForm = ({onComplete}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrorMessage('');
-        setSuccessMessage('');
 
         if (!profileData.age || !profileData.genre || !profileData.orentation || !profileData.special) {
             setErrorMessage('Edad, género, orientación y condición especial son necesarios.');
@@ -111,7 +111,6 @@ const ProfileEditForm = ({onComplete}) => {
             if (!profileFetchLoading && profileFetchData) {
                 console.log("Perfil actualizado:", profileFetchData);
                 await fetchAndStoreUserInfo('profile'); 
-                setSuccessMessage('Perfil actualizado exitosamente');
                 onComplete();
             } else if (!profileFetchLoading && profileFetchError) {
                 setErrorMessage('Error al actualizar el perfil. Intenta de nuevo.');
@@ -125,8 +124,13 @@ const ProfileEditForm = ({onComplete}) => {
 
     return (
         <form onSubmit={handleSubmit} className="profile-form">
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p>} 
+            {errorMessage && 
+                <Notification   
+                    type={'error'} 
+                    message={errorMessage} 
+                    onClose={()=>setErrorMessage('')}
+                />
+            }
             <div className='profile-form-groups'>
             <div>
                 <div className="form-group">
