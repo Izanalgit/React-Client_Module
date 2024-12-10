@@ -117,6 +117,6 @@ h2 {
 
 @media (max-width: 768px) {
     .chat-container ul {
-        height: 65vh;
+        height: 60vh;
     }
 }
