@@ -36,6 +36,24 @@
     margin: 10px 0 20px;
 }
 
+/*Premy profile view*/
+.search-card .premy-profile-view{
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: right;
+    margin-bottom: -20px;
+}
+
+.premy-profile-view button{
+    width: 24px;        /* Ajusta el tamaño */
+    height: 24px;
+    background-image: url('./src/assets/images/icons/contact.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+/*Buttons*/
 .search-card button {
     background-color: #007bff; /* Azul principal */
     color: #fff; /* Texto blanco */
