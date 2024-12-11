@@ -121,7 +121,7 @@
     right: 10px;       /* Margen desde la derecha */
     width: 24px;        /* Ajusta el tamaño */
     height: 24px;
-    background-image: url('./src/assets/images/icons/gear.png');
+    background-image: url('/src/assets/images/icons/gear.png');
     background-size: cover;
     background-repeat: no-repeat;
     cursor: pointer;
