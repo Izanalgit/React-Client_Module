@@ -3,6 +3,7 @@ import React, { useState , useEffect} from 'react';
 import { useApp } from '../../context/AppContext';
 import useFetchPOST from '../../hooks/useFetchPOST';
 
+import errorMsgUtil from '../../utils/errorMsgUtil';
 import Notification from '../popups/Notification';
 
 const ProfileEditForm = ({onComplete}) => {
@@ -113,7 +114,7 @@ const ProfileEditForm = ({onComplete}) => {
                 await fetchAndStoreUserInfo('profile'); 
                 onComplete();
             } else if (!profileFetchLoading && profileFetchError) {
-                setErrorMessage(profileFetchError);
+                setErrorMessage(errorMsgUtil(profileFetchError));
                 console.log(profileFetchError);
             }
             setIsUpdating(false);
