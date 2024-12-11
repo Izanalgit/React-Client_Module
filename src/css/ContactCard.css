@@ -5,8 +5,7 @@
     align-items: center;
     gap: 35px; /* Espacio entre elementos */
     padding: 10px 0;
-    /* background: #f8f9fa;  */
-    border-bottom: 2px solid #e9ecef; /* Línea divisoria */
+    border-bottom: 2px solid var(--contact-list-selector-border); /* Línea divisoria */
     font-family: 'Arial', sans-serif;
 }
 
@@ -14,7 +13,7 @@
 .title-selector h3 {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #a6abaf;
+    color: var(--contact-list-selector-h3-c);
     cursor: pointer;
     margin: 0;
     transition: color 0.3s, transform 0.2s; /* Efectos al pasar el ratón */
@@ -22,20 +21,20 @@
 
 /* Hover para títulos */
 .title-selector h3:hover {
-    color: #007bff; /* Azul claro */
+    color: var(--contact-list-selector-h3-c-hover); /* Azul claro */
     transform: scale(1.1); /* Ligero aumento de tamaño */
 }
 
 /* Separador (barra vertical) */
 .title-selector h3:nth-child(2) {
-    color: #adb5bd; /* Gris claro */
+    color: var(--contact-list-selector-bar);
     cursor: default; /* Sin interacción */
 }
 
 /* Título activo */
 .title-selector h3.active {
-    color: #007bff; /* Azul para el activo */
-    border-bottom: 2px solid #007bff; /* Indicador visual */
+    color: var(--contact-list-selector-h3-c-hover); /* Azul para el activo */
+    border-bottom: 2px solid var(--contact-list-selector-h3-c-hover); /* Indicador visual */
 }
 
 
@@ -43,10 +42,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between; /* Nombre y botones se separan a izquierda y derecha */
-    background: linear-gradient(135deg, #ffffff, #f7f7f7);
-    border: 1px solid #dcdcdc;
+    background: var(--global-card-background);
+    border: 1px solid var(--global-card-border);
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--global-shadow-color);
     padding: 10px 40px; /* Más espacio horizontal para la separación */
     max-width: 500px;
     margin: 10px auto;
@@ -57,7 +56,7 @@
 }
 
 .contact-card:hover {
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 8px var(--global-shadow-color-focus);
 }
 
 /* Imagen del perfil */
@@ -66,7 +65,7 @@
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #adb5bd;
+    border: 2px solid var(--contact-list-selector-bar);
 }
 
 /* Contenedor de la izquierda (imagen + nombre) */
@@ -80,7 +79,7 @@
 .contact-left h4 {
     margin: 0;
     font-size: 1.2rem;
-    color: #343a40;
+    color: var(--global-card-h4-c);
 }
 
 /* Contador de mensajes sin leer */
@@ -140,8 +139,8 @@
 }
 
 .contact-buttons button {
-    background-color: #6c757d;
-    color: #fff;
+    background-color:var(--contact-list-button-bg);
+    color:var(--contact-list-button-c);
     border: none;
     border-radius: 5px;
     padding: 6px 10px;
@@ -151,7 +150,7 @@
 }
 
 .contact-buttons button:hover {
-    background-color: #495057;
+    background-color:var(--contact-list-button-bg-hover);
 }
 
 .response-button{
@@ -168,19 +167,19 @@
 }
 
 .contact-links a {
-    color: #007bff;
+    color: var(--contact-list-a-c);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s;
-    border: 1px solid blue;
+    border: 1px solid var(--contact-list-a-border-c);
     border-radius: 5px;
     padding: 1%;
-    background-color: aliceblue;
+    background-color:var(--contact-list-a-bg);
 }
 
 .contact-links a:hover {
-    color: aliceblue;
-    background-color: #0056b3;
+    color: var(--contact-list-a-c-hover);
+    background-color: var(--contact-list-a-bg-hover);
 }
 
 

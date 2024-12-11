@@ -2,17 +2,18 @@
     max-width: 400px;
     margin: 0 auto; /* Centra el formulario */
     padding: 1.5rem;
-    background-color: #1e293b; /* Fondo oscuro */
+    background-color:var(--global-form-background-color);
     border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    color: #ffffff; /* Texto blanco */
+    box-shadow: 0 4px 6px var(--global-shadow-color);
+    color: var(--global-form-color);
     font-family: Arial, sans-serif;
 }
 
 .image-form h3 {
-    margin-bottom: 1rem;
+    margin: 1rem;
+    margin-top: 0px;
     text-align: center;
-    color: #60a5fa; /* Azul claro */
+    color: var(--global-form-h3-c);
     font-size: 1.5rem;
 }
 
@@ -25,16 +26,16 @@
 
 .image-form input[type="radio"] {
     margin-right: 0.5rem;
-    accent-color: #60a5fa; /* Personaliza el color del radio */
+    accent-color:var(--global-form-input-radio);
 }
 
 .image-form input[type="file"] {
     display: block;
     margin: 1rem 0;
     padding: 0.5rem;
-    background-color: #ffffff; /* Fondo blanco */
-    color: #1e293b; /* Texto oscuro */
-    border: 1px solid #ccc;
+    background-color:var(--global-form-input-bg);
+    color:var(--global-form-input-c);
+    border: 1px solid var(--global-form-input-border-c);
     border-radius: 4px;
     font-size: 0.9rem;
     cursor: pointer;
@@ -45,28 +46,19 @@
     display: block;
     width: 100%;
     padding: 0.7rem;
-    background-color: #60a5fa; /* Azul claro */
-    border: none;
     border-radius: 4px;
-    color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
-    cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.image-form button:disabled {
-    background-color: #94a3b8; /* Azul grisáceo */
-    cursor: not-allowed;
-}
-
 .image-form button:hover:enabled {
-    background-color: #3b82f6; /* Azul más oscuro */
+    background-color:var(--global-button-background-enabled);
 }
 
 .image-form p {
     margin-top: 1rem;
-    color: #f87171; /* Rojo para errores */
+    color:var(--image-form-p-c);
     font-size: 0.9rem;
     text-align: center;
 }

@@ -1,8 +1,8 @@
 /* General */
 .profile-view {
-    background-color: #ffffff;
+    background-color: var(--profile-view-bg);
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px var(--global-shadow-color);
     font-family: 'Arial', sans-serif;
     overflow: hidden;
     width: fit-content;
@@ -12,7 +12,7 @@
 /* Header del Perfil */
 .profile-header {
     position: relative;
-    background-color: #f4f4f4;
+    background-color: var(--profile-header-bg);
 }
 
 /* Imagen de Portada */
@@ -39,9 +39,9 @@
     height: 100px;
     border-radius: 50%;
     object-fit: contain;
-    border: 3px solid #ffffff;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
+    border: 3px solid var(--profile-pic-border);
+    box-shadow: 0 4px 10px var(--global-shadow-color);
+    background-color: var(--profile-pic-bg);
 }
 
 /* Título del Usuario */
@@ -57,19 +57,19 @@
 .user-name {
     font-size: 18px;
     font-weight: bold;
-    color: #333;
+    color: var(--profile-name-c);
 }
 
 .user-title h3 {
     font-size: 16px;
-    color: #666;
+    color: var(--profile-title-c);
 }
 
 /* Biografía */
 .profile-header p {
     font-size: 14px;
     line-height: 1.6;
-    color: #555;
+    color: var(--profile-header-c);
     padding-top: 10%;
 }
 
@@ -86,11 +86,11 @@
 .info-section p {
     font-size: 14px;
     line-height: 1.6;
-    color: #555;
+    color: var(--profile-info-c);
 }
 
 .info-section p strong {
-    color: #333;
+    color: var(--profile-info-strong-c);
 }
 
 /*Contenedor de contacto*/
@@ -109,8 +109,8 @@
     transform: translate(400%);
     width: 40px; 
     height: 40px; 
-    background-color: #000; 
-    border: 1.5px solid whitesmoke;
+    background-color: var(--profile-link-container-bg); 
+    border: 1.5px solid var(--profile-link-container-border);
     border-radius: 50%; 
     display: flex; 
     justify-content: center; 

@@ -6,8 +6,9 @@ footer{
     justify-content: space-around;
     z-index: 1000; 
     width: 100%;
-    background-color: #1e293b; 
-}
+    background-color: var(--footer-background-color); 
+    color: var(--footer-text-color);
+}   
 
 footer p{
     margin: .5%;

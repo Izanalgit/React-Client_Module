@@ -4,27 +4,26 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff;
+    background: var(--block-list-background-color);
     border-radius: 15px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px var(--global-shadow-color);
     margin: 20px auto;
     max-width: 400px;
 }
 
 .block-list h4 {
     font-size: 1.5rem;
-    color: #333;
+    color: var(--block-list-h4-c);
     margin: 15px;
     text-align: center;
     font-weight: bold;
 }
 
 .block-list p {
-    color: #666;
+    color: var(--block-list-p-c);
     font-size: 1rem;
     text-align: center;
 }
-
 
 
 /*Targetas*/
@@ -34,48 +33,44 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: #f9f9f9;
-    border: 2px solid #e0e0e0;
+    background: var(--global-card-background);
+    border: 2px solid var(--global-card-border);
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--global-shadow-color);
     transition: transform 0.2s, box-shadow 0.2s;
     width: -webkit-fill-available;
 }
 
 .block-card:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 12px var(--global-shadow-color-focus);
 }
 
 .block-card h4 {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #333;
+    color: var(--global-card-h4-c);
     margin-bottom: 10px;
 }
 
 .block-card button {
-    background-color: #007bff;
-    color: white;
     border: none;
     border-radius: 5px;
     padding: 8px 15px;
     font-size: 0.9rem;
-    cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s;
     margin-top: 10px;
 }
 
 .block-card button:hover {
-    background-color: #0056b3;
     transform: translateY(-2px);
 }
 
 .block-card .report-button {
-    background-color: #dc3545; /* Rojo para reportar */
+    background-color: var(--block-list-report-button-bg);
 }
 
 .block-card .report-button:hover {
-    background-color: #c82333;
+    background-color: var(--block-list-report-button-bg-hover);
 }
 
 .blocked-actions{

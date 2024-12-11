@@ -2,28 +2,19 @@
     max-width: 600px;
     margin: .5rem auto;
     padding: 1.5rem;
-    background-color: #1e293b; 
-    border: 1px solid  #e2e8f0;
+    background-color:var(--global-form-background-color); 
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    box-shadow: 0 4px 8px var(--global-shadow-color);
     font-family: Arial, sans-serif;
-    color: #f8fafc; /* Texto oscuro */
-}
-
-.search-form h2 {
-    margin-bottom: 1rem;
-    color: #f8fafc;
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: bold;
+    color:var(--global-form-color);
 }
 
 .search-form h3 {
-    margin: 1.5rem 0 1rem;
-    color: #e2e8f0;
+    margin: .7rem 0 1rem;
+    color:var(--search-form-h3);
     font-size: 1.4rem;
     font-weight: bold;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--search-form-h3);
     padding-bottom: 0.5rem;
 }
 
@@ -36,25 +27,25 @@
 .search-form label {
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: #f8fafc; 
+    color: var(--search-form-label-c); 
     font-size: 0.9rem;
 }
 
 .search-form input,
 .search-form select {
     padding: 0.8rem;
-    border: 1px solid #cbd5e1; /* Gris claro */
+    border: 1px solid var(--search-form-input-border); 
     border-radius: 5px;
-    background-color: #20385f;
+    background-color: var(--search-form-input-bg);
     font-size: 1rem;
-    color: #ffffff;
+    color: var(--search-form-input-c);
     outline: none;
     transition: border-color 0.3s;
 }
 
 .search-form input:focus,
 .search-form select:focus {
-    border-color: #3b82f6; /* Azul claro */
+    border-color: var(--search-form-input-focus-border); 
 }
 
 .search-form input[type="checkbox"] {
@@ -65,10 +56,8 @@
 .search-form button[type="submit"] {
     width: 100%;
     padding: 0.8rem;
-    background-color: #3b82f6; /* Azul */
     border: none;
     border-radius: 5px;
-    color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -76,12 +65,10 @@
 }
 
 .search-form button[type="submit"]:hover {
-    background-color: #2563eb; /* Azul más oscuro */
     transform: scale(1.02); /* Ligero aumento */
 }
 
 .search-form button[type="submit"]:active {
-    background-color: #1d4ed8; /* Azul aún más oscuro */
     transform: scale(0.98);
 }
 

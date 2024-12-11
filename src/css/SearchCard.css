@@ -1,24 +1,24 @@
 .search-card {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Fondo degradado suave */
-    border: 1px solid #ced4da; /* Borde sutil */
+    background: var(--global-card-background);
+    border: 1px solid var(--global-card-border); /* Borde sutil */
     border-radius: 12px; /* Esquinas redondeadas */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    box-shadow: 0 4px 6px var(--global-shadow-color);
     padding: 20px;
     max-width: 300px;
-    margin: 10px auto; /* Centramos horizontalmente */
-    text-align: center; /* Centramos el texto */
+    margin: 10px auto; 
+    text-align: center; 
     font-family: 'Arial', sans-serif;
     transition: transform 0.3s, box-shadow 0.3s; /* Animaciones suaves */
 }
 
 .search-card:hover {
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Intensifica la sombra */
+    box-shadow: 0 8px 12px var(--global-shadow-color-focus); /* Intensifica la sombra */
 }
 
 .search-card h4 {
     margin: 10px 0;
     font-size: 1.2rem;
-    color: #343a40; /* Tono oscuro elegante */
+    color: var(--global-card-h4-c);
 }
 
 .search-card img {
@@ -27,12 +27,12 @@
     border-radius: 5%; /* Imagen circular */
     object-fit: cover; /* Recorte dentro del círculo */
     margin: 10px 0;
-    border: 2px solid #6c757d; /* Pequeño borde alrededor */
+    border: 2px solid var(--search-card-p-c); 
 }
 
 .search-card p {
     font-size: 0.9rem;
-    color: #6c757d; /* Texto gris sutil */
+    color: var(--search-card-p-c);
     margin: 10px 0 20px;
 }
 
@@ -55,16 +55,10 @@
 
 /*Buttons*/
 .search-card button {
-    background-color: #007bff; /* Azul principal */
-    color: #fff; /* Texto blanco */
     border: none;
     border-radius: 5px;
     padding: 8px 15px;
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-.search-card button:hover {
-    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
 }

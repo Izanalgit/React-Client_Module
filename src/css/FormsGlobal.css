@@ -6,7 +6,7 @@
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #94a3b8; /* Gris claro */
+    color: var(--global-form-label-c);
     font-size: 0.9rem;
 }
 
@@ -14,10 +14,10 @@
     width: -webkit-fill-available;
     padding: 0.8rem;
     margin-top: 0.3rem;
-    border: 1px solid #94a3b8; /* Borde gris claro */
+    border: 1px solid var(--global-form-input-border-c);
     border-radius: 5px;
-    background-color: #f1f5f9; /* Fondo gris claro */
-    color: #1e293b; /* Texto oscuro */
+    background-color: var(--global-form-input-bg);
+    color: var(--global-form-input-c);
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s;
@@ -29,6 +29,8 @@
 }
 
 
-.form-group input:focus {
-    border-color: #60a5fa; /* Azul claro */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--global-form-input-border-c-focus);
 }

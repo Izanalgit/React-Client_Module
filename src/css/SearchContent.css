@@ -1,9 +1,9 @@
 .search-content .filter-button{
     width: 100%;
     max-width: 300px;
-    background-color: rgb(66, 173, 192);
+    background-color: var(--search-filter-button-bg);
 }
 
 .search-content .filter-button:hover{
-    background-color: rgb(47, 34, 165);
+    background-color: var(--search-filter-button-bg-hover);
 }

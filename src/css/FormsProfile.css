@@ -1,8 +1,8 @@
 /* Formulario */
 .profile-form {
-    background-color: #1e293b; /* Fondo oscuro */
-    color: #ffffff; /* Texto blanco */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color:var(--global-form-background-color);
+    color:var(--global-form-color);
+    box-shadow: 0 4px 8px var(--global-shadow-color);
     padding: 20px;
     max-width: 800px;
 }
@@ -21,7 +21,6 @@
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
 }
 
 .form-group input,
@@ -29,7 +28,7 @@
 .form-group textarea {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--global-form-input-border-c);
     border-radius: 5px;
     font-size: 14px;
 }
@@ -40,28 +39,12 @@
 }
 
 button {
-    background-color: #007bff;
-    color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
-    cursor: pointer;
     font-size: 16px;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-.error-message {
-    color: #ff4d4f;
-    font-weight: bold;
-}
-
-.success-message {
-    color: #28a745;
-    font-weight: bold;
-}
 
 @media (max-width: 768px) {
 

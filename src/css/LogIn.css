@@ -2,83 +2,58 @@
     max-width: 360px; /* Ancho máximo del formulario */
     margin: 1rem auto; /* Centra en la página */
     padding: 1.5rem;
-    background-color: #1e293b; /* Fondo oscuro */
-    color: #ffffff; /* Texto blanco */
+    background-color: var(--global-form-background-color);
+    color: var(--global-form-color); 
     border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+    box-shadow: 0 4px 8px var(--global-shadow-color); /* Sombra elegante */
     text-align: center;
     font-family: Arial, sans-serif;
 }
 
 .login-form h2 {
     margin-bottom: 1rem;
-    color: #60a5fa; /* Azul claro */
+    color: var(--global-form-h3-c);
     font-size: 1.8rem;
-}
-
-.login-form p {
-    margin: 0.5rem 0;
-    font-size: 0.9rem;
-    cursor: pointer;
-    color: #94a3b8; /* Gris claro */
-    text-decoration: underline;
-    transition: color 0.3s;
-}
-
-.login-form p:hover {
-    color: #60a5fa; /* Cambia a azul claro */
 }
 
 .login-form input {
     width: -webkit-fill-available;
     padding: 0.8rem;
     margin: 0.7rem 0;
-    border: 1px solid #94a3b8; /* Borde gris claro */
+    border: 1px solid var(--global-form-input-border-c);
     border-radius: 5px; /* Bordes suaves */
-    background-color: #f1f5f9; /* Fondo gris claro */
-    color: #1e293b; /* Texto oscuro */
+    background-color: var(--global-form-input-bg);
+    color: var(--global-form-input-c);
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s;
 }
 
 .login-form input:focus {
-    border-color: #60a5fa; /* Borde azul claro */
+    border-color: var(--global-form-input-border-c-focus);
 }
 
 .login-form button {
     width: 100%;
     padding: 0.8rem;
     margin-top: 0.7rem;
-    background-color: #60a5fa; /* Azul claro */
     border: none;
     border-radius: 5px;
-    color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.login-form button:hover {
-    background-color: #3b82f6; /* Azul más oscuro */
-}
-
-.login-form button:nth-child(2) {
-    background-color: #1e293b; /* Fondo oscuro */
-    color: #60a5fa; /* Texto azul claro */
-    border: 1px solid #60a5fa; /* Borde azul claro */
-}
-
-.login-form button:nth-child(2):hover {
-    background-color: #3b82f6; /* Azul más oscuro */
-    color: #ffffff;
-}
-
+/*Recover user*/
 .login-form p:last-child {
+    margin: 0.5rem 0;
     margin-top: 1rem;
     font-size: 1rem;
     color: #f87171; /* Rojo */
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.3s;
 }
 
 .login-form p:last-child:hover {

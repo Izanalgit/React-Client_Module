@@ -15,17 +15,15 @@
     display: flex;
     flex-direction: column; /* Organización vertical */
     gap: 10px; /* Espaciado entre los botones */
-    /* background: #f8f9fa; */
     padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 180px; /* Ancho fijo para los botones */
 }
 
 /* Estilo de los botones */
 .manage-buttons button {
-    background-color: #6c757d;
-    color: #fff;
+    background-color: var(--dashboard-button-bg);
+    color: var(--dashboard-button-c);
     border: none;
     border-radius: 5px;
     padding: 10px;
@@ -35,20 +33,18 @@
 }
 
 .manage-buttons button:hover {
-    background-color: #495057;
+    background-color: var(--dashboard-button-bg-hoover);
     transform: translateY(-2px); /* Efecto visual */
 }
 
 .manage-buttons button:disabled {
-    background-color: #adb5bd;
+    background-color: var(--dashboard-button-bg-disabled);
     cursor: not-allowed;
 }
 
 /* Contenido principal */
 .dashboard-content {
-    /* background: #ffffff; */
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 

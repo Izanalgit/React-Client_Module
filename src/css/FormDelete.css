@@ -2,33 +2,26 @@
     max-width: 400px;
     margin: 2rem auto;
     padding: 1.5rem;
-    background-color: #1e293b; /* Fondo oscuro */
-    color: #ffffff; /* Texto blanco */
+    background-color:var(--global-form-background-color);
+    color:var(--global-form-color);
     border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+    box-shadow: 0 4px 8px var(--global-shadow-color); /* Sombra elegante */
     font-family: Arial, sans-serif;
     text-align: center;
 }
 
-.profile-delete-form h3 {
-    margin-bottom: 1.5rem;
-    color: #f87171; /* Rojo claro */
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.form-group input:focus {
-    border-color: #f87171; /* Rojo claro */
+.profile-delete-form .form-group input:focus {
+    border-color:var(--delete-form-input-border-focus) !important;
 }
 
 .profile-delete-form button[type="submit"] {
     width: 100%;
     padding: 0.8rem;
     margin-top: 1.5rem;
-    background-color: #ef4444; /* Rojo intenso */
+    background-color:var(--delete-form-button-bg);
     border: none;
     border-radius: 5px;
-    color: #ffffff;
+    color: var(--delete-form-button-c);
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
@@ -36,22 +29,17 @@
 }
 
 .profile-delete-form button[type="submit"]:hover {
-    background-color: #dc2626; /* Rojo más oscuro */
+    background-color:var(--delete-form-button-bg-hover); 
     transform: scale(1.02); /* Ligero aumento para dar énfasis */
 }
 
 .profile-delete-form button[type="submit"]:active {
-    background-color: #b91c1c; /* Rojo aún más oscuro */
+    background-color:var(--delete-form-button-bg-active);
     transform: scale(0.98); /* Efecto de clic */
-}
-
-.profile-delete-form button:disabled {
-    background-color: #94a3b8; /* Gris deshabilitado */
-    cursor: not-allowed;
 }
 
 .profile-delete-form p {
     margin-top: 1rem;
-    color: #94a3b8; /* Gris claro */
+    color:var(--delete-form-p-c);
     font-size: 0.9rem;
 }
