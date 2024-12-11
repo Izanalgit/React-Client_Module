@@ -3,6 +3,7 @@ import { useState , useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPOST from "../../hooks/useFetchPOST";
 
+import Loader from "../popups/Loader";
 import Notification from '../popups/Notification';
 
 const UserRecoverFrom = ({userEmailLogIn}) => {
@@ -161,7 +162,11 @@ const UserRecoverFrom = ({userEmailLogIn}) => {
             <Notification   
                 type={'success'} 
                 message={successMessage} 
-                onClose={()=>setSuccessMessage('')}
+                onClose={()=>{
+                    userRecoverData
+                        ? window.location.reload()
+                        : setSuccessMessage('');
+                }}
             />
         }
 
@@ -173,13 +178,14 @@ const UserRecoverFrom = ({userEmailLogIn}) => {
                         type="email"
                         id="email"
                         name="email"
-                        value={userEmailLogIn}
+                        defaultValue={userEmailLogIn}
                         onChange={handleChange}
                     />
                 </div>
 
-                {!userForgottenLoading &&
-                    <button type="submit">Generar Clave</button>
+                {userForgottenLoading
+                    ? <Loader />
+                    : <button type="submit">Generar Clave</button>
                 }
             </form>
         }
@@ -194,6 +200,8 @@ const UserRecoverFrom = ({userEmailLogIn}) => {
                         name="recoverKey"
                         placeholder="XXXXXXXXXXXX"
                         onChange={handleChange}
+                        readOnly
+                        onFocus={(e) => e.target.removeAttribute('readonly')}
                     />
                 </div>
                 <div className="form-group">
@@ -215,8 +223,9 @@ const UserRecoverFrom = ({userEmailLogIn}) => {
                     />
                 </div>
 
-                {!userRecoverLoading &&
-                    <button type="submit">Recuperar cuenta</button>
+                {userRecoverLoading
+                    ? <Loader />
+                    : <button type="submit">Recuperar cuenta</button>
                 }
             </form>
         }

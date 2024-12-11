@@ -3,6 +3,7 @@ import { useState , useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPATCH from "../../hooks/useFetchPATCH";
 
+import errorMsgUtil from "../../utils/errorMsgUtil";
 import Notification from '../popups/Notification';
 
 const UserUpdateFrom = ({onComplete}) => {
@@ -76,7 +77,7 @@ const UserUpdateFrom = ({onComplete}) => {
                 await changeName(userUpdateData.name); 
                 setSuccessMessage('Usuario actualizado exitosamente'); 
             } else if (!userUpdateLoading && userUpdateError) {
-                setErrorMessage(userUpdateError);
+                setErrorMessage(errorMsgUtil(userUpdateError));
                 console.log(userUpdateError);
             }
             setIsUpdating(false);

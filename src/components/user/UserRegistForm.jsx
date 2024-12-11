@@ -3,6 +3,7 @@ import { useState , useEffect } from "react";
 import { useApp } from "../../context/AppContext";
 import useFetchPOST from "../../hooks/useFetchPOST";
 
+import errorMsgUtil from "../../utils/errorMsgUtil";
 import Notification from '../popups/Notification';
 
 const UserRegistForm = () => {
@@ -71,7 +72,7 @@ const UserRegistForm = () => {
                 console.log("Usuario registrado: ",userRegistData.message);
                 setSuccessMessage('Usuario registrado exitosamente, comprueba tu correo electrónico');
             } else if (!userRegistLoading && userRegistError) {
-                setErrorMessage(userRegistError);
+                setErrorMessage(errorMsgUtil(userRegistError));
                 console.log(userRegistError);
             }
             setIsUpdating(false);
@@ -93,7 +94,7 @@ const UserRegistForm = () => {
             <Notification   
                 type={'success'} 
                 message={successMessage} 
-                onClose={()=>setSuccessMessage('')}
+                onClose={()=>window.location.reload()}
             />
         } 
         {!successMessage &&
