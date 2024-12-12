@@ -8,6 +8,137 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  overflow-y: scroll;
+  scrollbar-width: none;
+
+  /*Body*/
+  --body-background-color: #fff0f5; /* Lavender Blush */
+  --body-text-color: #4b2c40; /* Darker muted pink */
+
+/*NavBar*/
+  --navbar-background-color: #ffccd5; /* Pinkish background */
+  --navbar-text-color: #4b2c40; /* Darker muted pink */
+  --navbar-span-bg: #ffffff;
+  --navbar-a-c: #d63384; /* Vivid pink */
+  --navbar-a-c-hover: #c2185b; /* Deep rose */
+  --navbar-a-c-active: #ff69b4; /* Hot pink */
+
+/*Footer*/
+  --footer-background-color: #ffe4e6; /* Soft pink */
+  --footer-text-color: #5d3a4b; /* Muted pinkish brown */
+
+/*Global Forms*/
+  --global-form-color: #4b2c40;
+  --global-form-background-color: #ffe4e6;
+  --global-form-label-c: #5d3a4b;
+  --global-form-input-border-c: #f4a6c2; /* Light rose */
+  --global-form-input-bg: #ffffff;
+  --global-form-input-c: #4b2c40;
+  --global-form-input-radio: #ff69b4;
+  --global-form-input-border-c-focus: #d63384;
+  --global-form-h3-c: #c2185b;
+
+/*Global Cards*/
+  --global-card-color: #4b2c40;
+  --global-card-background: linear-gradient(135deg, #ffe4e6, #ffccd5);
+  --global-card-border: #f4a6c2;
+  --global-card-h4-c: #4b2c40;
+
+/*Global Buttons*/
+  --global-button-background: #d63384;
+  --global-button-color: #ffffff;
+  --global-button-background-hover: #c2185b;
+  --global-button-background-enabled: #ff69b4;
+  --global-button-background-disabled: #f4a6c2;
+  --global-button-border-hover: #c2185b;
+
+/*Global a*/
+  --global-a-color: #d63384;
+  --global-a-color-hover: #c2185b;
+
+/*Global Shadow*/
+  --global-shadow-color: rgba(0, 0, 0, 0.1);
+  --global-shadow-color-focus: rgba(214, 51, 132, 0.3);
+
+/*User Forms*/
+/*Recover*/
+  --recover-form-button-bg: #d63384;
+  --recover-form-button-c: #ffffff;
+  --recover-form-button-bg-hover: #c2185b;
+  --recover-form-button-bg-disabled: #f4a6c2;
+  --recover-form-p-c: #5d3a4b;
+  --recover-form-h3-c: #c2185b;
+/*Images*/
+  --image-form-p-c: #d63384;
+/*Delete*/
+  --delete-form-input-border-focus: #ff0033;
+  --delete-form-button-bg: #ff0033; /* Bright red for delete */
+  --delete-form-button-c: #ffffff;
+  --delete-form-button-bg-hover: #cc0033;
+  --delete-form-button-bg-active: #990033;
+  --delete-form-p-c: #5d3a4b;
+
+/*Search Form*/
+  --search-form-h3: #4b2c40;
+  --search-form-label-c: #5d3a4b;
+  --search-form-input-bg: #ffe4e6;
+  --search-form-input-c: #4b2c40;
+  --search-form-input-border: #d63384;
+  --search-form-input-focus-border: #c2185b;
+  --search-card-p-c: #5d3a4b;
+  --search-filter-button-bg: #d63384;
+  --search-filter-button-bg-hover: #c2185b;
+
+/*Block List*/
+  --block-list-background-color: #ffe4e6;
+  --block-list-h4-c: #4b2c40;
+  --block-list-p-c: #5d3a4b;
+  --block-list-report-button-bg: #ff0033;
+  --block-list-report-button-bg-hover: #cc0033;
+
+/*Contact List*/
+  --contact-list-selector-border: #f4a6c2;
+  --contact-list-selector-h3-c: #d63384;
+  --contact-list-selector-h3-c-hover: #c2185b;
+  --contact-list-selector-bar: #ffccd5;
+  --contact-list-button-bg: #c2185b;
+  --contact-list-button-c: #fff;
+  --contact-list-button-bg-hover: #a01248;
+  --contact-list-a-bg: #ffe4e6;
+  --contact-list-a-c: #d63384;
+  --contact-list-a-border-c: #c2185b;
+  --contact-list-a-bg-hover: #c2185b;
+  --contact-list-a-c-hover: #ffffff;
+
+/*Home*/
+  --home-hero-background: linear-gradient(135deg, #fce4ec, #f8bbd0); 
+
+/*Dashboard*/
+  --dashboard-button-bg: #c2185b;
+  --dashboard-button-c: #ffffff;
+  --dashboard-button-bg-hover: #a01248;
+  --dashboard-button-bg-disabled: #f4a6c2;
+
+/*Profile*/
+  --profile-view-bg: #fff0f5;
+  --profile-header-bg: #ffe4e6;
+  --profile-pic-border: #ffffff;
+  --profile-pic-bg: #ffffff;
+  --profile-name-c: #4b2c40;
+  --profile-title-c: #5d3a4b;
+  --profile-header-c: #5d3a4b;
+  --profile-info-c: #4b2c40;
+  --profile-info-strong-c: #4b2c40;
+  --profile-link-container-bg: #836f70;
+  --profile-link-container-border: #d63384;
+
+/*Chat*/
+  --chat-container-border: #f4a6c2;
+  --chat-container-bg: #ffe4e6;
+  --chat-load-older-c: #5d3a4b;
+
+}
+[data-theme="dark"] {
   /*Body*/
   --body-background-color: #242424;
   --body-text-color: rgba(255, 255, 255, 0.87);
@@ -107,6 +238,9 @@
   --contact-list-a-bg-hover:#0056b3;
   --contact-list-a-c-hover:aliceblue;
 
+  /*Home*/
+  --home-hero-background: linear-gradient(135deg, #4f4d64, #4d5658); 
+
   /*Dashboard*/
   --dashboard-button-bg:#6c757d;
   --dashboard-button-c:#fff;
@@ -130,11 +264,6 @@
   --chat-container-border:#ccc;
   --chat-container-bg:#292828;
   --chat-load-older-c:#555;
-
-}
-[data-theme="dark"] {
-  --body-background-color: rgba(255, 255, 255, 0.87);
-  --body-text-color: #242424;
 }
 
 
