@@ -91,7 +91,7 @@ const AddPremy = () => {
                             Mensajes ilimitados
                         </li>
                         <li>
-                            Más cosas de premi
+                            Funciones exclusivas
                         </li>
                     </ul>
                     <h5>10 € / 30 días</h5>
@@ -105,7 +105,7 @@ const AddPremy = () => {
                             1 Mensaje por 1 Token
                         </li>
                         <li>
-                            Más cosas de los tokens
+                            Gastalos cuando quieras
                         </li>
                     </ul>
                     <h5>1 € / 2 tokens</h5>
