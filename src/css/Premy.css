@@ -6,7 +6,6 @@
     padding: 20px;
     text-align: center;
     font-family: 'Arial', sans-serif;
-    margin: 20px auto;
     max-width: 400px;
     transition: transform 0.3s ease;
 }
@@ -69,18 +68,10 @@
 
 /*Columnas */
 .buying-content {
-    background-color: #f8f9fa;
     border-radius: 10px;
     text-align: center;
     font-family: 'Arial', sans-serif;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-}
-
-.buying-content h4 {
-    font-size: 1.2rem;
-    color: #007bff;
-    margin-bottom: 15px;
 }
 
 .buying-content p {
@@ -165,7 +156,7 @@
 
 .premy-menu button.buying {
     background-color: #dc3545; /* Rojo para estado de compra */
-    transform: scale(1.05); /* Destacar el botón en compra */
+    transform: scale(.8);
 }
 
 
