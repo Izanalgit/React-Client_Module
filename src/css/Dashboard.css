@@ -33,7 +33,7 @@
 }
 
 .manage-buttons button:hover {
-    background-color: var(--dashboard-button-bg-hoover);
+    background-color: var(--dashboard-button-bg-hover);
     transform: translateY(-2px); /* Efecto visual */
 }
 
