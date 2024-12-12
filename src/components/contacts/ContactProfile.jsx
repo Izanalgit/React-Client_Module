@@ -5,6 +5,7 @@ import { useApp } from '../../context/AppContext';
 import useFetchGET from '../../hooks/useFetchGET';
 
 import ProfileView from '../profile/ProfileView';
+import ContactRequest from './ContactRequest';
 
 import Loader from '../popups/Loader';
 import Notification from '../popups/Notification';
@@ -57,6 +58,7 @@ const ContactProfile = ({contactId}) => {
             />
         }
         {contactProfile && !contactError && !loading &&
+        <>
             <div className='contact-profile-container'>
                 {contactName &&
                     <div className='link-container'>
@@ -64,8 +66,12 @@ const ContactProfile = ({contactId}) => {
                     </div>
                 }
                 <ProfileView userName={contactName} userProfileInfo={contactProfile}/>
+
             </div>
-        }
+            {!contactName &&
+                <ContactRequest contactId={contactId} />
+            }
+        </>}
     </>);
 };
 
