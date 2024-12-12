@@ -170,6 +170,7 @@ useEffect(() => {
     const haveUserAuth = localStorage.getItem("authToken");
     const haveUseKey = localStorage.getItem("userKey");
     const isUserLogedIn = localStorage.getItem("logedIn");
+    const savedTheme = localStorage.getItem("theme");
     if (isUserLogedIn && haveUserAuth && haveUseKey) {
         setLogedIn(isUserLogedIn);
         setAuthToken(haveUserAuth);
@@ -180,6 +181,7 @@ useEffect(() => {
         setUserBlocks(JSON.parse(localStorage.getItem("userBlocks")));
         setUserPremy(JSON.parse(localStorage.getItem("userPremy")));
     }
+    if(savedTheme) setTheme(savedTheme);
 }, []);
 
 // Fetch User Info when login
@@ -205,6 +207,7 @@ useEffect(() => {
 
 // Theme select
 const toggleTheme = () => {
+    localStorage.setItem("theme", (theme === "light" ? "dark" : "light"));
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
 };
 
