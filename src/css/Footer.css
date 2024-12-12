@@ -13,3 +13,8 @@ footer{
 footer p{
     margin: .5%;
 }
+
+footer button{
+    margin: 2%;
+    padding: 3px;
+}
