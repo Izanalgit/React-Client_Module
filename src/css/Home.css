@@ -1,0 +1,56 @@
+.hero {
+    text-align: center;
+    padding: 1rem;
+    background: var(--home-hero-background);
+    color: var(--body-text-color);
+    border-radius: 10px;
+}
+
+.cta-button {
+    background: var(--global-button-background);
+    color: var(--global-button-color);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cta-button:hover {
+    background: var(--global-button-background-hover);
+}
+
+.features {
+    background: var(--body-background-color);
+    color: var(--body-text-color);
+}
+
+.features h2{
+    margin-top: 2rem;
+}
+
+.features-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.features-grid div {
+    max-width: 300px;
+    text-align: center;
+}
+
+.testimonials {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: var(--footer-background-color);
+    color: var(--footer-text-color);
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .features-grid {
+        flex-direction: column;
+    }
+}
