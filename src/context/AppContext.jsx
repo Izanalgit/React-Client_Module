@@ -16,6 +16,7 @@ const AppProvaider = ({ children }) => {
     const [userPublicKey, setUserPublicKey] = useState(null);
     const [userKeyPass, setUserkeyPass] = useState(null);
     const [wsEvent , setWsEvent] = useState(null);
+    const [theme, setTheme] = useState("light");
     const IpAPI = import.meta.env.VITE_API_URL;
     const API = "https://" + IpAPI;
 
@@ -202,6 +203,15 @@ useEffect(() => {
     requestWs();
 }, [wsEvent]);
 
+// Theme select
+const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+};
+
+useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+}, [theme]);
+
 return (
     <AppContext.Provider
         value={{
@@ -216,11 +226,13 @@ return (
             userKey,
             userPublicKey,
             userKeyPass,
+            theme,
             getLoged,
             changeName,
             fetchAndStoreUserInfo,
             sendMessage,
             cleanWsEvent,
+            toggleTheme,
     }}>
         {children}
     </AppContext.Provider>
