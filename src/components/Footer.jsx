@@ -1,6 +1,10 @@
 import { useApp } from '../context/AppContext';
 import '../css/Footer.css';
 
+import moon from '../assets/images/icons/moon.ico';
+import sun from  '../assets/images/icons/sun.ico';
+
+
 const Footer = () =>{
 
     const {toggleTheme , theme} = useApp();
@@ -8,7 +12,10 @@ const Footer = () =>{
     return (<>
         <footer>
             <button onClick={toggleTheme}>
-                    Cambiar a {theme === "light" ? "Oscuro" : "Claro"}
+                    {theme === "light" 
+                        ? <img src={moon} />
+                        : <img src={sun} />
+                    }
             </button>
             <p>© 2024 Tu Plataforma de Citas. Todos los derechos reservados.</p>
     </footer>
