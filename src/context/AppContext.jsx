@@ -48,12 +48,12 @@ const AppProvaider = ({ children }) => {
             localStorage.setItem("logedIn", userName);
             localStorage.setItem("authToken", token);
             localStorage.setItem("userKey", userKey.rpk);
-            localStorage.setItem("userPublicKey", userKey.public);
+            localStorage.setItem("userPublicKey", userKey.publicKey);
 
             setLogedIn(userName);
             setAuthToken(token);
             setUserkey(userKey.rpk);
-            setUserPublicKey(userKey.public)
+            setUserPublicKey(userKey.publicKey)
             setUserkeyPass({
                 rps: userKey.rps,
                 riv: userKey.riv,
@@ -104,7 +104,7 @@ const fetchAndStoreUserInfo = async (selector) => {
         }
         if(!selector || selector === 'public'){
             const publicKey = await getUserKey(authToken);
-            userInfo.publicKey = publicKey.data.soloElPuebloSalvaAlPueblo.public;
+            userInfo.publicKey = publicKey.data.soloElPuebloSalvaAlPueblo.publicKey;
         }
 
         if (
