@@ -8,6 +8,7 @@ const AppContext = createContext();
 const AppProvaider = ({ children }) => {
     const [logedIn, setLogedIn] = useState(null);
     const [authToken, setAuthToken] = useState(null);
+    const [csrfToken, setCsrfToken] = useState(null);
     const [userProfile, setUserProfile] = useState(null);
     const [userContacts, setUserContacts] = useState(null);
     const [userBlocks, setUserBlocks] = useState(null);
@@ -24,7 +25,8 @@ const AppProvaider = ({ children }) => {
         getUserProfile, 
         getUserContacts, 
         getUserBlocks,
-        getUserKey 
+        getUserKey,
+        getUserCSRF 
     } = useUserService(API);
 
     const {
@@ -40,11 +42,11 @@ const AppProvaider = ({ children }) => {
     }
 
     // Loged state
-    const getLoged = (userName, token , userKey) => {
+    const getLoged = (userName, token , userKey, csrf) => {
         setLogedIn(userName);
         setAuthToken(token);
     
-        if (userName && token && userKey) {
+        if (userName && token && userKey && csrf) {
             localStorage.setItem("logedIn", userName);
             localStorage.setItem("authToken", token);
             localStorage.setItem("userKey", userKey.rpk);
@@ -52,6 +54,7 @@ const AppProvaider = ({ children }) => {
 
             setLogedIn(userName);
             setAuthToken(token);
+            setCsrfToken(csrf);
             setUserkey(userKey.rpk);
             setUserPublicKey(userKey.publicKey)
             setUserkeyPass({
@@ -70,6 +73,7 @@ const AppProvaider = ({ children }) => {
             localStorage.removeItem("userPublicKey");
             setLogedIn(null);
             setAuthToken(null);
+            setCsrfToken(null);
             setUserProfile(null);
             setUserContacts(null);
             setUserBlocks(null);
@@ -164,6 +168,19 @@ const getPKS = async () => {
     }
 }
 
+// Get CSRF Token
+const getCSRF = async () => {
+
+    if(!authToken)
+        return
+
+    const {data} = await getUserCSRF(authToken);
+
+    if(data){
+        setCsrfToken(data.tokenCSRF)
+    }
+}
+
 // Start or Refresh
 useEffect(() => {
     // Prevail logedIn state and user info
@@ -188,6 +205,7 @@ useEffect(() => {
 useEffect(() => {
     fetchAndStoreUserInfo();
     getPKS();
+    getCSRF();
 }, [logedIn, authToken ]);
 
 // Websocket
@@ -221,6 +239,7 @@ return (
             API,
             logedIn,
             authToken,
+            csrfToken,
             userProfile,
             userContacts,
             userBlocks,
