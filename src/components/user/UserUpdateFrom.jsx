@@ -8,7 +8,7 @@ import Notification from '../popups/Notification';
 
 const UserUpdateFrom = ({onComplete}) => {
 
-    const {API,authToken,logedIn,changeName} = useApp();
+    const {API,authToken,logedIn,csrfToken,changeName} = useApp();
 
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -58,7 +58,7 @@ const UserUpdateFrom = ({onComplete}) => {
             const headers = { Authorization: `${authToken}` };
             await userUpdate(
                 `${API}/api/user/update`, 
-                {payload:userData},
+                {payload:{userData,tokenCSRF:csrfToken}},
                 {headers}
             );
 
