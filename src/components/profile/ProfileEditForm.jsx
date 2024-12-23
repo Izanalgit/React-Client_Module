@@ -8,7 +8,7 @@ import Notification from '../popups/Notification';
 
 const ProfileEditForm = ({onComplete}) => {
 
-    const { API, authToken, userProfile , fetchAndStoreUserInfo} = useApp();
+    const { API, authToken, csrfToken, userProfile , fetchAndStoreUserInfo} = useApp();
 
     const [errorMessage, setErrorMessage] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
@@ -95,7 +95,7 @@ const ProfileEditForm = ({onComplete}) => {
             const headers = { Authorization: `${authToken}` };
             await updateProfile(
                 `${API}/api/profile/update`, 
-                {payload:{ profile:profileData, extended:profileExtenderData}},
+                {payload:{tokenCSRF:csrfToken, profile:profileData, extended:profileExtenderData}},
                 {headers}
             );
 
