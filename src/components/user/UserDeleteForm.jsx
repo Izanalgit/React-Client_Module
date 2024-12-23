@@ -9,7 +9,7 @@ import '../../css/FormDelete.css';
 
 const UserDeleteForm = () => {
     const navigate = useNavigate();
-    const {API,authToken,getLoged} = useApp();
+    const {API,authToken,getLoged,csrfToken} = useApp();
 
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
@@ -50,7 +50,7 @@ const UserDeleteForm = () => {
             const headers = { Authorization: `${authToken}` };
             await userDelete(
                 `${API}/api/user/delete`, 
-                {payload:userData},
+                {payload:{userData,tokenCSRF:csrfToken}},
                 {headers}
             );
 
