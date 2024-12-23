@@ -7,7 +7,7 @@ import { useApp } from '../context/AppContext';
 const Logout = () => {
     const navigate = useNavigate();
     const hasLoggedOut = useRef(false);
-    const {API,logedIn,getLoged} = useApp();
+    const {API,logedIn,getLoged,csrfToken} = useApp();
 
     useEffect(() => {
         const logoutUser = async () => {
@@ -19,7 +19,7 @@ const Logout = () => {
                 try {
                     await axios.post(
                         `${API}/api/user/logout`, 
-                        {},
+                        {payload:{tokenCSRF:csrfToken}},
                         {
                             headers: {
                                 Authorization: `${token}`,
