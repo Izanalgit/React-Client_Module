@@ -58,7 +58,7 @@ const UserUpdateFrom = ({onComplete}) => {
             const headers = { Authorization: `${authToken}` };
             await userUpdate(
                 `${API}/api/user/update`, 
-                {payload:{userData,tokenCSRF:csrfToken}},
+                {payload:{name:userData.name,pswd:userData.pswd,tokenCSRF:csrfToken}},
                 {headers}
             );
 
