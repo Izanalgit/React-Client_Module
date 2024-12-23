@@ -4,7 +4,8 @@ const useUserService = (url) => {
     const blocksInstance = useFetchGET();
     const profileInstance = useFetchGET(); 
     const contactsInstance = useFetchGET();
-    const keyInstance = useFetchGET();  
+    const keyInstance = useFetchGET();
+    const csrfInstance = useFetchGET();   
 
     const getUserBlocks = async (authToken) => {
         const headers = { Authorization: `${authToken}` };
@@ -44,11 +45,20 @@ const useUserService = (url) => {
         };
     };
 
+    const getUserCSRF = async (authToken) => {
+        const headers = { Authorization: `${authToken}` };
+        const csrf = await csrfInstance.fetchData(`${url}/api/user/csrf`, { headers });
+        return { 
+            data: csrf
+        };
+    };
+
     return {
         getUserProfile,
         getUserContacts,
         getUserBlocks,
         getUserKey,
+        getUserCSRF,
     };
 };
 
