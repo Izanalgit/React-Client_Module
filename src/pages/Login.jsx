@@ -44,7 +44,8 @@ const LoginComponent = () => {
                 await getLoged(
                     loginData.user, 
                     loginHeaders['authorization'],
-                    loginData.soloElPuebloSalvaAlPueblo
+                    loginData.soloElPuebloSalvaAlPueblo,
+                    loginData.tokenCSRF
                 );
                 console.log(loginData.message);
                 navigate('/');
