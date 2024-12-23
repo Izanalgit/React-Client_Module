@@ -38,7 +38,7 @@ const UserDeleteForm = () => {
         setErrorMessage('');
         setSuccessMessage('');
 
-        if (!userData.email &&  !userData.pswd) {
+        if (!userData.email || !userData.pswd) {
             setErrorMessage('Introduce todos los campos');
             return;
         }
@@ -50,7 +50,7 @@ const UserDeleteForm = () => {
             const headers = { Authorization: `${authToken}` };
             await userDelete(
                 `${API}/api/user/delete`, 
-                {payload:{userData,tokenCSRF:csrfToken}},
+                {payload:{name:userData.name,pswd:userData.pswd,tokenCSRF:csrfToken}},
                 {headers}
             );
 
