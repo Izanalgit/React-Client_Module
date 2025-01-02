@@ -50,7 +50,7 @@ const UserDeleteForm = () => {
             const headers = { Authorization: `${authToken}` };
             await userDelete(
                 `${API}/api/user/delete`, 
-                {payload:{name:userData.name,pswd:userData.pswd,tokenCSRF:csrfToken}},
+                {payload:{email:userData.email,pswd:userData.pswd,tokenCSRF:csrfToken}},
                 {headers}
             );
 
