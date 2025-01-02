@@ -5,12 +5,14 @@ import useFetchPOST from "../../hooks/useFetchPOST";
 
 import errorMsgUtil from "../../utils/errorMsgUtil";
 import Notification from '../popups/Notification';
+import Loader from '../popups/Loader';
 
 const UserRegistForm = () => {
 
     const {API} = useApp();
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [adviceMessage, setAdviceMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [isUpdating, setIsUpdating] = useState(false);
     const [newPswd,setNewPswd] = useState('');
@@ -40,6 +42,7 @@ const UserRegistForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrorMessage('');
+        setAdviceMessage('');
         setSuccessMessage('');
 
         if (!userData.name && !userData.email &&  !userData.pswd) {
@@ -48,6 +51,10 @@ const UserRegistForm = () => {
         }
         if (userData.pswd && userData.pswd != newPswd) {
             setErrorMessage('La contraseña debe coincidir');
+            return;
+        }
+        if (!userData.email.includes('@gmail')) {
+            setAdviceMessage('Es conveniente usar un correo de Gmail');
             return;
         }
 
@@ -83,11 +90,19 @@ const UserRegistForm = () => {
 
     return (
     <>
+        {userRegistLoading && <Loader/>}
         {errorMessage && 
             <Notification   
                 type={'error'} 
                 message={errorMessage} 
                 onClose={()=>setErrorMessage('')}
+            />
+        }
+        {adviceMessage && 
+            <Notification   
+                type={'notify'} 
+                message={adviceMessage} 
+                onClose={()=>setAdviceMessage('')}
             />
         }
         {successMessage && 
