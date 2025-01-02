@@ -54,6 +54,15 @@
     color: #721c24 !important;
 }
 
+.notification.notify {
+    background-color: #7ccbf0 !important;
+    border: 1px solid #57d6df !important;
+}
+.notification.notify .close-btn,
+.notification.notify p{
+    color: #0a3de6 !important;
+}
+
 /* Botón de cerrar */
 .close-btn {
     background: none !important;
