@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useChatContext } from '../../context/ChatContext';
 import MessageCard from './MessageCard';
  
-import Loader from '../popups/Loader';
 import Notification from '../popups/Notification';
 import '../../css/Chat.css';
 
 const ChatWindow = ({ contactId , contactPublicKey}) => {
 
+    const messageRef = useRef(null);
     const [errorMessage, setErrorMessage] = useState(null);
 
     const { 
@@ -31,7 +31,10 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
     },[error])
 
     const handleSendMessage = async (message) => {
-        await sendChatMessage(message);
+        if(!loading){
+            await sendChatMessage(message);
+            messageRef.current.value = "";
+        }
     };
 
     const hadleGetOlderChat = (lastDate) => {
@@ -40,7 +43,6 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
 
     return (
         <div className='chat-container'>
-            {loading && <Loader />}
             {errorMessage && 
                 <Notification   
                     type={'error'} 
@@ -65,6 +67,7 @@ const ChatWindow = ({ contactId , contactPublicKey}) => {
             }
             <input
                 type="text"
+                ref={messageRef}
                 placeholder="Escribe un mensaje..."
                 onKeyDown={(e) => {
                     if (e.key === 'Enter') handleSendMessage(e.target.value);
